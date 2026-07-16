@@ -56,3 +56,18 @@ Java Backend Developer passionate about integrating AI into enterprise applicati
 <img src="https://github-readme-streak-stats.herokuapp.com/?user=YangJs&theme=tokyonight" alt="GitHub Streak" />
 
 </div>
+
+---
+
+### 🚀 Featured Projects
+
+<div align="center">
+
+<a href="https://github.com/YangJs/ruoyi-ai">
+  <img height="120em" src="https://github-readme-stats.vercel.app/api/pin/?username=YangJs&repo=ruoyi-ai&theme=tokyonight" />
+</a>
+<a href="https://github.com/YangJs/ai-passage-creator-demo">
+  <img height="120em" src="https://github-readme-stats.vercel.app/api/pin/?username=YangJs&repo=ai-passage-creator-demo&theme=tokyonight" />
+</a>
+
+</div>
