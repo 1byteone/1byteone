@@ -69,6 +69,24 @@
 
 ---
 
+### 📈 Contribution Graph
+
+<div align="center">
+
+<img src="https://github-readme-activity-graph.vercel.app/graph?username=1byteone&theme=tokyo-night&hide_border=true&area=true" alt="Activity Graph" />
+
+<br/>
+
+<img src="https://raw.githubusercontent.com/1byteone/1byteone/output/github-contribution-grid-snake-dark.svg" alt="Snake animation" />
+
+<br/>
+
+<img src="https://raw.githubusercontent.com/1byteone/1byteone/main/profile-3d-contrib/profile-night-rainbow.svg" alt="3D Contribution Chart" />
+
+</div>
+
+---
+
 ### 🚀 Featured Projects
 
 #### 🏗️ ruoyi-ai — 企业级 AI 应用开发框架
