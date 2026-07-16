@@ -53,7 +53,7 @@ Java Backend Developer passionate about integrating AI into enterprise applicati
 
 <br/>
 
-<img src="https://github-readme-streak-stats.herokuapp.com/?user=YangJs&theme=tokyonight" alt="GitHub Streak" />
+<img src="https://streak-stats.demolab.com/?user=YangJs&theme=tokyonight" alt="GitHub Streak" />
 
 </div>
 
