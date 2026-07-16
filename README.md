@@ -193,20 +193,21 @@ flowchart TB
 
 ---
 
-#### ✍️ ai-passage-creator-demo — AI 爆款文章生成器
+#### ✍️ ai-passage-creator — AI 驱动的内容创作平台（灵犀写作）
 
-> 基于多 Agent 协作的智能内容创作系统，覆盖选题分析、文案生成、智能配图到在线支付的完整链路。
+> 基于 Spring AI Alibaba StateGraph 的多智能体内容创作平台，5 大专业 Agent 流水线编排，6 种配图策略并行执行，Stripe 商业闭环。
 
-`Java` `Spring AI Alibaba` `StateGraph` `Go` `Python` `Vue 3` `Qwen` `Gemini` `Stripe`
+`Java 21` `Spring Boot 3.5` `Spring AI Alibaba` `StateGraph` `MyBatis-Flex` `Vue 3` `DashScope` `Gemini` `Stripe`
 
-- 🤝 **5 Agent 流水线** — 选题 → 大纲 → 正文 → 配图分析 → 并行配图 → 图文合并，StateGraph 编排
-- 🎨 **智能配图策略** — Pexels / Mermaid / Iconify / 表情包 / Nano Banana(Gemini) / SVG，失败自动降级
-- 💳 **Stripe 商业闭环** — Checkout + 签名校验 Webhook，终身 VIP 解锁无限额度与高级配图
-- 🧩 **三语言等价后端** — Java(Spring AI) / Go(langchaingo) / Python(FastAPI) 三套实现，同一 Vue 前端 + MySQL
+- 🤖 **StateGraph 多智能体编排** — Title → Outline → Content → ImageAnalyzer → ParallelImage → Merger，6 节点状态图
+- 🎨 **6 策略并行配图** — Pexels / Nano Banana(Gemini) / Mermaid CLI / Iconify / Bing 表情包 / AI SVG，CompletableFuture 并行 + 自动降级
+- 💳 **Stripe VIP 商业闭环** — Checkout Sessions + Webhook 签名校验，终身 VIP 解锁无限额度与高级配图
+- ⚡ **SSE 实时流式** — DashScope 流式 LLM 输出实时推送前端，心跳保活 + 按 taskId 精准路由
+- 📊 **AOP 可观测性** — @AgentExecution 注解自动采集 Agent 执行日志，AgentLog 表全链路追踪
 
 <div align="center">
 
-<a href="https://github.com/1byteone/ai-passage-creator-demo">
+<a href="https://github.com/1byteone/ai-passage-creator">
   <img src="./assets/project-covers/ai-passage-creator-cover.webp" alt="AI Passage Creator 多智能体内容创作项目封面" width="100%" />
 </a>
 
@@ -218,13 +219,13 @@ flowchart TB
 
 <div align="center">
 
-<a href="https://github.com/1byteone/ai-passage-creator-demo">
+<a href="https://github.com/1byteone/ai-passage-creator">
   <img src="./assets/project-covers/ai-passage-creator-hero-cn.webp" alt="AI Passage Creator 中文 GitHub Hero 封面" width="100%" />
 </a>
 
 <br/><br/>
 
-<a href="https://github.com/1byteone/ai-passage-creator-demo">
+<a href="https://github.com/1byteone/ai-passage-creator">
   <img src="./assets/project-covers/material-illustrations/ai-passage-creator-material.webp" alt="AI Passage Creator 多智能体创作流水线说明图" width="100%" />
 </a>
 
@@ -390,7 +391,116 @@ flowchart TB
 
 ---
 
-### 🎯 Currently Focus
+#### 🏥 zznursing — 智颐智慧养老护理平台
+
+> 基于 RuoYi-Vue 的全生命周期养老管理平台，集成百度千帆 AI 健康评估、华为云 IoTDA 设备监控、双通道（管理端 + 微信小程序）架构。
+
+`Java 11` `Spring Boot 2.5` `MyBatis-Plus` `Spring Security` `Vue 3` `MySQL` `Redis` `百度千帆` `华为 IoTDA` `阿里云 OSS`
+
+- 🩺 **AI 智能健康评估** — 上传体检 PDF → OSS 存储 → PDF 文本提取 → Redis 缓存 → 百度千帆 Ernie 5.0 分析 → 结构化健康报告 + 护理等级推荐
+- 📡 **华为云 IoTDA 集成** — 设备注册/同步、AMQP 消息消费、Redis 设备影子缓存，支持可穿戴 + 固定设备
+- 🧓 **全生命周期管理** — 入住申请 → 健康评估 → 护理计划分配 → 合同 → 报警规则 → 退住，闭环流程
+- 📱 **双通道应用** — Spring Security JWT（管理端 Vue3） + WeChat 小程序（家属端 MemberInterceptor ThreadLocal 认证）
+- ⚙️ **RuoYi 企业基础** — RBAC 权限、代码生成器、Quartz 定时任务、Druid 主从、Jenkins CI/CD
+
+<div align="center">
+
+<a href="https://github.com/1byteone/zznursing">
+  <img src="./assets/project-covers/zznursing-cover.webp" alt="zznursing 智颐智慧养老护理平台项目封面" width="100%" />
+</a>
+
+</div>
+
+<details open>
+<summary><strong>中文 Hero 与 UI 预览</strong></summary>
+<br/>
+
+<div align="center">
+
+<a href="https://github.com/1byteone/zznursing">
+  <img src="./assets/project-covers/zznursing-hero-cn-raw-v2.webp" alt="zznursing 中文 GitHub Hero 封面" width="100%" />
+</a>
+
+</div>
+
+</details>
+
+<details>
+<summary>📐 系统架构</summary>
+
+```mermaid
+flowchart TB
+    subgraph Channels["📱 接入通道"]
+        ADMIN["Vue3 管理端<br/>Spring Security + JWT"]
+        MINIAPP["微信小程序 · 家属端<br/>MemberInterceptor + ThreadLocal"]
+    end
+
+    subgraph Business["🏥 养老核心 · zzyl-nursing-platform"]
+        ELDER["Elder · 老人管理"]
+        CHECKIN["CheckIn · 入住流程"]
+        HEALTH["HealthAssessment<br/>AI 健康评估"]
+        NURSING["Nursing · 护理体系<br/>Plan/Project/Level"]
+        DEVICE["Device · IoT 设备"]
+        ALERT["AlertRule · 报警规则"]
+    end
+
+    subgraph Infra["⚙️ 基础设施 · zzyl-framework + zzyl-common"]
+        SEC["SecurityConfig<br/>JWT Filter Chain"]
+        IOT["IotClientConfig<br/>华为 IoTDA SDK"]
+        AI["AIModelInvoker<br/>OpenAI SDK → 百度千帆"]
+        OSS["AliyunOSSOperator<br/>阿里云 OSS"]
+    end
+
+    subgraph External["🌐 外部服务"]
+        BAIDU["百度千帆 · Ernie 5.0"]
+        HUAWEI["华为云 IoTDA · AMQP"]
+        ALIYUN["阿里云 OSS · PDF 存储"]
+        WECHAT["微信开放平台<br/>jscode2session"]
+    end
+
+    subgraph Data["💾 数据层"]
+        MYSQL[("MySQL 8.0 · Druid 主从")]
+        REDIS[("Redis 6+ · Lettuce")]
+    end
+
+    ADMIN --> ELDER
+    ADMIN --> CHECKIN
+    ADMIN --> HEALTH
+    ADMIN --> NURSING
+    ADMIN --> DEVICE
+    MINIAPP --> ELDER
+    MINIAPP --> HEALTH
+
+    HEALTH --> AI
+    AI --> BAIDU
+    HEALTH --> OSS
+    OSS --> ALIYUN
+
+    DEVICE --> IOT
+    IOT --> HUAWEI
+
+    MINIAPP --> WECHAT
+
+    ELDER --> MYSQL
+    CHECKIN --> MYSQL
+    HEALTH --> MYSQL
+    NURSING --> MYSQL
+    DEVICE --> MYSQL
+
+    HEALTH --> REDIS
+    DEVICE --> REDIS
+
+    classDef channel fill:#1f6feb,stroke:#0d1117,color:#fff
+    classDef biz fill:#7B42BC,stroke:#0d1117,color:#fff
+    classDef infra fill:#DA3633,stroke:#0d1117,color:#fff
+    classDef ext fill:#238636,stroke:#0d1117,color:#fff
+    class ADMIN,MINIAPP channel
+    class ELDER,CHECKIN,HEALTH,NURSING,DEVICE,ALERT biz
+    class SEC,IOT,AI,OSS infra
+    class BAIDU,HUAWEI,ALIYUN,WECHAT ext
+```
+
+</details>
 
 - 🔭 I'm currently working on **Java + AI Agent application development**
 - 🌱 I'm currently learning **AI Agent frameworks, LLM application architecture**
