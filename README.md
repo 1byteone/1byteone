@@ -41,3 +41,18 @@ Java Backend Developer passionate about integrating AI into enterprise applicati
 ![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
 ![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
 ![IntelliJ IDEA](https://img.shields.io/badge/IntelliJ_IDEA-000000?style=for-the-badge&logo=intellij-idea&logoColor=white)
+
+---
+
+### 📊 GitHub Stats
+
+<div align="center">
+
+<img height="180em" src="https://github-readme-stats.vercel.app/api?username=YangJs&show_icons=true&theme=tokyonight&include_all_commits=true&count_private=true" />
+<img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=YangJs&layout=compact&theme=tokyonight" />
+
+<br/>
+
+<img src="https://github-readme-streak-stats.herokuapp.com/?user=YangJs&theme=tokyonight" alt="GitHub Streak" />
+
+</div>
