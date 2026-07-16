@@ -109,6 +109,26 @@
 
 </div>
 
+<details open>
+<summary><strong>中文 Hero 与项目机制图</strong></summary>
+<br/>
+
+<div align="center">
+
+<a href="https://github.com/1byteone/ruoyi-ai">
+  <img src="./assets/project-covers/ruoyi-ai-hero-cn.webp" alt="ruoyi-ai 中文 GitHub Hero 封面" width="100%" />
+</a>
+
+<br/><br/>
+
+<a href="https://github.com/1byteone/ruoyi-ai">
+  <img src="./assets/project-covers/material-illustrations/ruoyi-ai-material.webp" alt="ruoyi-ai 企业 AI 中枢机制说明图" width="100%" />
+</a>
+
+</div>
+
+</details>
+
 <details>
 <summary>📐 架构图</summary>
 
@@ -192,6 +212,26 @@ flowchart TB
 
 </div>
 
+<details open>
+<summary><strong>中文 Hero 与项目机制图</strong></summary>
+<br/>
+
+<div align="center">
+
+<a href="https://github.com/1byteone/ai-passage-creator-demo">
+  <img src="./assets/project-covers/ai-passage-creator-hero-cn.webp" alt="AI Passage Creator 中文 GitHub Hero 封面" width="100%" />
+</a>
+
+<br/><br/>
+
+<a href="https://github.com/1byteone/ai-passage-creator-demo">
+  <img src="./assets/project-covers/material-illustrations/ai-passage-creator-material.webp" alt="AI Passage Creator 多智能体创作流水线说明图" width="100%" />
+</a>
+
+</div>
+
+</details>
+
 <details>
 <summary>📐 多 Agent 协作流程</summary>
 
@@ -265,6 +305,26 @@ flowchart TB
 </a>
 
 </div>
+
+<details open>
+<summary><strong>中文 Hero 与项目机制图</strong></summary>
+<br/>
+
+<div align="center">
+
+<a href="https://github.com/1byteone/mewpaw-code">
+  <img src="./assets/project-covers/mewpaw-code-hero-cn.webp" alt="mewpaw-code 中文 GitHub Hero 封面" width="100%" />
+</a>
+
+<br/><br/>
+
+<a href="https://github.com/1byteone/mewpaw-code">
+  <img src="./assets/project-covers/material-illustrations/mewpaw-code-material.webp" alt="mewpaw-code ReAct 循环与安全机制说明图" width="100%" />
+</a>
+
+</div>
+
+</details>
 
 <details>
 <summary>📐 ReAct Loop &amp; 5 层安全链</summary>

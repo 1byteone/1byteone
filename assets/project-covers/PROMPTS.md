@@ -1,129 +1,53 @@
-# 项目封面提示词（中文友好版）
+# 项目封面提示词
 
-这些封面用于 `1byteone/1byteone` GitHub Profile 的 Featured Projects
-区域。最终图片统一为 `1536x1024`、高质量 WebP，并针对简体中文界面优化。
+这些新增中文 Hero 用于 `1byteone/1byteone` GitHub Profile 的
+Featured Projects 区域，同时兼顾 README Hero 与 GitHub Social Preview
+的缩略图阅读体验。仓库原始封面完整保留，两套视觉在 README 中共存。
 
-## 统一视觉规范
+## 新增 Hero 规范
 
-- 画布：3:2 横向，1536x1024。
-- 定位：专业软件产品案例主视觉，不做泛化科技插画。
-- 背景：深石墨色、克制的技术网格、柔和工作室光照。
-- 材质：烟熏玻璃、哑光金属、细密的数据光轨。
-- 构图：一个主要产品工作区，周围只保留有业务含义的模块。
-- 中文：所有界面标签使用简体中文，字形清晰、无乱码、无拼音。
-- 禁止：真人、通用机器人头、随机品牌、无意义代码、密集微型文字、
-  过量霓虹、赛博城市、版权角色和水印。
+- 正式画布：2:1 横向，`1536x768`。
+- 格式：高质量、不透明 WebP。
+- 构图：左侧项目名称、中文定位与能力摘要，右侧一个可识别的项目主符号。
+- 层级：项目名称最大，中文定位第二，能力标签与技术栈第三。
+- 风格：深色编辑视觉、克制的技术网格、精密材料与工作室光照。
+- 中文：仅使用准确的简体中文，字形清晰，无乱码、错别字或拼音。
+- 缩略图：在 GitHub README 宽度缩小时仍能读出项目名与一句核心定位。
+- 禁止：仪表盘截图、密集微型 UI、真人、通用机器人头、随机品牌、
+  无意义代码、赛博城市、过量霓虹、版权角色与水印。
 
-## RuoYi AI 中文编辑
+## 可复现提示词
 
-输入图 1 是当前英文封面，输入图 2 是官方 RuoYi AI Logo。保持原图的
-布局、Logo 几何、蓝紫渐变、面板位置、连接关系、图标和光照不变，仅将
-英文界面标题替换为以下简体中文：
+三张正式封面的完整提示词分别保存在：
 
-```text
-MODEL ROUTER -> 模型路由
-MODEL ENDPOINTS -> 模型端点
-USER INPUT -> 用户输入
-RAG KNOWLEDGE SYSTEM -> RAG 知识系统
-WORKFLOW CANVAS -> 工作流画布
-SUPERVISOR -> 智能体调度
-ENTERPRISE DATA SERVICES -> 企业数据服务
-DATABASE -> 数据库
-CACHE -> 缓存
-OBJECT STORAGE -> 对象存储
-AUDIT & GOVERNANCE -> 审计与治理
-```
+- [`prompts/01-hero-ruoyi-ai.md`](prompts/01-hero-ruoyi-ai.md)
+- [`prompts/02-hero-ai-passage-creator.md`](prompts/02-hero-ai-passage-creator.md)
+- [`prompts/03-hero-mewpaw-code.md`](prompts/03-hero-mewpaw-code.md)
 
-编辑要求：
+这些文件记录项目事实、精确中文文案、品牌符号、构图、材质、配色、
+禁止项与输出规格。重新生成时以对应文件为唯一提示词来源。
 
-```text
-对输入图执行高保真中文本地化编辑。严格保留原有构图、Logo、颜色、
-面板尺寸、图标、流程节点、数据连线、阴影和透视。只替换指定英文标题。
-所有文字必须使用简体中文，清晰、规整、字号足够，无乱码、无错别字、
-无额外英文段落。不要新增模块，不要重新设计 Logo。
-```
+## 资产分层
 
-## AI Passage Creator 中文编辑
+### 原始封面
 
-输入图 1 是当前英文封面，输入图 2 是项目 Logo。保持五智能体流水线、
-编辑器布局、配图库、Logo、进度数据和光照不变，将主要界面文案改为：
+以下仓库原图保持原文件名和原始内容不变：
 
-```text
-AI Passage Creator
-多智能体内容创作
-专业版
-项目
-用量
-套餐
-选题分析
-标题策划
-大纲构建
-正文创作
-配图生成
-已完成
-进行中
-选题输入
-标题方案
-文章大纲
-正文生成
-Markdown 流式输出
-配图需求
-内容分析
-并行生成
-图文合成
-合成中
-系统状态
-智能体协作
-内容质量
-Token 用量
-专业功能
-```
+- `ruoyi-ai-cover.webp`
+- `ai-passage-creator-cover.webp`
+- `mewpaw-code-cover.webp`
 
-示例文章主题统一为：
+### 新增中文 Hero
 
-```text
-2026 企业 AI Agent 落地趋势
-```
+- `ruoyi-ai-hero-cn.webp`
+- `ai-passage-creator-hero-cn.webp`
+- `mewpaw-code-hero-cn.webp`
 
-编辑要求：
+`*-hero-cn-raw.webp` 是 `$gpt-image` 输出的原始母版；新增正式 Hero
+经过 Lanczos 高质量缩放，统一为精确的 `1536x768`。
 
-```text
-对输入图执行高保真简体中文本地化。保持原有 UI 几何、五智能体节点、
-Logo、图片缩略图、图表、进度值、颜色和层级完全一致。替换主要英文标签
-与示例文章主题，删除无意义英文小字。中文必须清晰、规整、无乱码、无
-拼音；允许保留产品名 AI Passage Creator、Markdown 和 Token。
-```
+## 补充机制图
 
-## mewpaw-code
-
-项目定位：Java 21 CLI Coding Agent，以 ReAct Agent Loop、五层安全沙箱、
-六个内置工具和 TUI/REPL 交互为核心。
-
-```text
-设计一张 3:2 横向、1536x1024 的专业软件产品案例封面，主题是
-mewpaw-code，一款 Java 21 命令行编码智能体。它必须与 RuoYi AI 和
-AI Passage Creator 封面共享深石墨背景、烟熏玻璃面板、哑光金属边缘、
-精密数据光轨和克制的工作室光照，但使用 Java 琥珀橙、青色与少量成功绿
-作为独立识别色。
-
-画面中心是一套可信的全屏 TUI 编码工作台，正面略带三分之二透视。顶部
-准确显示 “mewpaw-code” 和 “Java 21 命令行编码智能体”。左侧任务区显示
-“任务” 与示例输入 “修复登录模块并运行测试”。中央主区呈现清晰的
-ReAct 工作流，准确显示 “思考 → 执行 → 观察”，下方包含代码差异、
-命令输出、实时工具调用和最终结果。右侧是 “安全沙箱” 面板，分层显示
-“命令白名单”“文件隔离”“网络限制”“资源配额”“审计日志”。
-
-底部工具栏使用六个清晰图标与准确标签：
-“文件”“命令”“搜索”“Git”“依赖”“测试”。
-加入一个小型权限确认模块，显示 “权限待确认”，并加入状态栏：
-“工具 6/6”“测试通过”“审计开启”。
-
-品牌图形使用原创的几何猫爪终端徽标：猫爪轮廓与命令提示符 >_ 结合，
-简洁、工程化、不可爱化，不使用任何现有动漫或影视角色，不出现真实猫咪
-或拟人角色。画面要在 GitHub README 小尺寸显示时仍能一眼识别为
-Java CLI Coding Agent。
-
-所有界面文字必须是清晰、准确的简体中文；允许保留 mewpaw-code、
-Java 21、Git、TUI、ReAct 等技术名词。避免乱码、伪代码堆砌、随机英文、
-通用机器人头、黑客电影风、赛博城市、过量霓虹和水印。
-```
+三个项目另有一套基于 `guizang-material-illustration` 的浅色 3D Swiss
+材料解释图，用于展示架构、流程与安全机制。提示词、原始母版与正式资产
+见 [`material-illustrations/PROMPTS.md`](material-illustrations/PROMPTS.md)。

@@ -4,7 +4,7 @@ palette: dark-amber-cyan
 rendering: polished-digital-terminal
 references:
   - ref_id: 01
-    filename: ../mewpaw-code-cover.webp
+    filename: ../references/mewpaw-code-emblem.png
     usage: direct-logo-only
 ---
 
