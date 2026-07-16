@@ -71,3 +71,25 @@ Java Backend Developer passionate about integrating AI into enterprise applicati
 </a>
 
 </div>
+
+---
+
+### 🎯 Currently Focus
+
+- 🔭 I'm currently working on **Java + AI Agent application development**
+- 🌱 I'm currently learning **AI Agent frameworks, LLM application architecture**
+- 👯 I'm looking to collaborate on **AI open-source projects**
+
+---
+
+### 📬 Get in Touch
+
+<div align="center">
+
+[![Email](https://img.shields.io/badge/Email-yjs_0831%40qq.com-blue?style=for-the-badge&logo=gmail&logoColor=white)](mailto:yjs_0831@qq.com)
+
+<br/>
+
+*"Building intelligent systems, one line of Java at a time."*
+
+</div>
