@@ -81,7 +81,7 @@
 
 <br/>
 
-<img src="https://raw.githubusercontent.com/1byteone/1byteone/main/profile-3d-contrib/profile-night-rainbow.svg" alt="3D Contribution Chart" />
+<img src="https://raw.githubusercontent.com/1byteone/1byteone/master/profile-3d-contrib/profile-night-rainbow.svg" alt="3D Contribution Chart" />
 
 </div>
 
@@ -93,16 +93,19 @@
 
 > 一站式 AI 应用开发平台，支持多厂商大模型统一接入、企业知识库 RAG、可视化流程编排与多智能体协同调度。
 
-`Java` `Spring Boot 3.5` `LangChain4j` `Python` `MySQL` `Redis` `Docker`
+`Java 17` `Spring Boot 3.5` `LangChain4j` `langgraph4j` `Sa-Token` `MySQL` `Redis` `Milvus` `Neo4j` `Docker`
 
-- 🔗 **多模型统一接入** — 兼容 OpenAI / DeepSeek / 通义千问 / MiniMax，一行配置切换
-- 🧠 **企业知识库 RAG** — 本地 RAG + 向量库（Milvus/Weaviate），高精度检索增强
-- 🔄 **可视化流程编排** — 拖拽式 AI 工作流设计，Supervisor 多智能体协同
-- 🛡️ **企业级安全** — Sa-Token + JWT 双认证，数据脱敏，全链路审计
+- 🔗 **多模型统一接入** — OpenAI / DeepSeek / 通义千问 / 智谱 / MiniMax / Ollama，工厂模式一键切换
+- 🧠 **企业知识库 RAG** — 文档加载 → 切分 → 向量化 → 检索 → 重排全链路，支持 Milvus/Weaviate/Qdrant + Neo4j GraphRAG
+- 🤖 **Supervisor 多智能体** — 基于 LangChain4j Agentic API，SupervisorAgent 调度 Skills/WebSearch/SQL/Chart 子智能体
+- 🔄 **可视化流程编排** — 基于 langgraph4j 的节点图引擎，支持人机协作与 SSE 流式响应
+- 🛡️ **企业级安全** — Sa-Token 认证 + MCP 工具协议 + 全链路可观测
 
 <div align="center">
 
-[![ruoyi-ai](https://github-readme-stats.vercel.app/api/pin/?username=1byteone&repo=ruoyi-ai&theme=tokyonight)](https://github.com/1byteone/ruoyi-ai)
+<a href="https://github.com/1byteone/ruoyi-ai">
+  <img src="./assets/project-covers/ruoyi-ai-cover.webp" alt="RuoYi AI 企业级 AI 应用平台项目封面" width="100%" />
+</a>
 
 </div>
 
@@ -110,27 +113,60 @@
 <summary>📐 架构图</summary>
 
 ```mermaid
-graph TB
-    subgraph "Frontend"
-        A[Vue 3 用户端] --- B[Vben Admin 管理端]
+flowchart TB
+    UI["🖥️ Vue 3 用户端 / Vben 管理端"]
+    API["🚪 ruoyi-admin · REST + SSE + WebSocket"]
+
+    subgraph Modules["📦 业务模块 · ruoyi-modules"]
+        CHAT["ruoyi-chat · AI 核心"]
+        AIFLOW["ruoyi-aiflow · LLM 流程编排"]
+        WORKFLOW["ruoyi-workflow · BPM 审批"]
+        SYSTEM["ruoyi-system · RBAC 系统"]
     end
-    subgraph "Gateway"
-        C[API Gateway]
+
+    subgraph Engine["🧠 AI 引擎 · LangChain4j Agentic"]
+        SUP["Supervisor Agent 调度"]
+        SKILLS["Skills Agent"]
+        SEARCH["WebSearch Agent"]
+        SQL["SQL Agent"]
+        CHART["Chart / ECharts Agent"]
     end
-    subgraph "Core Modules"
-        D[ruoyi-chat<br/>RAG 知识库] --- E[ruoyi-aiflow<br/>流程编排]
-        F[ruoyi-workflow<br/>工作流] --- G[ruoyi-system<br/>系统管理]
+
+    subgraph RAG["🔍 RAG 管线"]
+        EMBED["Embed 向量化"]
+        RETR["Retrieve 检索"]
+        RERANK["Rerank 重排"]
     end
-    subgraph "AI Engine"
-        H[LangChain4j Agent] --> I[Supervisor 调度]
-        I --> J[Model Router]
+
+    subgraph Data["💾 数据与模型"]
+        MODELS["LLM · OpenAI / DeepSeek / 通义 / 智谱"]
+        VECTOR["向量库 · Milvus / Weaviate / Qdrant"]
+        GRAPH["Neo4j GraphRAG"]
+        STORE["MySQL / Redis"]
     end
-    subgraph "Models"
-        K[OpenAI] -.- L[DeepSeek] -.- M[通义千问] -.- N[MiniMax]
-    end
-    A --> C --> D & E & F & G
-    D --> H
-    J --> K & L & M & N
+
+    UI --> API
+    API --> CHAT
+    API --> AIFLOW
+    API --> WORKFLOW
+    API --> SYSTEM
+    CHAT --> SUP
+    SUP --> SKILLS
+    SUP --> SEARCH
+    SUP --> SQL
+    SUP --> CHART
+    CHAT --> EMBED
+    EMBED --> RETR
+    RETR --> RERANK
+    SUP --> MODELS
+    RERANK --> VECTOR
+    RERANK --> GRAPH
+    CHAT --> STORE
+
+    classDef engine fill:#7B42BC,stroke:#0d1117,color:#fff
+    classDef data fill:#238636,stroke:#0d1117,color:#fff
+    class SUP,SKILLS,SEARCH,SQL,CHART engine
+    class MODELS,VECTOR,GRAPH,STORE data
 ```
 
 </details>
@@ -141,16 +177,18 @@ graph TB
 
 > 基于多 Agent 协作的智能内容创作系统，覆盖选题分析、文案生成、智能配图到在线支付的完整链路。
 
-`Java` `Spring Boot 3.5` `Spring AI` `Go` `Python` `Vue 3` `Stripe`
+`Java` `Spring AI Alibaba` `StateGraph` `Go` `Python` `Vue 3` `Qwen` `Gemini` `Stripe`
 
-- 🤝 **多 Agent 编排** — 选题 Agent + 文案 Agent + 配图 Agent 协同创作，流水线式内容生产
-- 🎨 **智能配图选择** — 多种配图方式（AI 生图 / 素材库 / 混搭），自动匹配最佳方案
-- 💳 **Stripe 在线支付** — 完整商业化闭环，支持付费内容生成
-- 🧩 **三语言后端** — 同时提供 Java / Go / Python 三种版本，技术选型灵活
+- 🤝 **5 Agent 流水线** — 选题 → 大纲 → 正文 → 配图分析 → 并行配图 → 图文合并，StateGraph 编排
+- 🎨 **智能配图策略** — Pexels / Mermaid / Iconify / 表情包 / Nano Banana(Gemini) / SVG，失败自动降级
+- 💳 **Stripe 商业闭环** — Checkout + 签名校验 Webhook，终身 VIP 解锁无限额度与高级配图
+- 🧩 **三语言等价后端** — Java(Spring AI) / Go(langchaingo) / Python(FastAPI) 三套实现，同一 Vue 前端 + MySQL
 
 <div align="center">
 
-[![ai-passage-creator-demo](https://github-readme-stats.vercel.app/api/pin/?username=1byteone&repo=ai-passage-creator-demo&theme=tokyonight)](https://github.com/1byteone/ai-passage-creator-demo)
+<a href="https://github.com/1byteone/ai-passage-creator-demo">
+  <img src="./assets/project-covers/ai-passage-creator-cover.webp" alt="AI Passage Creator 多智能体内容创作项目封面" width="100%" />
+</a>
 
 </div>
 
@@ -158,16 +196,51 @@ graph TB
 <summary>📐 多 Agent 协作流程</summary>
 
 ```mermaid
-graph LR
-    U[👤 用户需求] --> O[🎯 Supervisor 调度]
-    O --> A1[📋 选题 Agent]
-    O --> A2[✍️ 文案 Agent]
-    O --> A3[🎨 配图 Agent]
-    O --> A4[🔍 审核 Agent]
-    A1 & A2 & A4 -.-> LLM[🧠 LLM API]
-    A3 -.-> IMG[🖼️ Image API]
-    O --> PAY[💳 Stripe]
-    O --> PUB[📤 发布]
+flowchart TB
+    U["👤 用户输入选题"]
+
+    subgraph P1["阶段 1 · 人机协作"]
+        A1["📋 TitleGenerator<br/>生成 3-5 标题"]
+        H1{"用户选定标题"}
+    end
+    subgraph P2["阶段 2 · 人机协作"]
+        A2["📝 OutlineGenerator<br/>生成大纲 · SSE 流式"]
+        H2{"用户编辑 / AI 优化"}
+    end
+    subgraph P3["阶段 3 · 图文生成"]
+        A3["✍️ ContentGenerator<br/>正文 · SSE 流式"]
+        A4["🔎 ImageAnalyzer<br/>配图需求分析"]
+        A5["🎨 ParallelImageGenerator<br/>并行生成配图"]
+        A6["🧩 ContentMerger<br/>图文合并"]
+    end
+
+    LLM["🧠 Qwen / DashScope"]
+    IMG["🖼️ Gemini · 图库 · 降级 Picsum"]
+    COS["☁️ 腾讯云 COS"]
+    PAY["💳 Stripe VIP"]
+    OUT["📤 图文成品"]
+
+    U --> A1
+    A1 --> H1
+    H1 --> A2
+    A2 --> H2
+    H2 --> A3
+    A3 --> A4
+    A4 --> A5
+    A5 --> A6
+    A6 --> OUT
+
+    A1 --> LLM
+    A2 --> LLM
+    A3 --> LLM
+    A5 --> IMG
+    A5 --> COS
+    PAY -.-> P3
+
+    classDef agent fill:#7B42BC,stroke:#0d1117,color:#fff
+    classDef ext fill:#238636,stroke:#0d1117,color:#fff
+    class A1,A2,A3,A4,A5,A6 agent
+    class LLM,IMG,COS,PAY ext
 ```
 
 </details>
@@ -178,35 +251,79 @@ graph LR
 
 > 纯 Java 实现的命令行编码智能体，ReAct Agent Loop + 5 层安全沙箱 + 6 个内置工具，TUI/REPL 交互体验。
 
-`Java 21` `ReAct Agent` `CLI/TUI` `Docker` `Python`
+`Java 21` `Spring Boot` `LangChain4j` `picocli` `MCP` `React` `xterm.js`
 
-- 🌀 **ReAct Agent Loop** — Think → Act → Observe 循环，自主规划和执行编码任务
-- 🔒 **5 层安全沙箱** — 命令白名单 + 文件隔离 + 网络限制 + 资源配额 + 审计日志
-- 🛠️ **6 个内置工具** — 文件读写、命令执行、代码搜索、Git 操作、依赖管理、测试运行
-- 🖥️ **TUI/REPL 交互** — 终端原生体验，支持对话式编程和实时反馈
+- 🌀 **ReAct Agent Loop** — Think → Act → Observe 事件流循环（≤50 轮），LLM 流式 + 工具流式输出
+- 🛠️ **6 个内置工具** — `bash` / `read_file` / `write_file` / `edit_file` / `glob` / `grep`，可经 MCP 扩展
+- 🔒 **5 层安全过滤链** — ToolFilter → PathGuard → CommandScanner → UserConfirm → AuditLog，责任链放行/拦截/确认
+- 🖥️ **多模态交互** — picocli CLI + REPL 斜杠命令 + 三档 TUI 渲染（Kitty/Sixel 图形），另附 React 网页工作台
 
 <div align="center">
 
-[![mewpaw-code](https://github-readme-stats.vercel.app/api/pin/?username=1byteone&repo=mewpaw-code&theme=tokyonight)](https://github.com/1byteone/mewpaw-code)
+<a href="https://github.com/1byteone/mewpaw-code">
+  <img src="./assets/project-covers/mewpaw-code-cover.webp" alt="mewpaw-code Java 21 命令行编码智能体项目封面" width="100%" />
+</a>
 
 </div>
 
 <details>
-<summary>📐 ReAct Agent Loop</summary>
+<summary>📐 ReAct Loop &amp; 5 层安全链</summary>
 
 ```mermaid
-graph LR
-    U[👤 自然语言任务] --> T[💭 Think 分析规划]
-    T --> A[⚡ Act 执行工具]
-    A --> T1[📁 File I/O]
-    A --> T2[💻 Command]
-    A --> T3[🔍 Search]
-    A --> T4[📦 Git]
-    A --> T5[📚 Deps]
-    A --> T6[🧪 Test]
-    T1 & T2 & T3 & T4 & T5 & T6 --> O[👁️ Observe]
+flowchart TB
+    U["👤 自然语言任务"]
+
+    subgraph Loop["🌀 ReAct Agent Loop · ≤50 轮"]
+        T["💭 Think · 流式推理"]
+        A["⚡ Act · 工具调用请求"]
+        O["👁️ Observe · 结果回填"]
+    end
+
+    subgraph Sec["🔒 SecurityFilterChain"]
+        S1["ToolFilter"]
+        S2["PathGuard"]
+        S3["CommandScanner"]
+        S4["UserConfirm"]
+        S5["AuditLog"]
+    end
+
+    subgraph Tools["🛠️ ToolRegistry · 6 内置 + MCP"]
+        BASH["bash"]
+        RF["read_file"]
+        WF["write_file"]
+        EF["edit_file"]
+        GL["glob"]
+        GR["grep"]
+    end
+
+    R["✅ Response"]
+
+    U --> T
+    T --> A
+    A --> S1
+    S1 --> S2
+    S2 --> S3
+    S3 --> S4
+    S4 --> S5
+    S5 --> BASH
+    S5 --> RF
+    S5 --> WF
+    S5 --> EF
+    S5 --> GL
+    S5 --> GR
+    BASH --> O
+    RF --> O
+    WF --> O
+    EF --> O
+    GL --> O
+    GR --> O
     O -->|未完成| T
-    O -->|完成| R[✅ Response]
+    O -->|完成| R
+
+    classDef loop fill:#7B42BC,stroke:#0d1117,color:#fff
+    classDef sec fill:#DA3633,stroke:#0d1117,color:#fff
+    class T,A,O loop
+    class S1,S2,S3,S4,S5 sec
 ```
 
 </details>
