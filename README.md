@@ -54,34 +54,27 @@
 
 ---
 
-### 📊 GitHub Stats
+### 🧭 Engineering Architecture
 
 <div align="center">
 
-<img height="180em" src="https://github-readme-stats.vercel.app/api?username=1byteone&show_icons=true&theme=tokyonight&include_all_commits=true&count_private=true" />
-<img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=1byteone&layout=compact&theme=tokyonight" />
-
-<br/>
-
-<img src="https://streak-stats.demolab.com/?user=1byteone&theme=tokyonight" alt="GitHub Streak" />
+<a href="./diagrams/profile-architecture.html">
+  <img src="./assets/profile-architecture.png" alt="1byteone Java 与 AI Agent 开源项目工程架构总览" width="100%" />
+</a>
 
 </div>
 
 ---
 
-### 📈 Contribution Graph
+### 📈 GitHub Activity
 
 <div align="center">
 
-<img src="https://github-readme-activity-graph.vercel.app/graph?username=1byteone&theme=tokyo-night&hide_border=true&area=true" alt="Activity Graph" />
+<img src="./assets/github-contribution-grid-snake-dark.svg" alt="GitHub contribution snake animation" width="100%" />
 
 <br/>
 
-<img src="https://raw.githubusercontent.com/1byteone/1byteone/output/github-contribution-grid-snake-dark.svg" alt="Snake animation" />
-
-<br/>
-
-<img src="https://raw.githubusercontent.com/1byteone/1byteone/master/profile-3d-contrib/profile-night-rainbow.svg" alt="3D Contribution Chart" />
+<img src="./profile-3d-contrib/profile-night-rainbow.svg" alt="3D Contribution Chart" width="100%" />
 
 </div>
 
