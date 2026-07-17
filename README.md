@@ -393,15 +393,15 @@ flowchart TB
 
 #### 🏥 zznursing — 智颐智慧养老护理平台
 
-> 基于 RuoYi-Vue 的全生命周期养老管理平台，集成百度千帆 AI 健康评估、华为云 IoTDA 设备监控、双通道（管理端 + 微信小程序）架构。
+> 面向养老机构的综合运营平台，围绕入住、护理、健康评估、设备监测与家属服务形成一体化闭环，集成百度千帆 AI 与华为云 IoTDA。
 
-`Java 11` `Spring Boot 2.5` `MyBatis-Plus` `Spring Security` `Vue 3` `MySQL` `Redis` `百度千帆` `华为 IoTDA` `阿里云 OSS`
+`Java 11` `Spring Boot 2.5` `Spring Security` `MyBatis-Plus` `Vue 2` `MySQL` `Redis` `百度千帆` `华为云 IoTDA` `微信小程序`
 
-- 🩺 **AI 智能健康评估** — 上传体检 PDF → OSS 存储 → PDF 文本提取 → Redis 缓存 → 百度千帆 Ernie 5.0 分析 → 结构化健康报告 + 护理等级推荐
-- 📡 **华为云 IoTDA 集成** — 设备注册/同步、AMQP 消息消费、Redis 设备影子缓存，支持可穿戴 + 固定设备
-- 🧓 **全生命周期管理** — 入住申请 → 健康评估 → 护理计划分配 → 合同 → 报警规则 → 退住，闭环流程
-- 📱 **双通道应用** — Spring Security JWT（管理端 Vue3） + WeChat 小程序（家属端 MemberInterceptor ThreadLocal 认证）
-- ⚙️ **RuoYi 企业基础** — RBAC 权限、代码生成器、Quartz 定时任务、Druid 主从、Jenkins CI/CD
+- 🩺 **AI 辅助健康评估** — 体检 PDF 上传到 OSS 后进入解析与结构化流程，再由百度千帆生成健康评估与护理建议
+- 📡 **IoT 设备监测闭环** — 华为云 IoTDA + AMQP 接入腕带、床垫等设备，结合 Redis 缓存与报警规则追踪状态
+- 🧓 **养老业务一体化** — 老人档案、床位入住、合同、护理计划、护理等级与服务项目统一管理
+- 📱 **双端协同服务** — Vue 2 管理端支撑机构运营，微信小程序面向家属提供登录、预约与状态查询
+- ⚙️ **企业级平台底座** — Spring Security JWT、Quartz 定时任务、阿里云 OSS 与 MyBatis-Plus 持久层共同支撑业务闭环
 
 <div align="center">
 
@@ -412,13 +412,19 @@ flowchart TB
 </div>
 
 <details open>
-<summary><strong>中文 Hero 与 UI 预览</strong></summary>
+<summary><strong>中文 Hero 与项目机制图</strong></summary>
 <br/>
 
 <div align="center">
 
 <a href="https://github.com/1byteone/zznursing">
-  <img src="./assets/project-covers/zznursing-hero-cn-raw-v2.webp" alt="zznursing 中文 GitHub Hero 封面" width="100%" />
+  <img src="./assets/project-covers/zznursing-hero-cn.webp" alt="zznursing 中文 GitHub Hero 封面" width="100%" />
+</a>
+
+<br/><br/>
+
+<a href="https://github.com/1byteone/zznursing">
+  <img src="./assets/project-covers/material-illustrations/zznursing-material.webp" alt="zznursing 养老服务数字闭环机制图" width="100%" />
 </a>
 
 </div>
@@ -431,76 +437,68 @@ flowchart TB
 ```mermaid
 flowchart TB
     subgraph Channels["📱 接入通道"]
-        ADMIN["Vue3 管理端<br/>Spring Security + JWT"]
-        MINIAPP["微信小程序 · 家属端<br/>MemberInterceptor + ThreadLocal"]
+        ADMIN["Vue 2 管理端<br/>Element UI + JWT"]
+        MINIAPP["微信小程序 · 家属端<br/>登录 / 预约 / 状态查询"]
     end
 
-    subgraph Business["🏥 养老核心 · zzyl-nursing-platform"]
-        ELDER["Elder · 老人管理"]
-        CHECKIN["CheckIn · 入住流程"]
-        HEALTH["HealthAssessment<br/>AI 健康评估"]
-        NURSING["Nursing · 护理体系<br/>Plan/Project/Level"]
-        DEVICE["Device · IoT 设备"]
-        ALERT["AlertRule · 报警规则"]
+    subgraph Business["🏥 核心业务 · zzyl-nursing-platform"]
+        ELDER["老人档案 / 床位 / 合同"]
+        NURSING["护理体系<br/>计划 / 等级 / 项目"]
+        HEALTH["健康评估<br/>PDF 解析 + AI 结构化"]
+        DEVICE["IoT 设备<br/>设备档案 / 上报 / 告警规则"]
     end
 
-    subgraph Infra["⚙️ 基础设施 · zzyl-framework + zzyl-common"]
-        SEC["SecurityConfig<br/>JWT Filter Chain"]
-        IOT["IotClientConfig<br/>华为 IoTDA SDK"]
-        AI["AIModelInvoker<br/>OpenAI SDK → 百度千帆"]
-        OSS["AliyunOSSOperator<br/>阿里云 OSS"]
+    subgraph Infra["⚙️ 平台支撑"]
+        AUTH["Spring Security<br/>JWT + RBAC"]
+        CACHE["Redis<br/>会话 / 报告文本 / 设备状态"]
+        JOB["Quartz<br/>定时任务"]
+        OSS["阿里云 OSS<br/>报告与附件存储"]
     end
 
     subgraph External["🌐 外部服务"]
-        BAIDU["百度千帆 · Ernie 5.0"]
-        HUAWEI["华为云 IoTDA · AMQP"]
-        ALIYUN["阿里云 OSS · PDF 存储"]
+        BAIDU["百度千帆<br/>AI 健康评估"]
+        HUAWEI["华为云 IoTDA<br/>AMQP 设备消息"]
         WECHAT["微信开放平台<br/>jscode2session"]
     end
 
-    subgraph Data["💾 数据层"]
-        MYSQL[("MySQL 8.0 · Druid 主从")]
-        REDIS[("Redis 6+ · Lettuce")]
-    end
+    DATA["MySQL · MyBatis-Plus"]
 
     ADMIN --> ELDER
-    ADMIN --> CHECKIN
-    ADMIN --> HEALTH
     ADMIN --> NURSING
+    ADMIN --> HEALTH
     ADMIN --> DEVICE
     MINIAPP --> ELDER
     MINIAPP --> HEALTH
-
-    HEALTH --> AI
-    AI --> BAIDU
-    HEALTH --> OSS
-    OSS --> ALIYUN
-
-    DEVICE --> IOT
-    IOT --> HUAWEI
-
     MINIAPP --> WECHAT
 
-    ELDER --> MYSQL
-    CHECKIN --> MYSQL
-    HEALTH --> MYSQL
-    NURSING --> MYSQL
-    DEVICE --> MYSQL
+    HEALTH --> BAIDU
+    HEALTH --> OSS
+    HEALTH --> CACHE
+    DEVICE --> HUAWEI
+    DEVICE --> CACHE
 
-    HEALTH --> REDIS
-    DEVICE --> REDIS
+    ELDER --> AUTH
+    NURSING --> AUTH
+    ELDER --> JOB
+
+    ELDER --> DATA
+    NURSING --> DATA
+    HEALTH --> DATA
+    DEVICE --> DATA
 
     classDef channel fill:#1f6feb,stroke:#0d1117,color:#fff
     classDef biz fill:#7B42BC,stroke:#0d1117,color:#fff
     classDef infra fill:#DA3633,stroke:#0d1117,color:#fff
     classDef ext fill:#238636,stroke:#0d1117,color:#fff
     class ADMIN,MINIAPP channel
-    class ELDER,CHECKIN,HEALTH,NURSING,DEVICE,ALERT biz
-    class SEC,IOT,AI,OSS infra
-    class BAIDU,HUAWEI,ALIYUN,WECHAT ext
+    class ELDER,NURSING,HEALTH,DEVICE biz
+    class AUTH,CACHE,JOB,OSS infra
+    class BAIDU,HUAWEI,WECHAT ext
 ```
 
 </details>
+
+### Currently Focus
 
 - 🔭 I'm currently working on **Java + AI Agent application development**
 - 🌱 I'm currently learning **AI Agent frameworks, LLM application architecture**

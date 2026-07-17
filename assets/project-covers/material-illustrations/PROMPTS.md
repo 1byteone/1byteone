@@ -1,6 +1,6 @@
 # 归藏材料插画补图
 
-这组三张补图使用 `guizang-material-illustration` 的材料化解释图方法，
+这组四张补图使用 `guizang-material-illustration` 的材料化解释图方法，
 并由 `$gpt-image` 生成。它们用于补充项目机制，不替代 README 当前使用的
 深色 Hero 封面。
 
@@ -22,6 +22,13 @@
 | ruoyi-ai | 企业 AI 中枢与五类能力 | `prompts/01-ruoyi-ai-material.md` | `ruoyi-ai-material.webp` |
 | ai-passage-creator-demo | 多智能体内容创作流水线 | `prompts/02-ai-passage-creator-material.md` | `ai-passage-creator-material.webp` |
 | mewpaw-code | ReAct 循环、六工具、五层防护 | `prompts/03-mewpaw-code-material.md` | `mewpaw-code-material.webp` |
+| zznursing | 养老服务数字闭环 | `prompts/04-zznursing-material.md` | `zznursing-material.webp` |
 
 `*-material-raw.webp` 保留 `$gpt-image` 原始输出；正式资产经过高质量
 缩放，统一为精确的 `1536x768`。
+
+## zznursing 迭代说明
+
+- `zznursing-material-raw.webp`：修订后接受母版，保留原始输出用于复现。
+- `zznursing-material.webp`：基于接受母版导出的正式 README 展示图。
+- 首轮机制图因内部微文案过多而未采用，最终版仅保留项目主结构与短标签。
