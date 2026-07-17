@@ -54,27 +54,34 @@
 
 ---
 
-### 🧭 Engineering Architecture
+### 📊 GitHub Stats
 
 <div align="center">
 
-<a href="./diagrams/profile-architecture.html">
-  <img src="./assets/profile-architecture.png" alt="1byteone Java 与 AI Agent 开源项目工程架构总览" width="100%" />
-</a>
+<img height="180em" src="https://github-readme-stats.vercel.app/api?username=1byteone&show_icons=true&theme=tokyonight&include_all_commits=true&count_private=true" />
+<img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=1byteone&layout=compact&theme=tokyonight" />
+
+<br/>
+
+<img src="https://streak-stats.demolab.com/?user=1byteone&theme=tokyonight" alt="GitHub Streak" />
 
 </div>
 
 ---
 
-### 📈 GitHub Activity
+### 📈 Contribution Graph
 
 <div align="center">
 
-<img src="./assets/github-contribution-grid-snake-dark.svg" alt="GitHub contribution snake animation" width="100%" />
+<img src="https://github-readme-activity-graph.vercel.app/graph?username=1byteone&theme=tokyo-night&hide_border=true&area=true" alt="Activity Graph" />
 
 <br/>
 
-<img src="./profile-3d-contrib/profile-night-rainbow.svg" alt="3D Contribution Chart" width="100%" />
+<img src="https://raw.githubusercontent.com/1byteone/1byteone/output/github-contribution-grid-snake-dark.svg" alt="Snake animation" />
+
+<br/>
+
+<img src="https://raw.githubusercontent.com/1byteone/1byteone/master/profile-3d-contrib/profile-night-rainbow.svg" alt="3D Contribution Chart" />
 
 </div>
 
@@ -125,7 +132,10 @@
 <details>
 <summary>📐 架构图</summary>
 
+<br/>
+
 ```mermaid
+%%{init: {'theme':'base','themeVariables': {'background':'#0d1117','primaryColor':'#1f6feb22','primaryTextColor':'#ffffff','primaryBorderColor':'#58a6ff','lineColor':'#8b949e','tertiaryColor':'#161b22','fontFamily':'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace'}}}%%
 flowchart TB
     UI["🖥️ Vue 3 用户端 / Vben 管理端"]
     API["🚪 ruoyi-admin · REST + SSE + WebSocket"]
@@ -182,6 +192,16 @@ flowchart TB
     class MODELS,VECTOR,GRAPH,STORE data
 ```
 
+_补充：专业版架构图，可点击查看 HTML 导出版。_
+
+<div align="center">
+
+<a href="./diagrams/ruoyi-ai-architecture.html">
+  <img src="./assets/project-architectures/ruoyi-ai-architecture.png" alt="ruoyi-ai 企业级 AI 应用开发框架系统架构图" width="100%" />
+</a>
+
+</div>
+
 </details>
 
 ---
@@ -229,7 +249,10 @@ flowchart TB
 <details>
 <summary>📐 多 Agent 协作流程</summary>
 
+<br/>
+
 ```mermaid
+%%{init: {'theme':'base','themeVariables': {'background':'#0d1117','primaryColor':'#1f6feb22','primaryTextColor':'#ffffff','primaryBorderColor':'#58a6ff','lineColor':'#8b949e','tertiaryColor':'#161b22','fontFamily':'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace'}}}%%
 flowchart TB
     U["👤 用户输入选题"]
 
@@ -277,6 +300,16 @@ flowchart TB
     class LLM,IMG,COS,PAY ext
 ```
 
+_补充：专业版架构图，可点击查看 HTML 导出版。_
+
+<div align="center">
+
+<a href="./diagrams/ai-passage-creator-architecture.html">
+  <img src="./assets/project-architectures/ai-passage-creator-architecture.png" alt="ai-passage-creator 多智能体内容创作系统架构图" width="100%" />
+</a>
+
+</div>
+
 </details>
 
 ---
@@ -323,7 +356,10 @@ flowchart TB
 <details>
 <summary>📐 ReAct Loop &amp; 5 层安全链</summary>
 
+<br/>
+
 ```mermaid
+%%{init: {'theme':'base','themeVariables': {'background':'#0d1117','primaryColor':'#1f6feb22','primaryTextColor':'#ffffff','primaryBorderColor':'#58a6ff','lineColor':'#8b949e','tertiaryColor':'#161b22','fontFamily':'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace'}}}%%
 flowchart TB
     U["👤 自然语言任务"]
 
@@ -380,6 +416,16 @@ flowchart TB
     class S1,S2,S3,S4,S5 sec
 ```
 
+_补充：专业版架构图，可点击查看 HTML 导出版。_
+
+<div align="center">
+
+<a href="./diagrams/mewpaw-code-architecture.html">
+  <img src="./assets/project-architectures/mewpaw-code-architecture.png" alt="mewpaw-code Java 21 CLI Coding Agent 系统架构图" width="100%" />
+</a>
+
+</div>
+
 </details>
 
 ---
@@ -427,7 +473,10 @@ flowchart TB
 <details>
 <summary>📐 系统架构</summary>
 
+<br/>
+
 ```mermaid
+%%{init: {'theme':'base','themeVariables': {'background':'#0d1117','primaryColor':'#1f6feb22','primaryTextColor':'#ffffff','primaryBorderColor':'#58a6ff','lineColor':'#8b949e','tertiaryColor':'#161b22','fontFamily':'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace'}}}%%
 flowchart TB
     subgraph Channels["📱 接入通道"]
         ADMIN["Vue 2 管理端<br/>Element UI + JWT"]
@@ -488,6 +537,16 @@ flowchart TB
     class AUTH,CACHE,JOB,OSS infra
     class BAIDU,HUAWEI,WECHAT ext
 ```
+
+_补充：专业版架构图，可点击查看 HTML 导出版。_
+
+<div align="center">
+
+<a href="./diagrams/zznursing-architecture.html">
+  <img src="./assets/project-architectures/zznursing-architecture.png" alt="zznursing 智慧养老护理平台系统架构图" width="100%" />
+</a>
+
+</div>
 
 </details>
 
