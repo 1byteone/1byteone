@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>zznursing Architecture Diagram</title>
+  <title>zznursing 系统架构图</title>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js" integrity="sha384-ZZ1pncU3bQe8y31yfZdMFdSpttDoPmOZg2wguVK9almUodir1PghgT0eY7Mrty8H" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js" integrity="sha384-en/ztfPSRkGfME4KIm05joYXynqzUgbsG5nMrj/xEFAHXkeZfO3yMK8QQ+mP7p1/" crossorigin="anonymous"></script>
@@ -49,7 +49,7 @@
     <div class="header">
       <div class="header-row">
         <div class="pulse-dot"></div>
-        <h1>zznursing Architecture</h1>
+        <h1>zznursing 系统架构图</h1>
         <div class="toolbar">
           <div class="toolbar-actions">
             <button onclick="copyAsImage(this)">Copy</button>
@@ -59,13 +59,13 @@
           <button class="toolbar-toggle" onclick="this.parentElement.classList.toggle('expanded')" title="Export options" aria-label="Export options">...</button>
         </div>
       </div>
-      <p class="subtitle">Integrated elderly-care platform connecting management operations, family mini-app access, AI health assessment, IoT monitoring, and enterprise care workflows.</p>
+      <p class="subtitle">围绕养老机构运营、家属小程序服务、健康评估、IoT 设备监测与护理闭环打造的一体化平台，统一承接 AI、微信与 IoT 云服务接入。</p>
     </div>
 
     <div class="diagram-container">
       <svg viewBox="0 0 1100 760" role="img" aria-labelledby="title desc">
-        <title id="title">zznursing system architecture</title>
-        <desc id="desc">Admin and family channels enter a healthcare operations platform backed by AI assessment, IoT device monitoring, Redis, MySQL, OSS, and cloud services.</desc>
+        <title id="title">zznursing 系统架构图</title>
+        <desc id="desc">管理端与家属小程序进入养老护理平台，连接档案与健康评估、家属服务、IoT 监测、Redis / MySQL 数据层，以及百度千帆、微信开放平台和华为 IoTDA 集成能力。</desc>
         <defs>
           <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
             <polygon points="0 0, 10 3.5, 0 7" fill="#64748b" />
@@ -80,143 +80,145 @@
 
         <line x1="135" y1="180" x2="245" y2="180" stroke="#22d3ee" stroke-width="1.5" marker-end="url(#arrowhead)" />
         <line x1="135" y1="270" x2="245" y2="270" stroke="#22d3ee" stroke-width="1.5" marker-end="url(#arrowhead)" />
-        <line x1="365" y1="180" x2="470" y2="180" stroke="#34d399" stroke-width="1.5" marker-end="url(#arrowhead)" />
-        <line x1="365" y1="270" x2="470" y2="270" stroke="#34d399" stroke-width="1.5" marker-end="url(#arrowhead)" />
-        <line x1="620" y1="180" x2="730" y2="180" stroke="#a78bfa" stroke-width="1.5" marker-end="url(#arrowhead)" />
-        <line x1="620" y1="270" x2="730" y2="270" stroke="#fbbf24" stroke-width="1.5" marker-end="url(#arrowhead)" />
-        <line x1="870" y1="160" x2="990" y2="135" stroke="#fbbf24" stroke-width="1.5" marker-end="url(#arrowhead)" />
-        <line x1="870" y1="205" x2="990" y2="205" stroke="#fbbf24" stroke-width="1.5" marker-end="url(#arrowhead)" />
-        <line x1="870" y1="250" x2="990" y2="280" stroke="#fbbf24" stroke-width="1.5" marker-end="url(#arrowhead)" />
+        <line x1="365" y1="180" x2="490" y2="170" stroke="#34d399" stroke-width="1.5" marker-end="url(#arrowhead)" />
+        <path d="M 365 180 C 420 190 445 255 490 300" fill="none" stroke="#34d399" stroke-width="1.5" marker-end="url(#arrowhead)" />
+        <line x1="365" y1="270" x2="490" y2="235" stroke="#34d399" stroke-width="1.5" marker-end="url(#arrowhead)" />
+        <line x1="600" y1="170" x2="750" y2="162" stroke="#a78bfa" stroke-width="1.5" marker-end="url(#arrowhead)" />
+        <line x1="600" y1="235" x2="750" y2="242" stroke="#fbbf24" stroke-width="1.5" marker-end="url(#arrowhead)" />
+        <line x1="600" y1="300" x2="750" y2="322" stroke="#fbbf24" stroke-width="1.5" marker-end="url(#arrowhead)" />
+        <line x1="850" y1="162" x2="990" y2="128" stroke="#fbbf24" stroke-width="1.5" marker-end="url(#arrowhead)" />
+        <line x1="850" y1="242" x2="990" y2="208" stroke="#fbbf24" stroke-width="1.5" marker-end="url(#arrowhead)" />
+        <line x1="850" y1="322" x2="990" y2="288" stroke="#fbbf24" stroke-width="1.5" marker-end="url(#arrowhead)" />
         <line x1="525" y1="445" x2="635" y2="445" stroke="#34d399" stroke-width="1.5" marker-end="url(#arrowhead)" />
         <line x1="755" y1="445" x2="865" y2="445" stroke="#a78bfa" stroke-width="1.5" marker-end="url(#arrowhead)" />
         <line x1="525" y1="525" x2="635" y2="525" stroke="#34d399" stroke-width="1.5" marker-end="url(#arrowhead)" />
         <line x1="755" y1="525" x2="865" y2="525" stroke="#a78bfa" stroke-width="1.5" marker-end="url(#arrowhead)" />
 
         <rect x="185" y="40" width="720" height="590" rx="12" fill="rgba(251, 191, 36, 0.05)" stroke="#fbbf24" stroke-width="1" stroke-dasharray="8,4" />
-        <text x="202" y="61" fill="#fbbf24" font-size="10" font-weight="600">SMART ELDERLY CARE OPERATIONS PLATFORM</text>
+        <text x="202" y="61" fill="#fbbf24" font-size="10" font-weight="600">智慧养老护理运营平台</text>
 
         <rect x="20" y="145" width="115" height="70" rx="6" fill="#0f172a" />
         <rect x="20" y="145" width="115" height="70" rx="6" fill="rgba(30, 41, 59, 0.5)" stroke="#94a3b8" stroke-width="1.5" />
-        <text x="77.5" y="172" fill="#ffffff" font-size="11" font-weight="600" text-anchor="middle">Admin Staff</text>
-        <text x="77.5" y="190" fill="#94a3b8" font-size="8" text-anchor="middle">Institution operations</text>
+        <text x="77.5" y="172" fill="#ffffff" font-size="11" font-weight="600" text-anchor="middle">机构运营人员</text>
+        <text x="77.5" y="190" fill="#94a3b8" font-size="8" text-anchor="middle">后台运营 / 护理管理</text>
 
         <rect x="20" y="235" width="115" height="70" rx="6" fill="#0f172a" />
         <rect x="20" y="235" width="115" height="70" rx="6" fill="rgba(30, 41, 59, 0.5)" stroke="#94a3b8" stroke-width="1.5" />
-        <text x="77.5" y="262" fill="#ffffff" font-size="11" font-weight="600" text-anchor="middle">Family Users</text>
-        <text x="77.5" y="280" fill="#94a3b8" font-size="8" text-anchor="middle">Mini-app access</text>
+        <text x="77.5" y="262" fill="#ffffff" font-size="11" font-weight="600" text-anchor="middle">家属用户</text>
+        <text x="77.5" y="280" fill="#94a3b8" font-size="8" text-anchor="middle">小程序访问</text>
 
         <rect x="245" y="145" width="120" height="70" rx="6" fill="#0f172a" />
         <rect x="245" y="145" width="120" height="70" rx="6" fill="rgba(8, 51, 68, 0.4)" stroke="#22d3ee" stroke-width="1.4" />
-        <text x="305" y="171" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">Vue Admin</text>
-        <text x="305" y="188" fill="#94a3b8" font-size="8" text-anchor="middle">JWT + operations UI</text>
+        <text x="305" y="171" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">Vue 管理端</text>
+        <text x="305" y="188" fill="#94a3b8" font-size="8" text-anchor="middle">JWT / 机构运营</text>
 
         <rect x="245" y="235" width="120" height="70" rx="6" fill="#0f172a" />
         <rect x="245" y="235" width="120" height="70" rx="6" fill="rgba(8, 51, 68, 0.4)" stroke="#22d3ee" stroke-width="1.4" />
-        <text x="305" y="261" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">WeChat Mini App</text>
-        <text x="305" y="278" fill="#94a3b8" font-size="8" text-anchor="middle">openId / member flow</text>
+        <text x="305" y="261" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">微信小程序</text>
+        <text x="305" y="278" fill="#94a3b8" font-size="8" text-anchor="middle">openId / 家属服务</text>
 
         <rect x="470" y="110" width="150" height="230" rx="8" fill="transparent" stroke="#34d399" stroke-width="1" stroke-dasharray="4,4" />
-        <text x="482" y="126" fill="#34d399" font-size="8">Core care business</text>
+        <text x="482" y="126" fill="#34d399" font-size="8">核心养老业务</text>
 
         <rect x="490" y="145" width="110" height="50" rx="6" fill="#0f172a" />
         <rect x="490" y="145" width="110" height="50" rx="6" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1.3" />
-        <text x="545" y="166" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">Elder / CheckIn</text>
-        <text x="545" y="182" fill="#94a3b8" font-size="8" text-anchor="middle">Archive / bed / contract</text>
+        <text x="545" y="166" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">档案 / 健康评估</text>
+        <text x="545" y="182" fill="#94a3b8" font-size="8" text-anchor="middle">老人资料 / 入住 / 报告</text>
 
         <rect x="490" y="210" width="110" height="50" rx="6" fill="#0f172a" />
         <rect x="490" y="210" width="110" height="50" rx="6" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1.3" />
-        <text x="545" y="231" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">Nursing System</text>
-        <text x="545" y="247" fill="#94a3b8" font-size="8" text-anchor="middle">Plan / project / level</text>
+        <text x="545" y="231" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">护理服务 / 家属</text>
+        <text x="545" y="247" fill="#94a3b8" font-size="8" text-anchor="middle">计划 / 预约 / 通知</text>
 
         <rect x="490" y="275" width="110" height="50" rx="6" fill="#0f172a" />
         <rect x="490" y="275" width="110" height="50" rx="6" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1.3" />
-        <text x="545" y="296" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">Device / Alert</text>
-        <text x="545" y="312" fill="#94a3b8" font-size="8" text-anchor="middle">IoT status / rules</text>
+        <text x="545" y="296" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">设备监测 / 告警</text>
+        <text x="545" y="312" fill="#94a3b8" font-size="8" text-anchor="middle">IoT 状态 / 规则</text>
 
         <rect x="730" y="110" width="140" height="230" rx="8" fill="transparent" stroke="#a78bfa" stroke-width="1" stroke-dasharray="4,4" />
-        <text x="742" y="126" fill="#a78bfa" font-size="8">AI + support services</text>
+        <text x="742" y="126" fill="#a78bfa" font-size="8">AI 与接入服务</text>
 
         <rect x="750" y="135" width="100" height="55" rx="6" fill="#0f172a" />
         <rect x="750" y="135" width="100" height="55" rx="6" fill="rgba(76, 29, 149, 0.4)" stroke="#a78bfa" stroke-width="1.3" />
-        <text x="800" y="157" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">Health AI</text>
-        <text x="800" y="174" fill="#94a3b8" font-size="8" text-anchor="middle">PDF parse + assessment</text>
+        <text x="800" y="157" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">健康 AI</text>
+        <text x="800" y="174" fill="#94a3b8" font-size="8" text-anchor="middle">PDF 解析 / 护理评估</text>
 
         <rect x="750" y="215" width="100" height="55" rx="6" fill="#0f172a" />
         <rect x="750" y="215" width="100" height="55" rx="6" fill="rgba(120, 53, 15, 0.3)" stroke="#fbbf24" stroke-width="1.3" />
-        <text x="800" y="237" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">OSS + Cache</text>
-        <text x="800" y="254" fill="#94a3b8" font-size="8" text-anchor="middle">Aliyun OSS / Redis</text>
+        <text x="800" y="237" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">家属服务接入</text>
+        <text x="800" y="254" fill="#94a3b8" font-size="8" text-anchor="middle">openId / 预约 / 通知</text>
 
         <rect x="750" y="295" width="100" height="55" rx="6" fill="#0f172a" />
         <rect x="750" y="295" width="100" height="55" rx="6" fill="rgba(120, 53, 15, 0.3)" stroke="#fbbf24" stroke-width="1.3" />
-        <text x="800" y="317" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">Security / Jobs</text>
-        <text x="800" y="334" fill="#94a3b8" font-size="8" text-anchor="middle">JWT / Quartz / RBAC</text>
+        <text x="800" y="317" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">IoT 接入 / 告警</text>
+        <text x="800" y="334" fill="#94a3b8" font-size="8" text-anchor="middle">IoTDA / Redis / 规则</text>
 
         <rect x="990" y="95" width="90" height="65" rx="6" fill="#0f172a" />
         <rect x="990" y="95" width="90" height="65" rx="6" fill="rgba(120, 53, 15, 0.3)" stroke="#fbbf24" stroke-width="1.4" />
-        <text x="1035" y="120" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">Baidu Qianfan</text>
-        <text x="1035" y="138" fill="#94a3b8" font-size="8" text-anchor="middle">Ernie health AI</text>
+        <text x="1035" y="120" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">百度千帆</text>
+        <text x="1035" y="138" fill="#94a3b8" font-size="8" text-anchor="middle">健康评估 / 建议生成</text>
 
         <rect x="990" y="175" width="90" height="65" rx="6" fill="#0f172a" />
         <rect x="990" y="175" width="90" height="65" rx="6" fill="rgba(120, 53, 15, 0.3)" stroke="#fbbf24" stroke-width="1.4" />
-        <text x="1035" y="200" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">Huawei IoTDA</text>
-        <text x="1035" y="218" fill="#94a3b8" font-size="8" text-anchor="middle">AMQP device events</text>
+        <text x="1035" y="200" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">微信开放平台</text>
+        <text x="1035" y="218" fill="#94a3b8" font-size="8" text-anchor="middle">openId / 会话换取</text>
 
         <rect x="990" y="255" width="90" height="65" rx="6" fill="#0f172a" />
         <rect x="990" y="255" width="90" height="65" rx="6" fill="rgba(120, 53, 15, 0.3)" stroke="#fbbf24" stroke-width="1.4" />
-        <text x="1035" y="280" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">WeChat Open</text>
-        <text x="1035" y="298" fill="#94a3b8" font-size="8" text-anchor="middle">jscode2session</text>
+        <text x="1035" y="280" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">华为 IoTDA</text>
+        <text x="1035" y="298" fill="#94a3b8" font-size="8" text-anchor="middle">AMQP 设备事件</text>
 
         <rect x="250" y="405" width="120" height="80" rx="6" fill="#0f172a" />
         <rect x="250" y="405" width="120" height="80" rx="6" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1.4" />
-        <text x="310" y="432" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">Assessment Flow</text>
-        <text x="310" y="451" fill="#94a3b8" font-size="8" text-anchor="middle">Upload PDF / parse text</text>
-        <text x="310" y="466" fill="#94a3b8" font-size="8" text-anchor="middle">Structured nursing advice</text>
+        <text x="310" y="432" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">体检报告流程</text>
+        <text x="310" y="451" fill="#94a3b8" font-size="8" text-anchor="middle">上传 PDF / 文本解析</text>
+        <text x="310" y="466" fill="#94a3b8" font-size="8" text-anchor="middle">结构化护理建议</text>
 
         <rect x="405" y="405" width="120" height="80" rx="6" fill="#0f172a" />
         <rect x="405" y="405" width="120" height="80" rx="6" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1.4" />
-        <text x="465" y="432" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">IoT Ingestion</text>
-        <text x="465" y="451" fill="#94a3b8" font-size="8" text-anchor="middle">Watch / mattress / alerts</text>
-        <text x="465" y="466" fill="#94a3b8" font-size="8" text-anchor="middle">Device state rules</text>
+        <text x="465" y="432" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">IoT 数据采集</text>
+        <text x="465" y="451" fill="#94a3b8" font-size="8" text-anchor="middle">腕带 / 床垫 / 告警</text>
+        <text x="465" y="466" fill="#94a3b8" font-size="8" text-anchor="middle">设备状态规则</text>
 
         <rect x="635" y="405" width="120" height="80" rx="6" fill="#0f172a" />
         <rect x="635" y="405" width="120" height="80" rx="6" fill="rgba(76, 29, 149, 0.4)" stroke="#a78bfa" stroke-width="1.4" />
-        <text x="695" y="432" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">Redis</text>
-        <text x="695" y="451" fill="#94a3b8" font-size="8" text-anchor="middle">Report cache / device state</text>
-        <text x="695" y="466" fill="#94a3b8" font-size="8" text-anchor="middle">24h reuse</text>
+        <text x="695" y="432" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">Redis 缓存</text>
+        <text x="695" y="451" fill="#94a3b8" font-size="8" text-anchor="middle">报告缓存 / 设备状态</text>
+        <text x="695" y="466" fill="#94a3b8" font-size="8" text-anchor="middle">24h 复用</text>
 
         <rect x="865" y="405" width="120" height="80" rx="6" fill="#0f172a" />
         <rect x="865" y="405" width="120" height="80" rx="6" fill="rgba(76, 29, 149, 0.4)" stroke="#a78bfa" stroke-width="1.4" />
-        <text x="925" y="432" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">MySQL</text>
-        <text x="925" y="451" fill="#94a3b8" font-size="8" text-anchor="middle">Elder / contract / care</text>
-        <text x="925" y="466" fill="#94a3b8" font-size="8" text-anchor="middle">IoT and assessment data</text>
+        <text x="925" y="432" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">MySQL 主库</text>
+        <text x="925" y="451" fill="#94a3b8" font-size="8" text-anchor="middle">老人 / 合同 / 护理</text>
+        <text x="925" y="466" fill="#94a3b8" font-size="8" text-anchor="middle">IoT 与评估数据</text>
 
         <rect x="405" y="485" width="120" height="80" rx="6" fill="#0f172a" />
         <rect x="405" y="485" width="120" height="80" rx="6" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1.4" />
-        <text x="465" y="512" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">Facility Graph</text>
-        <text x="465" y="531" fill="#94a3b8" font-size="8" text-anchor="middle">Floor / room / bed</text>
-        <text x="465" y="546" fill="#94a3b8" font-size="8" text-anchor="middle">Admission mapping</text>
+        <text x="465" y="512" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">床位 / 楼层映射</text>
+        <text x="465" y="531" fill="#94a3b8" font-size="8" text-anchor="middle">楼层 / 房间 / 床位</text>
+        <text x="465" y="546" fill="#94a3b8" font-size="8" text-anchor="middle">入住关系映射</text>
 
         <rect x="635" y="485" width="120" height="80" rx="6" fill="#0f172a" />
         <rect x="635" y="485" width="120" height="80" rx="6" fill="rgba(76, 29, 149, 0.4)" stroke="#a78bfa" stroke-width="1.4" />
-        <text x="695" y="512" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">Rule Engine</text>
-        <text x="695" y="531" fill="#94a3b8" font-size="8" text-anchor="middle">Alert thresholds</text>
-        <text x="695" y="546" fill="#94a3b8" font-size="8" text-anchor="middle">Contract reminders</text>
+        <text x="695" y="512" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">规则引擎</text>
+        <text x="695" y="531" fill="#94a3b8" font-size="8" text-anchor="middle">告警阈值</text>
+        <text x="695" y="546" fill="#94a3b8" font-size="8" text-anchor="middle">合同提醒</text>
 
         <rect x="865" y="485" width="120" height="80" rx="6" fill="#0f172a" />
         <rect x="865" y="485" width="120" height="80" rx="6" fill="rgba(76, 29, 149, 0.4)" stroke="#a78bfa" stroke-width="1.4" />
-        <text x="925" y="512" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">Care Ledger</text>
-        <text x="925" y="531" fill="#94a3b8" font-size="8" text-anchor="middle">Plan / project / billing</text>
-        <text x="925" y="546" fill="#94a3b8" font-size="8" text-anchor="middle">Lifecycle trace</text>
+        <text x="925" y="512" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">护理台账</text>
+        <text x="925" y="531" fill="#94a3b8" font-size="8" text-anchor="middle">计划 / 项目 / 计费</text>
+        <text x="925" y="546" fill="#94a3b8" font-size="8" text-anchor="middle">生命周期追踪</text>
 
-        <text x="735" y="675" fill="#ffffff" font-size="10" font-weight="600">Legend</text>
+        <text x="735" y="675" fill="#ffffff" font-size="10" font-weight="600">图例</text>
         <rect x="735" y="688" width="16" height="10" rx="2" fill="rgba(8, 51, 68, 0.4)" stroke="#22d3ee" />
-        <text x="757" y="696" fill="#94a3b8" font-size="8">Channel</text>
+        <text x="757" y="696" fill="#94a3b8" font-size="8">接入层</text>
         <rect x="805" y="688" width="16" height="10" rx="2" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" />
-        <text x="827" y="696" fill="#94a3b8" font-size="8">Business</text>
+        <text x="827" y="696" fill="#94a3b8" font-size="8">业务层</text>
         <rect x="875" y="688" width="16" height="10" rx="2" fill="rgba(76, 29, 149, 0.4)" stroke="#a78bfa" />
-        <text x="897" y="696" fill="#94a3b8" font-size="8">Data / AI</text>
+        <text x="897" y="696" fill="#94a3b8" font-size="8">数据 / AI</text>
         <rect x="970" y="688" width="16" height="10" rx="2" fill="rgba(120, 53, 15, 0.3)" stroke="#fbbf24" />
-        <text x="992" y="696" fill="#94a3b8" font-size="8">Cloud service</text>
+        <text x="992" y="696" fill="#94a3b8" font-size="8">云服务</text>
       </svg>
     </div>
 
@@ -224,39 +226,39 @@
       <div class="card">
         <div class="card-header">
           <div class="card-dot cyan"></div>
-          <h3>Dual Channels</h3>
+          <h3>双端接入</h3>
         </div>
         <ul>
-          <li>- Vue admin serves institutional operators across the full care lifecycle</li>
-          <li>- WeChat mini-app gives family members status queries and appointment flows</li>
-          <li>- Channel authentication splits between JWT admin and mini-app openId flow</li>
+          <li>- Vue 管理端覆盖机构运营、护理管理、老人入住与评估处理</li>
+          <li>- 微信小程序承接家属侧状态查询、预约与通知触达链路</li>
+          <li>- 渠道认证拆分为 JWT 管理端与 openId 小程序接入模型</li>
         </ul>
       </div>
       <div class="card">
         <div class="card-header">
           <div class="card-dot emerald"></div>
-          <h3>Care Operations</h3>
+          <h3>护理业务闭环</h3>
         </div>
         <ul>
-          <li>- Elder, admission, nursing plans, contracts, and facilities share one platform base</li>
-          <li>- AI health assessment turns uploaded PDFs into structured nursing suggestions</li>
-          <li>- IoT ingestion watches wearable and bedside devices for alert conditions</li>
+          <li>- 档案、入住、护理计划、家属服务与设备告警共用统一业务底座</li>
+          <li>- 健康 AI 将上传报告转换为结构化评估结果与护理建议</li>
+          <li>- IoT 采集链路持续监测腕带、床垫等设备并触发规则判断</li>
         </ul>
       </div>
       <div class="card">
         <div class="card-header">
           <div class="card-dot amber"></div>
-          <h3>Cloud Integration</h3>
+          <h3>云服务集成</h3>
         </div>
         <ul>
-          <li>- Baidu Qianfan powers health scoring and intervention recommendations</li>
-          <li>- Huawei IoTDA and AMQP bridge device telemetry into the rule engine</li>
-          <li>- Aliyun OSS, Redis, and MySQL preserve reports, cache state, and transactional data</li>
+          <li>- 百度千帆负责健康评估、建议生成等 AI 推理任务</li>
+          <li>- 微信开放平台与华为 IoTDA 分别承接家属接入和设备遥测链路</li>
+          <li>- Redis 与 MySQL 共同保存缓存状态、业务交易与护理台账数据</li>
         </ul>
       </div>
     </div>
 
-    <p class="footer">zznursing / integrated elderly-care operations / generated with architecture-diagram skill</p>
+    <p class="footer">zznursing / 智慧养老护理运营平台 / generated with architecture-diagram skill</p>
   </div>
 
   <script>

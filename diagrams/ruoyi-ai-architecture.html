@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ruoyi-ai Architecture Diagram</title>
+  <title>ruoyi-ai 系统架构图</title>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js" integrity="sha384-ZZ1pncU3bQe8y31yfZdMFdSpttDoPmOZg2wguVK9almUodir1PghgT0eY7Mrty8H" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js" integrity="sha384-en/ztfPSRkGfME4KIm05joYXynqzUgbsG5nMrj/xEFAHXkeZfO3yMK8QQ+mP7p1/" crossorigin="anonymous"></script>
@@ -134,7 +134,7 @@
     <div class="header">
       <div class="header-row">
         <div class="pulse-dot"></div>
-        <h1>ruoyi-ai Architecture</h1>
+        <h1>ruoyi-ai 系统架构图</h1>
         <div class="toolbar">
           <div class="toolbar-actions">
             <button onclick="copyAsImage(this)">Copy</button>
@@ -144,13 +144,13 @@
           <button class="toolbar-toggle" onclick="this.parentElement.classList.toggle('expanded')" title="Export options" aria-label="Export options">...</button>
         </div>
       </div>
-      <p class="subtitle">Enterprise AI application platform with multi-model access, Supervisor multi-agent orchestration, RAG, GraphRAG, and workflow composition.</p>
+      <p class="subtitle">面向企业场景的 AI 应用平台，统一接入多模型能力，通过 Supervisor 多 Agent 编排、RAG / GraphRAG 检索与工作流引擎支撑对话、审批与系统运营。</p>
     </div>
 
     <div class="diagram-container">
       <svg viewBox="0 0 1100 760" role="img" aria-labelledby="title desc">
-        <title id="title">ruoyi-ai system architecture</title>
-        <desc id="desc">Frontend and admin clients enter through ruoyi-admin, fan into business modules, AI agent engine, RAG pipeline, and enterprise data services.</desc>
+        <title id="title">ruoyi-ai 系统架构图</title>
+        <desc id="desc">用户端与管理后台经 ruoyi-admin 进入平台，连接业务模块、Supervisor 多 Agent 编排、RAG 检索链路以及企业数据与模型服务。</desc>
         <defs>
           <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
             <polygon points="0 0, 10 3.5, 0 7" fill="#64748b" />
@@ -166,70 +166,70 @@
         <!-- Arrows behind components -->
         <line x1="120" y1="200" x2="220" y2="200" stroke="#22d3ee" stroke-width="1.5" marker-end="url(#arrowhead)" />
         <line x1="360" y1="200" x2="445" y2="200" stroke="#34d399" stroke-width="1.5" marker-end="url(#arrowhead)" />
-        <line x1="540" y1="200" x2="640" y2="200" stroke="#34d399" stroke-width="1.5" marker-end="url(#arrowhead)" />
-        <line x1="735" y1="170" x2="865" y2="170" stroke="#34d399" stroke-width="1.5" marker-end="url(#arrowhead)" />
-        <line x1="735" y1="235" x2="865" y2="235" stroke="#a78bfa" stroke-width="1.5" marker-end="url(#arrowhead)" />
-        <line x1="735" y1="300" x2="865" y2="300" stroke="#fbbf24" stroke-width="1.5" marker-end="url(#arrowhead)" />
+        <path d="M 540 200 C 560 198 575 176 590 170" fill="none" stroke="#34d399" stroke-width="1.5" marker-end="url(#arrowhead)" />
+        <line x1="715" y1="170" x2="790" y2="170" stroke="#34d399" stroke-width="1.5" marker-end="url(#arrowhead)" />
+        <line x1="715" y1="235" x2="790" y2="235" stroke="#a78bfa" stroke-width="1.5" marker-end="url(#arrowhead)" />
+        <line x1="715" y1="300" x2="790" y2="300" stroke="#fbbf24" stroke-width="1.5" marker-end="url(#arrowhead)" />
         <line x1="360" y1="430" x2="430" y2="430" stroke="#34d399" stroke-width="1.5" marker-end="url(#arrowhead)" />
         <line x1="525" y1="430" x2="610" y2="430" stroke="#fb923c" stroke-width="1.5" marker-end="url(#arrowhead)" />
         <line x1="700" y1="430" x2="820" y2="430" stroke="#a78bfa" stroke-width="1.5" marker-end="url(#arrowhead)" />
-        <line x1="525" y1="500" x2="610" y2="500" stroke="#fb923c" stroke-width="1.5" marker-end="url(#arrowhead)" />
-        <line x1="700" y1="500" x2="820" y2="500" stroke="#a78bfa" stroke-width="1.5" marker-end="url(#arrowhead)" />
+        <path d="M 477.5 465 L 477.5 520 L 610 520" fill="none" stroke="#fb923c" stroke-width="1.5" marker-end="url(#arrowhead)" />
+        <line x1="700" y1="520" x2="820" y2="520" stroke="#a78bfa" stroke-width="1.5" marker-end="url(#arrowhead)" />
 
         <rect x="160" y="40" width="790" height="580" rx="12" fill="rgba(251, 191, 36, 0.05)" stroke="#fbbf24" stroke-width="1" stroke-dasharray="8,4" />
-        <text x="176" y="61" fill="#fbbf24" font-size="10" font-weight="600">ENTERPRISE AI PLATFORM / RUOYI-VUE-PLUS FOUNDATION</text>
+        <text x="176" y="61" fill="#fbbf24" font-size="10" font-weight="600">企业 AI 平台 / 若依 AI 应用底座</text>
 
         <rect x="20" y="165" width="100" height="70" rx="6" fill="#0f172a" />
         <rect x="20" y="165" width="100" height="70" rx="6" fill="rgba(30, 41, 59, 0.5)" stroke="#94a3b8" stroke-width="1.5" />
-        <text x="70" y="192" fill="#ffffff" font-size="11" font-weight="600" text-anchor="middle">Users</text>
-        <text x="70" y="210" fill="#94a3b8" font-size="8" text-anchor="middle">Web / Admin</text>
+        <text x="70" y="192" fill="#ffffff" font-size="11" font-weight="600" text-anchor="middle">用户入口</text>
+        <text x="70" y="210" fill="#94a3b8" font-size="8" text-anchor="middle">Web / 管理后台</text>
 
         <rect x="220" y="145" width="140" height="110" rx="8" fill="#0f172a" />
         <rect x="220" y="145" width="140" height="110" rx="8" fill="rgba(8, 51, 68, 0.4)" stroke="#22d3ee" stroke-width="1.5" />
-        <text x="290" y="172" fill="#ffffff" font-size="11" font-weight="600" text-anchor="middle">Frontend Layer</text>
-        <text x="290" y="193" fill="#94a3b8" font-size="8" text-anchor="middle">Vue 3 User Portal</text>
-        <text x="290" y="208" fill="#94a3b8" font-size="8" text-anchor="middle">Vben Admin Console</text>
-        <text x="290" y="223" fill="#22d3ee" font-size="8" text-anchor="middle">SSE / WebSocket UX</text>
+        <text x="290" y="172" fill="#ffffff" font-size="11" font-weight="600" text-anchor="middle">前端交互层</text>
+        <text x="290" y="193" fill="#94a3b8" font-size="8" text-anchor="middle">Vue 3 用户端</text>
+        <text x="290" y="208" fill="#94a3b8" font-size="8" text-anchor="middle">Vben 管理后台</text>
+        <text x="290" y="223" fill="#22d3ee" font-size="8" text-anchor="middle">SSE / WebSocket 体验</text>
 
         <rect x="445" y="170" width="95" height="60" rx="6" fill="#0f172a" />
         <rect x="445" y="170" width="95" height="60" rx="6" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1.5" />
         <text x="492.5" y="194" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">ruoyi-admin</text>
-        <text x="492.5" y="212" fill="#94a3b8" font-size="8" text-anchor="middle">REST + SSE + WS</text>
+        <text x="492.5" y="212" fill="#94a3b8" font-size="8" text-anchor="middle">REST / SSE / WebSocket</text>
 
         <rect x="570" y="110" width="165" height="250" rx="8" fill="transparent" stroke="#34d399" stroke-width="1" stroke-dasharray="4,4" />
-        <text x="580" y="126" fill="#34d399" font-size="8">ruoyi-modules</text>
+        <text x="580" y="126" fill="#34d399" font-size="8">业务模块层</text>
 
         <rect x="590" y="145" width="125" height="50" rx="6" fill="#0f172a" />
         <rect x="590" y="145" width="125" height="50" rx="6" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1.3" />
         <text x="652.5" y="166" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">ruoyi-chat</text>
-        <text x="652.5" y="182" fill="#94a3b8" font-size="8" text-anchor="middle">AI chat / MCP / RAG</text>
+        <text x="652.5" y="182" fill="#94a3b8" font-size="8" text-anchor="middle">对话 / MCP / RAG</text>
 
         <rect x="590" y="215" width="125" height="50" rx="6" fill="#0f172a" />
         <rect x="590" y="215" width="125" height="50" rx="6" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1.3" />
         <text x="652.5" y="236" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">ruoyi-aiflow</text>
-        <text x="652.5" y="252" fill="#94a3b8" font-size="8" text-anchor="middle">langgraph4j flow engine</text>
+        <text x="652.5" y="252" fill="#94a3b8" font-size="8" text-anchor="middle">langgraph4j 流程编排</text>
 
         <rect x="590" y="285" width="125" height="50" rx="6" fill="#0f172a" />
         <rect x="590" y="285" width="125" height="50" rx="6" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1.3" />
         <text x="652.5" y="306" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">workflow / system</text>
-        <text x="652.5" y="322" fill="#94a3b8" font-size="8" text-anchor="middle">BPM / RBAC / tenant</text>
+        <text x="652.5" y="322" fill="#94a3b8" font-size="8" text-anchor="middle">BPM / RBAC / 租户能力</text>
 
         <rect x="770" y="110" width="155" height="250" rx="8" fill="transparent" stroke="#fb7185" stroke-width="1" stroke-dasharray="4,4" />
-        <text x="780" y="126" fill="#fb7185" font-size="8">AI engine + platform services</text>
+        <text x="780" y="126" fill="#fb7185" font-size="8">AI 编排与平台服务</text>
 
         <rect x="790" y="145" width="115" height="50" rx="6" fill="#0f172a" />
         <rect x="790" y="145" width="115" height="50" rx="6" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1.3" />
         <text x="847.5" y="166" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">Supervisor</text>
-        <text x="847.5" y="182" fill="#94a3b8" font-size="8" text-anchor="middle">Agentic API orchestration</text>
+        <text x="847.5" y="182" fill="#94a3b8" font-size="8" text-anchor="middle">多 Agent 调度编排</text>
 
         <rect x="790" y="210" width="115" height="50" rx="6" fill="#0f172a" />
         <rect x="790" y="210" width="115" height="50" rx="6" fill="rgba(76, 29, 149, 0.4)" stroke="#a78bfa" stroke-width="1.3" />
-        <text x="847.5" y="231" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">RAG Pipeline</text>
-        <text x="847.5" y="247" fill="#94a3b8" font-size="8" text-anchor="middle">Embed / Retrieve / Rerank</text>
+        <text x="847.5" y="231" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">RAG 检索链路</text>
+        <text x="847.5" y="247" fill="#94a3b8" font-size="8" text-anchor="middle">向量化 / 检索 / 重排</text>
 
         <rect x="790" y="275" width="115" height="50" rx="6" fill="#0f172a" />
         <rect x="790" y="275" width="115" height="50" rx="6" fill="rgba(120, 53, 15, 0.3)" stroke="#fbbf24" stroke-width="1.3" />
-        <text x="847.5" y="296" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">Ops / Observability</text>
+        <text x="847.5" y="296" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">运维 / 可观测性</text>
         <text x="847.5" y="312" fill="#94a3b8" font-size="8" text-anchor="middle">SnailJob / Admin / OSS</text>
 
         <rect x="455" y="390" width="70" height="20" rx="4" fill="rgba(251, 146, 60, 0.3)" stroke="#fb923c" stroke-width="1" />
@@ -237,18 +237,18 @@
 
         <rect x="240" y="395" width="120" height="70" rx="6" fill="#0f172a" />
         <rect x="240" y="395" width="120" height="70" rx="6" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1.4" />
-        <text x="300" y="421" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">Workflow Builder</text>
-        <text x="300" y="438" fill="#94a3b8" font-size="8" text-anchor="middle">11 node types</text>
-        <text x="300" y="452" fill="#94a3b8" font-size="8" text-anchor="middle">Human feedback / SSE</text>
+        <text x="300" y="421" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">工作流编排器</text>
+        <text x="300" y="438" fill="#94a3b8" font-size="8" text-anchor="middle">11 类节点能力</text>
+        <text x="300" y="452" fill="#94a3b8" font-size="8" text-anchor="middle">人工反馈 / SSE</text>
 
         <rect x="430" y="395" width="95" height="70" rx="6" fill="#0f172a" />
         <rect x="430" y="395" width="95" height="70" rx="6" fill="rgba(251, 146, 60, 0.3)" stroke="#fb923c" stroke-width="1.4" />
-        <text x="477.5" y="421" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">Event Bus</text>
+        <text x="477.5" y="421" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">事件总线</text>
         <text x="477.5" y="438" fill="#94a3b8" font-size="8" text-anchor="middle">Agent / Tool / Stream</text>
 
         <rect x="610" y="395" width="90" height="70" rx="6" fill="#0f172a" />
         <rect x="610" y="395" width="90" height="70" rx="6" fill="rgba(76, 29, 149, 0.4)" stroke="#a78bfa" stroke-width="1.4" />
-        <text x="655" y="421" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">Vector DB</text>
+        <text x="655" y="421" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">向量数据库</text>
         <text x="655" y="438" fill="#94a3b8" font-size="8" text-anchor="middle">Milvus / Weaviate</text>
 
         <rect x="610" y="485" width="90" height="70" rx="6" fill="#0f172a" />
@@ -258,30 +258,30 @@
 
         <rect x="820" y="395" width="105" height="70" rx="6" fill="#0f172a" />
         <rect x="820" y="395" width="105" height="70" rx="6" fill="rgba(76, 29, 149, 0.4)" stroke="#a78bfa" stroke-width="1.4" />
-        <text x="872.5" y="421" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">MySQL + Redis</text>
-        <text x="872.5" y="438" fill="#94a3b8" font-size="8" text-anchor="middle">Business data / cache</text>
+        <text x="872.5" y="421" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">业务库 / 缓存</text>
+        <text x="872.5" y="438" fill="#94a3b8" font-size="8" text-anchor="middle">MySQL / Redis</text>
 
         <rect x="820" y="485" width="105" height="70" rx="6" fill="#0f172a" />
         <rect x="820" y="485" width="105" height="70" rx="6" fill="rgba(120, 53, 15, 0.3)" stroke="#fbbf24" stroke-width="1.4" />
-        <text x="872.5" y="511" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">Model Router</text>
+        <text x="872.5" y="511" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">模型路由</text>
         <text x="872.5" y="528" fill="#94a3b8" font-size="8" text-anchor="middle">OpenAI / DeepSeek / Qwen</text>
 
         <rect x="960" y="145" width="110" height="105" rx="8" fill="#0f172a" />
         <rect x="960" y="145" width="110" height="105" rx="8" fill="rgba(30, 41, 59, 0.5)" stroke="#94a3b8" stroke-width="1.4" />
-        <text x="1015" y="170" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">External Models</text>
+        <text x="1015" y="170" fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle">外部模型</text>
         <text x="1015" y="191" fill="#94a3b8" font-size="8" text-anchor="middle">OpenAI</text>
         <text x="1015" y="206" fill="#94a3b8" font-size="8" text-anchor="middle">DeepSeek</text>
         <text x="1015" y="221" fill="#94a3b8" font-size="8" text-anchor="middle">Qwen / Zhipu</text>
 
-        <text x="775" y="650" fill="#ffffff" font-size="10" font-weight="600">Legend</text>
+        <text x="775" y="650" fill="#ffffff" font-size="10" font-weight="600">图例</text>
         <rect x="775" y="664" width="16" height="10" rx="2" fill="rgba(8, 51, 68, 0.4)" stroke="#22d3ee" />
-        <text x="797" y="672" fill="#94a3b8" font-size="8">Frontend</text>
+        <text x="797" y="672" fill="#94a3b8" font-size="8">前端</text>
         <rect x="855" y="664" width="16" height="10" rx="2" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" />
-        <text x="877" y="672" fill="#94a3b8" font-size="8">Backend</text>
+        <text x="877" y="672" fill="#94a3b8" font-size="8">业务服务</text>
         <rect x="930" y="664" width="16" height="10" rx="2" fill="rgba(76, 29, 149, 0.4)" stroke="#a78bfa" />
-        <text x="952" y="672" fill="#94a3b8" font-size="8">Data / RAG</text>
+        <text x="952" y="672" fill="#94a3b8" font-size="8">数据 / RAG</text>
         <rect x="1015" y="664" width="16" height="10" rx="2" fill="rgba(120, 53, 15, 0.3)" stroke="#fbbf24" />
-        <text x="1037" y="672" fill="#94a3b8" font-size="8">Cloud / Ops</text>
+        <text x="1037" y="672" fill="#94a3b8" font-size="8">云服务 / 运维</text>
       </svg>
     </div>
 
@@ -289,39 +289,39 @@
       <div class="card">
         <div class="card-header">
           <div class="card-dot cyan"></div>
-          <h3>Application Surface</h3>
+          <h3>应用入口层</h3>
         </div>
         <ul>
-          <li>- Vue 3 user portal and Vben admin console share one API entry</li>
-          <li>- ruoyi-admin exposes REST, SSE, and WebSocket interaction patterns</li>
-          <li>- Workflow builder supports interruption and human feedback loops</li>
+          <li>- Vue 3 用户端与 Vben 管理后台共用统一 API 入口</li>
+          <li>- ruoyi-admin 负责 REST、SSE 与 WebSocket 交互出口</li>
+          <li>- 工作流编排器支持节点中断、SSE 回传与人工反馈闭环</li>
         </ul>
       </div>
       <div class="card">
         <div class="card-header">
           <div class="card-dot emerald"></div>
-          <h3>AI Core</h3>
+          <h3>AI 核心能力</h3>
         </div>
         <ul>
-          <li>- Supervisor coordinates Skills, WebSearch, SQL, and Chart agents</li>
-          <li>- ruoyi-chat anchors RAG, MCP tools, and multi-model routing</li>
-          <li>- langgraph4j drives visual AI workflow orchestration</li>
+          <li>- Supervisor 统一协调 Skills、WebSearch、SQL 与 Chart Agent</li>
+          <li>- ruoyi-chat 承载对话、MCP 工具接入与多模型路由能力</li>
+          <li>- langgraph4j 驱动可视化 AI 流程编排与事件总线协作</li>
         </ul>
       </div>
       <div class="card">
         <div class="card-header">
           <div class="card-dot violet"></div>
-          <h3>Enterprise Data</h3>
+          <h3>企业数据底座</h3>
         </div>
         <ul>
-          <li>- Milvus, Weaviate, or Qdrant provide vector persistence</li>
-          <li>- Neo4j enriches retrieval through GraphRAG traversal</li>
-          <li>- MySQL and Redis back business modules, tenancy, and cache flows</li>
+          <li>- Milvus、Weaviate 与同类向量库支撑向量化检索存储</li>
+          <li>- Neo4j 通过 GraphRAG 提升复杂知识关联与召回质量</li>
+          <li>- MySQL 与 Redis 为业务模块、租户隔离和缓存链路托底</li>
         </ul>
       </div>
     </div>
 
-    <p class="footer">ruoyi-ai / enterprise AI platform / generated with architecture-diagram skill</p>
+    <p class="footer">ruoyi-ai / 企业 AI 应用平台 / generated with architecture-diagram skill</p>
   </div>
 
   <script>
