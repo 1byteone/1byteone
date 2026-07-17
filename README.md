@@ -135,61 +135,75 @@
 <br/>
 
 ```mermaid
-%%{init: {'theme':'base','themeVariables': {'background':'#0d1117','primaryColor':'#1f6feb22','primaryTextColor':'#ffffff','primaryBorderColor':'#58a6ff','lineColor':'#8b949e','tertiaryColor':'#161b22','fontFamily':'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace'}}}%%
-flowchart TB
-    UI["🖥️ Vue 3 用户端 / Vben 管理端"]
-    API["🚪 ruoyi-admin · REST + SSE + WebSocket"]
+%%{init: {"theme":"base","flowchart":{"curve":"linear","nodeSpacing":38,"rankSpacing":50},"themeVariables":{"background":"#0d1117","primaryTextColor":"#e6edf3","lineColor":"#8b949e","tertiaryColor":"#161b22","clusterBkg":"#161b22","clusterBorder":"#30363d","edgeLabelBackground":"#0d1117","fontFamily":"ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace"}}}%%
+flowchart LR
+    UI["User Channels<br/>Vue 3 / Vben Admin"]
+    API["ruoyi-admin<br/>REST / SSE / WebSocket"]
 
-    subgraph Modules["📦 业务模块 · ruoyi-modules"]
-        CHAT["ruoyi-chat · AI 核心"]
-        AIFLOW["ruoyi-aiflow · LLM 流程编排"]
-        WORKFLOW["ruoyi-workflow · BPM 审批"]
-        SYSTEM["ruoyi-system · RBAC 系统"]
+    subgraph MOD["Business Modules"]
+        direction TB
+        CHAT["ruoyi-chat<br/>Chat / Agent / RAG"]
+        FLOW["ruoyi-aiflow<br/>langgraph4j Orchestration"]
+        WF["ruoyi-workflow<br/>BPM / Approval"]
+        SYS["ruoyi-system<br/>RBAC / Tenant / OSS"]
     end
 
-    subgraph Engine["🧠 AI 引擎 · LangChain4j Agentic"]
-        SUP["Supervisor Agent 调度"]
-        SKILLS["Skills Agent"]
-        SEARCH["WebSearch Agent"]
+    subgraph AGENT["Agentic Layer"]
+        direction TB
+        SUP["Supervisor"]
+        SKILL["Skills Agent"]
+        WEB["WebSearch Agent"]
         SQL["SQL Agent"]
-        CHART["Chart / ECharts Agent"]
+        CHART["Chart Agent"]
     end
 
-    subgraph RAG["🔍 RAG 管线"]
-        EMBED["Embed 向量化"]
-        RETR["Retrieve 检索"]
-        RERANK["Rerank 重排"]
-    end
-
-    subgraph Data["💾 数据与模型"]
-        MODELS["LLM · OpenAI / DeepSeek / 通义 / 智谱"]
-        VECTOR["向量库 · Milvus / Weaviate / Qdrant"]
+    subgraph PIPE["Knowledge Pipeline"]
+        direction TB
+        EMBED["Embedding"]
+        RETR["Retrieval"]
+        RERANK["Rerank"]
         GRAPH["Neo4j GraphRAG"]
-        STORE["MySQL / Redis"]
+    end
+
+    subgraph DATA["Model & Storage"]
+        direction TB
+        MODELS["LLM Providers<br/>OpenAI / DeepSeek / 通义 / 智谱 / Ollama"]
+        VECTOR["Vector DB<br/>Milvus / Weaviate / Qdrant"]
+        STORE["Transactional Store<br/>MySQL / Redis"]
     end
 
     UI --> API
     API --> CHAT
-    API --> AIFLOW
-    API --> WORKFLOW
-    API --> SYSTEM
+    API --> FLOW
+    API --> WF
+    API --> SYS
     CHAT --> SUP
-    SUP --> SKILLS
-    SUP --> SEARCH
+    SUP --> SKILL
+    SUP --> WEB
     SUP --> SQL
     SUP --> CHART
-    CHAT --> EMBED
-    EMBED --> RETR
-    RETR --> RERANK
-    SUP --> MODELS
+    CHAT --> EMBED --> RETR --> RERANK
     RERANK --> VECTOR
     RERANK --> GRAPH
+    SUP -.-> MODELS
     CHAT --> STORE
+    FLOW --> STORE
+    SYS --> STORE
+    WF --> STORE
 
-    classDef engine fill:#7B42BC,stroke:#0d1117,color:#fff
-    classDef data fill:#238636,stroke:#0d1117,color:#fff
-    class SUP,SKILLS,SEARCH,SQL,CHART engine
-    class MODELS,VECTOR,GRAPH,STORE data
+    classDef entry fill:#083344,stroke:#22d3ee,color:#ffffff
+    classDef module fill:#064e3b,stroke:#34d399,color:#ffffff
+    classDef agent fill:#4c1d95,stroke:#a78bfa,color:#ffffff
+    classDef pipe fill:#1e293b,stroke:#94a3b8,color:#ffffff
+    classDef data fill:#312e81,stroke:#a78bfa,color:#ffffff
+    classDef ext fill:#78350f,stroke:#fbbf24,color:#ffffff
+    class UI,API entry
+    class CHAT,FLOW,WF,SYS module
+    class SUP,SKILL,WEB,SQL,CHART agent
+    class EMBED,RETR,RERANK,GRAPH pipe
+    class VECTOR,STORE data
+    class MODELS ext
+    linkStyle default stroke:#8b949e,stroke-width:1.5px
 ```
 
 _补充：专业版架构图，可点击查看 HTML 导出版。_
@@ -252,52 +266,59 @@ _补充：专业版架构图，可点击查看 HTML 导出版。_
 <br/>
 
 ```mermaid
-%%{init: {'theme':'base','themeVariables': {'background':'#0d1117','primaryColor':'#1f6feb22','primaryTextColor':'#ffffff','primaryBorderColor':'#58a6ff','lineColor':'#8b949e','tertiaryColor':'#161b22','fontFamily':'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace'}}}%%
-flowchart TB
-    U["👤 用户输入选题"]
+%%{init: {"theme":"base","flowchart":{"curve":"linear","nodeSpacing":38,"rankSpacing":50},"themeVariables":{"background":"#0d1117","primaryTextColor":"#e6edf3","lineColor":"#8b949e","tertiaryColor":"#161b22","clusterBkg":"#161b22","clusterBorder":"#30363d","edgeLabelBackground":"#0d1117","fontFamily":"ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace"}}}%%
+flowchart LR
+    U["用户选题"]
+    PICK{"确认标题"}
+    EDIT{"校对大纲"}
+    OUT["图文成稿"]
 
-    subgraph P1["阶段 1 · 人机协作"]
-        A1["📋 TitleGenerator<br/>生成 3-5 标题"]
-        H1{"用户选定标题"}
-    end
-    subgraph P2["阶段 2 · 人机协作"]
-        A2["📝 OutlineGenerator<br/>生成大纲 · SSE 流式"]
-        H2{"用户编辑 / AI 优化"}
-    end
-    subgraph P3["阶段 3 · 图文生成"]
-        A3["✍️ ContentGenerator<br/>正文 · SSE 流式"]
-        A4["🔎 ImageAnalyzer<br/>配图需求分析"]
-        A5["🎨 ParallelImageGenerator<br/>并行生成配图"]
-        A6["🧩 ContentMerger<br/>图文合并"]
+    subgraph MAIN["StateGraph Pipeline"]
+        direction LR
+        TITLE["TitleGenerator<br/>3-5 个标题"]
+        OUTLINE["OutlineGenerator<br/>SSE 大纲"]
+        CONTENT["ContentGenerator<br/>SSE 正文"]
+        ANALYZE["ImageAnalyzer<br/>配图需求识别"]
+        PARALLEL["ParallelImageGenerator<br/>6 策略并行"]
+        MERGE["ContentMerger<br/>图文合并"]
     end
 
-    LLM["🧠 Qwen / DashScope"]
-    IMG["🖼️ Gemini · 图库 · 降级 Picsum"]
-    COS["☁️ 腾讯云 COS"]
-    PAY["💳 Stripe VIP"]
-    OUT["📤 图文成品"]
+    subgraph CAP["Model & Asset Services"]
+        direction TB
+        LLM["DashScope / Qwen"]
+        IMAGE["Gemini / Pexels<br/>Mermaid / Iconify"]
+        COS["Tencent COS"]
+        STRIPE["Stripe VIP"]
+        LOG["AgentLog / AOP"]
+    end
 
-    U --> A1
-    A1 --> H1
-    H1 --> A2
-    A2 --> H2
-    H2 --> A3
-    A3 --> A4
-    A4 --> A5
-    A5 --> A6
-    A6 --> OUT
+    U --> TITLE --> PICK --> OUTLINE --> EDIT --> CONTENT --> ANALYZE --> PARALLEL --> MERGE --> OUT
+    TITLE -.-> LLM
+    OUTLINE -.-> LLM
+    CONTENT -.-> LLM
+    ANALYZE -.-> LLM
+    PARALLEL -.-> IMAGE
+    PARALLEL -.-> COS
+    TITLE -.-> LOG
+    OUTLINE -.-> LOG
+    CONTENT -.-> LOG
+    PARALLEL -.-> LOG
+    MERGE -.-> LOG
+    STRIPE -.-> PARALLEL
 
-    A1 --> LLM
-    A2 --> LLM
-    A3 --> LLM
-    A5 --> IMG
-    A5 --> COS
-    PAY -.-> P3
-
-    classDef agent fill:#7B42BC,stroke:#0d1117,color:#fff
-    classDef ext fill:#238636,stroke:#0d1117,color:#fff
-    class A1,A2,A3,A4,A5,A6 agent
-    class LLM,IMG,COS,PAY ext
+    classDef entry fill:#083344,stroke:#22d3ee,color:#ffffff
+    classDef decision fill:#0f172a,stroke:#38bdf8,color:#ffffff
+    classDef agent fill:#4c1d95,stroke:#a78bfa,color:#ffffff
+    classDef service fill:#064e3b,stroke:#34d399,color:#ffffff
+    classDef biz fill:#78350f,stroke:#fbbf24,color:#ffffff
+    classDef support fill:#1e293b,stroke:#94a3b8,color:#ffffff
+    class U,OUT entry
+    class PICK,EDIT decision
+    class TITLE,OUTLINE,CONTENT,ANALYZE,PARALLEL,MERGE agent
+    class LLM,IMAGE,COS service
+    class STRIPE biz
+    class LOG support
+    linkStyle default stroke:#8b949e,stroke-width:1.5px
 ```
 
 _补充：专业版架构图，可点击查看 HTML 导出版。_
@@ -359,61 +380,65 @@ _补充：专业版架构图，可点击查看 HTML 导出版。_
 <br/>
 
 ```mermaid
-%%{init: {'theme':'base','themeVariables': {'background':'#0d1117','primaryColor':'#1f6feb22','primaryTextColor':'#ffffff','primaryBorderColor':'#58a6ff','lineColor':'#8b949e','tertiaryColor':'#161b22','fontFamily':'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace'}}}%%
-flowchart TB
-    U["👤 自然语言任务"]
+%%{init: {"theme":"base","flowchart":{"curve":"linear","nodeSpacing":38,"rankSpacing":50},"themeVariables":{"background":"#0d1117","primaryTextColor":"#e6edf3","lineColor":"#8b949e","tertiaryColor":"#161b22","clusterBkg":"#161b22","clusterBorder":"#30363d","edgeLabelBackground":"#0d1117","fontFamily":"ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace"}}}%%
+flowchart LR
+    U["自然语言任务"]
+    I["CLI / REPL / TUI / WebUI"]
+    R["响应 / 补丁 / 结果"]
+    LIMIT["Iteration Policy<br/>MAX_ITERATIONS = 50 / MAX_ERRORS = 3"]
 
-    subgraph Loop["🌀 ReAct Agent Loop · ≤50 轮"]
-        T["💭 Think · 流式推理"]
-        A["⚡ Act · 工具调用请求"]
-        O["👁️ Observe · 结果回填"]
+    subgraph LOOP["ReAct Loop"]
+        direction LR
+        T["Think"]
+        A["Act"]
+        O["Observe"]
     end
 
-    subgraph Sec["🔒 SecurityFilterChain"]
-        S1["ToolFilter"]
-        S2["PathGuard"]
-        S3["CommandScanner"]
-        S4["UserConfirm"]
-        S5["AuditLog"]
+    subgraph GUARD["Security Filter Chain"]
+        direction TB
+        TF["ToolFilter"]
+        PG["PathGuard"]
+        SCAN["CommandScanner"]
+        CONFIRM["UserConfirm"]
+        AUDIT["AuditLog"]
     end
 
-    subgraph Tools["🛠️ ToolRegistry · 6 内置 + MCP"]
-        BASH["bash"]
-        RF["read_file"]
-        WF["write_file"]
-        EF["edit_file"]
-        GL["glob"]
-        GR["grep"]
+    subgraph TOOL["Tool Runtime"]
+        direction TB
+        BUILTIN["Built-in Tools<br/>bash / read_file / write_file<br/>edit_file / glob / grep"]
+        MCP["MCP Tool Adapters"]
+        HOOK["Validation / Timeout / Streaming"]
     end
 
-    R["✅ Response"]
+    subgraph SUPPORT["Context & Skills"]
+        direction TB
+        MEM["ContextCompressor / JSONL"]
+        SKILL["SkillLoader / Registry"]
+    end
 
-    U --> T
-    T --> A
-    A --> S1
-    S1 --> S2
-    S2 --> S3
-    S3 --> S4
-    S4 --> S5
-    S5 --> BASH
-    S5 --> RF
-    S5 --> WF
-    S5 --> EF
-    S5 --> GL
-    S5 --> GR
-    BASH --> O
-    RF --> O
-    WF --> O
-    EF --> O
-    GL --> O
-    GR --> O
+    U --> I --> T --> A
+    A --> TF --> PG --> SCAN --> CONFIRM --> AUDIT
+    AUDIT --> BUILTIN
+    AUDIT --> MCP
+    BUILTIN --> HOOK --> O
+    MCP --> HOOK
     O -->|未完成| T
     O -->|完成| R
+    T -.-> MEM
+    A -.-> SKILL
+    LIMIT -.-> T
 
-    classDef loop fill:#7B42BC,stroke:#0d1117,color:#fff
-    classDef sec fill:#DA3633,stroke:#0d1117,color:#fff
+    classDef entry fill:#083344,stroke:#22d3ee,color:#ffffff
+    classDef loop fill:#064e3b,stroke:#34d399,color:#ffffff
+    classDef guard fill:#881337,stroke:#fb7185,color:#ffffff
+    classDef tool fill:#78350f,stroke:#f59e0b,color:#ffffff
+    classDef support fill:#312e81,stroke:#a78bfa,color:#ffffff
+    class U,I,R entry
     class T,A,O loop
-    class S1,S2,S3,S4,S5 sec
+    class TF,PG,SCAN,CONFIRM,AUDIT guard
+    class BUILTIN,MCP,HOOK tool
+    class LIMIT,MEM,SKILL support
+    linkStyle default stroke:#8b949e,stroke-width:1.5px
 ```
 
 _补充：专业版架构图，可点击查看 HTML 导出版。_
@@ -476,66 +501,73 @@ _补充：专业版架构图，可点击查看 HTML 导出版。_
 <br/>
 
 ```mermaid
-%%{init: {'theme':'base','themeVariables': {'background':'#0d1117','primaryColor':'#1f6feb22','primaryTextColor':'#ffffff','primaryBorderColor':'#58a6ff','lineColor':'#8b949e','tertiaryColor':'#161b22','fontFamily':'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace'}}}%%
-flowchart TB
-    subgraph Channels["📱 接入通道"]
-        ADMIN["Vue 2 管理端<br/>Element UI + JWT"]
-        MINIAPP["微信小程序 · 家属端<br/>登录 / 预约 / 状态查询"]
+%%{init: {"theme":"base","flowchart":{"curve":"linear","nodeSpacing":38,"rankSpacing":50},"themeVariables":{"background":"#0d1117","primaryTextColor":"#e6edf3","lineColor":"#8b949e","tertiaryColor":"#161b22","clusterBkg":"#161b22","clusterBorder":"#30363d","edgeLabelBackground":"#0d1117","fontFamily":"ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace"}}}%%
+flowchart LR
+    subgraph CHANNEL["Access Channels"]
+        direction TB
+        ADMIN["Vue Admin<br/>JWT / 机构运营"]
+        MINI["WeChat Mini Program<br/>家属查询 / 预约"]
     end
 
-    subgraph Business["🏥 核心业务 · zzyl-nursing-platform"]
-        ELDER["老人档案 / 床位 / 合同"]
-        NURSING["护理体系<br/>计划 / 等级 / 项目"]
-        HEALTH["健康评估<br/>PDF 解析 + AI 结构化"]
-        DEVICE["IoT 设备<br/>设备档案 / 上报 / 告警规则"]
+    subgraph CORE["Care Service Domain"]
+        direction TB
+        ELDER["老人档案 / 入住 / 合同"]
+        CARE["护理计划 / 等级 / 项目"]
+        HEALTH["健康评估<br/>PDF 解析 / AI 结构化"]
+        IOT["IoT 设备 / 告警规则"]
     end
 
-    subgraph Infra["⚙️ 平台支撑"]
-        AUTH["Spring Security<br/>JWT + RBAC"]
-        CACHE["Redis<br/>会话 / 报告文本 / 设备状态"]
-        JOB["Quartz<br/>定时任务"]
-        OSS["阿里云 OSS<br/>报告与附件存储"]
+    subgraph PLATFORM["Platform Services"]
+        direction TB
+        SEC["Spring Security / JWT / RBAC"]
+        CACHE["Redis<br/>报告缓存 / 设备状态"]
+        JOB["Quartz<br/>提醒 / 巡检"]
+        OSS["Aliyun OSS<br/>报告 / 附件"]
     end
 
-    subgraph External["🌐 外部服务"]
-        BAIDU["百度千帆<br/>AI 健康评估"]
-        HUAWEI["华为云 IoTDA<br/>AMQP 设备消息"]
-        WECHAT["微信开放平台<br/>jscode2session"]
+    subgraph EXT["External Integrations"]
+        direction TB
+        BAIDU["百度千帆"]
+        HUAWEI["华为云 IoTDA"]
+        WECHAT["微信开放平台"]
     end
 
-    DATA["MySQL · MyBatis-Plus"]
+    DB["MySQL / MyBatis-Plus"]
 
     ADMIN --> ELDER
-    ADMIN --> NURSING
+    ADMIN --> CARE
     ADMIN --> HEALTH
-    ADMIN --> DEVICE
-    MINIAPP --> ELDER
-    MINIAPP --> HEALTH
-    MINIAPP --> WECHAT
+    ADMIN --> IOT
+    MINI --> ELDER
+    MINI --> HEALTH
+    MINI -.-> WECHAT
 
-    HEALTH --> BAIDU
+    ADMIN -.-> SEC
+    MINI -.-> SEC
     HEALTH --> OSS
+    HEALTH -.-> BAIDU
     HEALTH --> CACHE
-    DEVICE --> HUAWEI
-    DEVICE --> CACHE
-
-    ELDER --> AUTH
-    NURSING --> AUTH
+    HEALTH --> DB
+    IOT -.-> HUAWEI
+    IOT --> CACHE
+    IOT --> DB
     ELDER --> JOB
+    ELDER --> DB
+    CARE --> DB
 
-    ELDER --> DATA
-    NURSING --> DATA
-    HEALTH --> DATA
-    DEVICE --> DATA
-
-    classDef channel fill:#1f6feb,stroke:#0d1117,color:#fff
-    classDef biz fill:#7B42BC,stroke:#0d1117,color:#fff
-    classDef infra fill:#DA3633,stroke:#0d1117,color:#fff
-    classDef ext fill:#238636,stroke:#0d1117,color:#fff
-    class ADMIN,MINIAPP channel
-    class ELDER,NURSING,HEALTH,DEVICE biz
-    class AUTH,CACHE,JOB,OSS infra
+    classDef channel fill:#083344,stroke:#22d3ee,color:#ffffff
+    classDef core fill:#064e3b,stroke:#34d399,color:#ffffff
+    classDef security fill:#881337,stroke:#fb7185,color:#ffffff
+    classDef platform fill:#1e293b,stroke:#94a3b8,color:#ffffff
+    classDef ext fill:#78350f,stroke:#fbbf24,color:#ffffff
+    classDef data fill:#312e81,stroke:#a78bfa,color:#ffffff
+    class ADMIN,MINI channel
+    class ELDER,CARE,HEALTH,IOT core
+    class SEC security
+    class CACHE,JOB,OSS platform
     class BAIDU,HUAWEI,WECHAT ext
+    class DB data
+    linkStyle default stroke:#8b949e,stroke-width:1.5px
 ```
 
 _补充：专业版架构图，可点击查看 HTML 导出版。_
