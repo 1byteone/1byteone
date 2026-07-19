@@ -1,0 +1,224 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1080" role="img" aria-labelledby="title desc">
+  <title id="title">mewpaw-code animated runtime data flow</title>
+  <desc id="desc">Animated runtime data flow for mewpaw-code, showing prompt intake, Think Act Observe loop, security filter chain, tool registry, built-in and MCP tools, workspace execution, and final response emission.</desc>
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#1e293b" stroke-width="0.8"/>
+    </pattern>
+    <filter id="glow" x="-120%" y="-120%" width="340%" height="340%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <marker id="arrow-cyan" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#22d3ee"/>
+    </marker>
+    <marker id="arrow-violet" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#a78bfa"/>
+    </marker>
+    <marker id="arrow-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#34d399"/>
+    </marker>
+    <marker id="arrow-rose" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#fb7185"/>
+    </marker>
+    <marker id="arrow-rose-sm" markerWidth="8" markerHeight="6" refX="7.2" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#fb7185"/>
+    </marker>
+    <marker id="arrow-slate" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#94a3b8"/>
+    </marker>
+
+    <path id="p-prompt-app" d="M150 264 V320"/>
+    <path id="p-app-think" d="M230 362 H280 V222 H370"/>
+    <path id="p-think-act" d="M470 264 V320"/>
+    <path id="p-act-filter" d="M570 362 H600 V208 H680"/>
+    <path id="p-filter-path" d="M760 236 V280"/>
+    <path id="p-path-scan" d="M760 336 V380"/>
+    <path id="p-scan-confirm" d="M760 436 V480"/>
+    <path id="p-confirm-audit" d="M760 536 V580"/>
+    <path id="p-audit-registry" d="M840 608 H920 V568 H1080"/>
+    <path id="p-registry-builtin" d="M1220 596 V620 H1115 V650"/>
+    <path id="p-registry-mcp" d="M1220 596 V620 H1375 V650"/>
+    <path id="p-builtin-local" d="M1115 734 V780"/>
+    <path id="p-mcp-external" d="M1375 734 V780"/>
+    <path id="p-local-observe" d="M1000 816 H640 V802 H570"/>
+    <path id="p-external-observe" d="M1260 816 H1000"/>
+    <path id="p-observe-response" d="M470 844 V900"/>
+    <path id="p-loop-return" d="M370 942 H300 V222 H370"/>
+    <path id="p-support-memory" d="M570 802 H640 V980 H680"/>
+    <path id="p-support-event" d="M1210 852 V952"/>
+
+    <style>
+      .bg { fill: #0f172a; }
+      .region { fill: none; stroke: #334155; stroke-width: 1.2; stroke-dasharray: 10 6; }
+      .title { fill: #f8fafc; font: 700 26px 'Segoe UI', Arial, sans-serif; }
+      .subtitle { fill: #94a3b8; font: 400 12px 'Segoe UI', Arial, sans-serif; }
+      .region-label { fill: #cbd5e1; font: 600 12px 'Segoe UI', Arial, sans-serif; letter-spacing: 1px; }
+      .tag { fill: #e2e8f0; font: 600 10px 'Segoe UI', Arial, sans-serif; letter-spacing: 1.2px; }
+      .name { fill: #f8fafc; font: 600 16px 'Segoe UI', Arial, sans-serif; }
+      .meta { fill: #94a3b8; font: 400 11px 'Segoe UI', Arial, sans-serif; }
+      .label { fill: #cbd5e1; font: 500 10px 'Segoe UI', Arial, sans-serif; }
+      .legend { fill: #cbd5e1; font: 500 11px 'Segoe UI', Arial, sans-serif; }
+      .entry-fill { fill: #0b1f28; stroke: #22d3ee; stroke-width: 1.6; }
+      .loop-fill { fill: #211334; stroke: #a78bfa; stroke-width: 1.6; }
+      .guard-fill { fill: #2d1320; stroke: #fb7185; stroke-width: 1.6; }
+      .tool-fill { fill: #0f251d; stroke: #34d399; stroke-width: 1.6; }
+      .support-fill { fill: #172233; stroke: #94a3b8; stroke-width: 1.6; }
+      .flow-cyan { fill: none; stroke: #22d3ee; stroke-width: 2.8; stroke-dasharray: 8 10; marker-end: url(#arrow-cyan); }
+      .flow-violet { fill: none; stroke: #a78bfa; stroke-width: 2.8; stroke-dasharray: 8 10; marker-end: url(#arrow-violet); }
+      .flow-green { fill: none; stroke: #34d399; stroke-width: 2.7; stroke-dasharray: 8 10; marker-end: url(#arrow-green); }
+      .flow-rose { fill: none; stroke: #fb7185; stroke-width: 2.6; stroke-dasharray: 8 10; marker-end: url(#arrow-rose); }
+      .flow-rose-short { fill: none; stroke: #fb7185; stroke-width: 2.4; stroke-dasharray: 8 10; marker-end: url(#arrow-rose-sm); }
+      .flow-support { fill: none; stroke: #94a3b8; stroke-width: 1.5; stroke-dasharray: 6 8; marker-end: url(#arrow-slate); opacity: 0.6; }
+      .flow-support-soft { fill: none; stroke: #94a3b8; stroke-width: 1.3; stroke-dasharray: 5 8; marker-end: url(#arrow-slate); opacity: 0.42; }
+      .signal { filter: url(#glow); }
+      .signal circle { opacity: 0; }
+      @media (prefers-reduced-motion: reduce) {
+        .signal { display: none; }
+        .flow-cyan, .flow-violet, .flow-green, .flow-rose, .flow-rose-short, .flow-support, .flow-support-soft { stroke-dasharray: none; }
+      }
+    </style>
+  </defs>
+
+  <rect width="1600" height="1080" class="bg"/>
+  <rect width="1600" height="1080" fill="url(#grid)"/>
+
+  <text x="40" y="56" class="title">mewpaw-code | Animated Runtime Flow</text>
+  <text x="40" y="80" class="subtitle">Prompt-driven Java coding agent flow from task intake through Think / Act / Observe, guarded tool execution, workspace mutation, and streamed response assembly.</text>
+
+  <rect x="40" y="140" width="220" height="320" rx="18" class="region"/>
+  <text x="58" y="164" class="region-label">ENTRY</text>
+  <rect x="70" y="180" width="160" height="84" rx="12" class="entry-fill"/>
+  <text x="150" y="209" class="tag" text-anchor="middle">TASK INPUT</text>
+  <text x="150" y="235" class="name" text-anchor="middle">Natural Language Prompt</text>
+  <text x="150" y="254" class="meta" text-anchor="middle">feature / fix / review / run</text>
+  <rect x="70" y="320" width="160" height="84" rx="12" class="entry-fill"/>
+  <text x="150" y="349" class="tag" text-anchor="middle">LAUNCHER</text>
+  <text x="150" y="375" class="name" text-anchor="middle">mewcode-app</text>
+  <text x="150" y="394" class="meta" text-anchor="middle">cli / tui / web modes</text>
+
+  <rect x="320" y="140" width="260" height="860" rx="18" class="region"/>
+  <text x="338" y="164" class="region-label">REACT LOOP</text>
+  <rect x="370" y="180" width="200" height="84" rx="12" class="loop-fill"/>
+  <text x="470" y="209" class="tag" text-anchor="middle">THINK</text>
+  <text x="470" y="235" class="name" text-anchor="middle">Prompt Build + Model Stream</text>
+  <text x="470" y="254" class="meta" text-anchor="middle">system / history / user synthesis</text>
+  <rect x="370" y="320" width="200" height="84" rx="12" class="loop-fill"/>
+  <text x="470" y="349" class="tag" text-anchor="middle">ACT</text>
+  <text x="470" y="375" class="name" text-anchor="middle">Tool Request Planning</text>
+  <text x="470" y="394" class="meta" text-anchor="middle">StreamingToolRunner dispatch</text>
+  <rect x="370" y="760" width="200" height="84" rx="12" class="loop-fill"/>
+  <text x="470" y="789" class="tag" text-anchor="middle">OBSERVE</text>
+  <text x="470" y="815" class="name" text-anchor="middle">Tool Result Foldback</text>
+  <text x="470" y="834" class="meta" text-anchor="middle">ToolExecutionResultMessage</text>
+  <rect x="370" y="900" width="200" height="84" rx="12" class="entry-fill"/>
+  <text x="470" y="929" class="tag" text-anchor="middle">RESPONSE</text>
+  <text x="470" y="955" class="name" text-anchor="middle">Patch / Explanation / Output</text>
+  <text x="470" y="974" class="meta" text-anchor="middle">TurnCompleted or TurnFailed</text>
+
+  <rect x="620" y="140" width="280" height="520" rx="18" class="region"/>
+  <text x="638" y="164" class="region-label">SECURITY FILTER CHAIN</text>
+  <rect x="680" y="180" width="160" height="56" rx="10" class="guard-fill"/>
+  <text x="760" y="214" class="name" text-anchor="middle">ToolFilter</text>
+  <rect x="680" y="280" width="160" height="56" rx="10" class="guard-fill"/>
+  <text x="760" y="314" class="name" text-anchor="middle">PathGuard</text>
+  <rect x="680" y="380" width="160" height="56" rx="10" class="guard-fill"/>
+  <text x="760" y="414" class="name" text-anchor="middle">CommandScanner</text>
+  <rect x="680" y="480" width="160" height="56" rx="10" class="guard-fill"/>
+  <text x="760" y="514" class="name" text-anchor="middle">UserConfirm</text>
+  <rect x="680" y="580" width="160" height="56" rx="10" class="guard-fill"/>
+  <text x="760" y="614" class="name" text-anchor="middle">AuditLog</text>
+
+  <rect x="940" y="140" width="590" height="760" rx="18" class="region"/>
+  <text x="958" y="164" class="region-label">TOOL RUNTIME</text>
+  <rect x="1080" y="540" width="280" height="56" rx="10" class="support-fill"/>
+  <text x="1220" y="574" class="name" text-anchor="middle">ToolRegistry + ToolDescriptor</text>
+  <rect x="1000" y="650" width="230" height="84" rx="12" class="tool-fill"/>
+  <text x="1115" y="679" class="tag" text-anchor="middle">BUILT-IN TOOLS</text>
+  <text x="1115" y="705" class="name" text-anchor="middle">bash / read_file / write_file</text>
+  <text x="1115" y="724" class="meta" text-anchor="middle">edit_file / glob / grep</text>
+  <rect x="1260" y="650" width="230" height="84" rx="12" class="tool-fill"/>
+  <text x="1375" y="679" class="tag" text-anchor="middle">MCP BRIDGE</text>
+  <text x="1375" y="705" class="name" text-anchor="middle">mewcode-mcp</text>
+  <text x="1375" y="724" class="meta" text-anchor="middle">stdio adapter to external tools</text>
+  <rect x="1000" y="780" width="230" height="72" rx="12" class="support-fill"/>
+  <text x="1115" y="809" class="tag" text-anchor="middle">LOCAL WORKSPACE</text>
+  <text x="1115" y="835" class="name" text-anchor="middle">shell / files / tests / git</text>
+  <rect x="1260" y="780" width="230" height="72" rx="12" class="support-fill"/>
+  <text x="1375" y="809" class="tag" text-anchor="middle">EXTERNAL TOOLS</text>
+  <text x="1375" y="835" class="name" text-anchor="middle">browser / mcp / skill endpoints</text>
+
+  <rect x="620" y="920" width="910" height="120" rx="18" class="region"/>
+  <text x="638" y="944" class="region-label">SUPPORT MODULES</text>
+  <rect x="680" y="952" width="180" height="56" rx="10" class="support-fill"/>
+  <text x="770" y="986" class="name" text-anchor="middle">mewcode-memory</text>
+  <rect x="900" y="952" width="180" height="56" rx="10" class="support-fill"/>
+  <text x="990" y="986" class="name" text-anchor="middle">mewcode-skill</text>
+  <rect x="1120" y="952" width="180" height="56" rx="10" class="support-fill"/>
+  <text x="1210" y="986" class="name" text-anchor="middle">AgentEventSink</text>
+  <rect x="1340" y="952" width="150" height="56" rx="10" class="support-fill"/>
+  <text x="1415" y="986" class="name" text-anchor="middle">TUI / WebUI</text>
+
+  <use href="#p-prompt-app" class="flow-cyan"><animate attributeName="stroke-dashoffset" values="0;-36" dur="1.8s" repeatCount="indefinite"/></use>
+  <use href="#p-app-think" class="flow-cyan"><animate attributeName="stroke-dashoffset" values="0;-36" dur="2.0s" repeatCount="indefinite"/></use>
+  <use href="#p-think-act" class="flow-violet"><animate attributeName="stroke-dashoffset" values="0;-36" dur="1.8s" repeatCount="indefinite"/></use>
+  <use href="#p-act-filter" class="flow-violet"><animate attributeName="stroke-dashoffset" values="0;-36" dur="2.0s" repeatCount="indefinite"/></use>
+  <use href="#p-filter-path" class="flow-rose-short"><animate attributeName="stroke-dashoffset" values="0;-28" dur="1.6s" repeatCount="indefinite"/></use>
+  <use href="#p-path-scan" class="flow-rose-short"><animate attributeName="stroke-dashoffset" values="0;-28" dur="1.6s" repeatCount="indefinite"/></use>
+  <use href="#p-scan-confirm" class="flow-rose-short"><animate attributeName="stroke-dashoffset" values="0;-28" dur="1.6s" repeatCount="indefinite"/></use>
+  <use href="#p-confirm-audit" class="flow-rose-short"><animate attributeName="stroke-dashoffset" values="0;-28" dur="1.6s" repeatCount="indefinite"/></use>
+  <use href="#p-audit-registry" class="flow-rose"><animate attributeName="stroke-dashoffset" values="0;-28" dur="1.6s" repeatCount="indefinite"/></use>
+  <use href="#p-registry-builtin" class="flow-green"><animate attributeName="stroke-dashoffset" values="0;-32" dur="1.8s" repeatCount="indefinite"/></use>
+  <use href="#p-registry-mcp" class="flow-green"><animate attributeName="stroke-dashoffset" values="0;-32" dur="1.8s" repeatCount="indefinite"/></use>
+  <use href="#p-builtin-local" class="flow-green"><animate attributeName="stroke-dashoffset" values="0;-32" dur="1.8s" repeatCount="indefinite"/></use>
+  <use href="#p-mcp-external" class="flow-green"><animate attributeName="stroke-dashoffset" values="0;-32" dur="1.8s" repeatCount="indefinite"/></use>
+  <use href="#p-local-observe" class="flow-support"><animate attributeName="stroke-dashoffset" values="0;-24" dur="2.4s" repeatCount="indefinite"/></use>
+  <use href="#p-external-observe" class="flow-support-soft"><animate attributeName="stroke-dashoffset" values="0;-18" dur="3.0s" repeatCount="indefinite"/></use>
+  <use href="#p-observe-response" class="flow-cyan"><animate attributeName="stroke-dashoffset" values="0;-24" dur="1.8s" repeatCount="indefinite"/></use>
+  <use href="#p-loop-return" class="flow-support-soft"><animate attributeName="stroke-dashoffset" values="0;-16" dur="3.2s" repeatCount="indefinite"/></use>
+  <use href="#p-support-memory" class="flow-support-soft"><animate attributeName="stroke-dashoffset" values="0;-16" dur="3.2s" repeatCount="indefinite"/></use>
+  <use href="#p-support-event" class="flow-support-soft"><animate attributeName="stroke-dashoffset" values="0;-16" dur="3.2s" repeatCount="indefinite"/></use>
+
+  <g class="signal" fill="#22d3ee">
+    <circle r="4"><animateMotion dur="2.0s" repeatCount="indefinite"><mpath href="#p-prompt-app"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="2.0s" repeatCount="indefinite"/></circle>
+    <circle r="4"><animateMotion dur="2.0s" begin=".32s" repeatCount="indefinite"><mpath href="#p-app-think"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="2.0s" begin=".32s" repeatCount="indefinite"/></circle>
+    <circle r="4"><animateMotion dur="1.8s" begin=".66s" repeatCount="indefinite"><mpath href="#p-observe-response"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="1.8s" begin=".66s" repeatCount="indefinite"/></circle>
+  </g>
+  <g class="signal" fill="#a78bfa">
+    <circle r="4"><animateMotion dur="1.8s" begin=".20s" repeatCount="indefinite"><mpath href="#p-think-act"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="1.8s" begin=".20s" repeatCount="indefinite"/></circle>
+    <circle r="4"><animateMotion dur="2.0s" begin=".58s" repeatCount="indefinite"><mpath href="#p-act-filter"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="2.0s" begin=".58s" repeatCount="indefinite"/></circle>
+  </g>
+  <g class="signal" fill="#fb7185">
+    <circle r="3.8"><animateMotion dur="1.6s" begin=".24s" repeatCount="indefinite"><mpath href="#p-filter-path"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="1.6s" begin=".24s" repeatCount="indefinite"/></circle>
+    <circle r="3.8"><animateMotion dur="1.6s" begin=".52s" repeatCount="indefinite"><mpath href="#p-path-scan"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="1.6s" begin=".52s" repeatCount="indefinite"/></circle>
+    <circle r="3.8"><animateMotion dur="1.6s" begin=".80s" repeatCount="indefinite"><mpath href="#p-scan-confirm"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="1.6s" begin=".80s" repeatCount="indefinite"/></circle>
+    <circle r="3.8"><animateMotion dur="1.6s" begin="1.08s" repeatCount="indefinite"><mpath href="#p-confirm-audit"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="1.6s" begin="1.08s" repeatCount="indefinite"/></circle>
+    <circle r="3.8"><animateMotion dur="1.9s" begin="1.36s" repeatCount="indefinite"><mpath href="#p-audit-registry"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="1.9s" begin="1.36s" repeatCount="indefinite"/></circle>
+  </g>
+  <g class="signal" fill="#34d399">
+    <circle r="4"><animateMotion dur="1.8s" begin=".30s" repeatCount="indefinite"><mpath href="#p-registry-builtin"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="1.8s" begin=".30s" repeatCount="indefinite"/></circle>
+    <circle r="4"><animateMotion dur="1.8s" begin=".62s" repeatCount="indefinite"><mpath href="#p-registry-mcp"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="1.8s" begin=".62s" repeatCount="indefinite"/></circle>
+    <circle r="4"><animateMotion dur="1.8s" begin=".94s" repeatCount="indefinite"><mpath href="#p-builtin-local"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="1.8s" begin=".94s" repeatCount="indefinite"/></circle>
+    <circle r="4"><animateMotion dur="1.8s" begin="1.26s" repeatCount="indefinite"><mpath href="#p-mcp-external"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="1.8s" begin="1.26s" repeatCount="indefinite"/></circle>
+  </g>
+  <g class="signal" fill="#94a3b8">
+    <circle r="3.6"><animateMotion dur="2.4s" begin=".42s" repeatCount="indefinite"><mpath href="#p-local-observe"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="2.4s" begin=".42s" repeatCount="indefinite"/></circle>
+  </g>
+
+  <text x="170" y="300" class="label">task handed to runtime</text>
+  <text x="340" y="198" class="label">bootstrap prompt context</text>
+  <text x="588" y="350" class="label">plan tool use</text>
+  <text x="884" y="554" class="label">approved action</text>
+  <text x="1240" y="636" class="label">descriptor routing</text>
+  <text x="1010" y="760" class="label">built-in execution</text>
+  <text x="1260" y="760" class="label">mcp execution</text>
+  <text x="710" y="790" class="label">shared result bus</text>
+  <text x="318" y="886" class="label">loop until no tool calls</text>
+  <text x="664" y="960" class="label">memory and event support</text>
+
+  <rect x="40" y="1042" width="1520" height="24" fill="#111827" stroke="#334155" stroke-width="1"/>
+  <text x="58" y="1059" class="legend">Animated cyan shows intake and final response. Violet shows loop control. Rose shows security review. Green shows tool routing and execution. Slate shows result return and loopback.</text>
+</svg>

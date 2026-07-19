@@ -1,0 +1,237 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1700 1450" role="img" aria-labelledby="title desc">
+  <title id="title">ai-passage-creator animated data flow architecture</title>
+  <desc id="desc">Animated top to bottom data flow for ai-passage-creator, showing request intake, StateGraph orchestration, title and outline checkpoints, content generation, image analysis, parallel image generation, content merge, and final publication with service dependencies.</desc>
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#1e293b" stroke-width="0.8"/>
+    </pattern>
+    <filter id="glow" x="-120%" y="-120%" width="340%" height="340%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <marker id="arrow-cyan" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#22d3ee"/>
+    </marker>
+    <marker id="arrow-violet" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#a78bfa"/>
+    </marker>
+    <marker id="arrow-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#34d399"/>
+    </marker>
+    <marker id="arrow-amber" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#fbbf24"/>
+    </marker>
+    <marker id="arrow-slate" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#94a3b8"/>
+    </marker>
+
+    <path id="p-user-api" d="M360 244 H500 V246 H630"/>
+    <path id="p-api-orchestrator" d="M810 294 V340"/>
+    <path id="p-orchestrator-title" d="M810 412 V470"/>
+    <path id="p-title-h1" d="M810 550 V590"/>
+    <path id="p-h1-outline" d="M810 686 V728"/>
+    <path id="p-outline-h2" d="M810 808 V850"/>
+    <path id="p-h2-content" d="M810 946 V988"/>
+    <path id="p-content-analyze" d="M810 1068 V1112 H460 V1160"/>
+    <path id="p-analyze-parallel" d="M620 1200 H920"/>
+    <path id="p-parallel-merge" d="M1140 1200 H1450"/>
+
+    <path id="p-title-llm" d="M990 510 H1130"/>
+    <path id="p-outline-llm" d="M990 768 H1130"/>
+    <path id="p-content-llm" d="M990 1028 H1130"/>
+    <path id="p-llm-spine" d="M1130 510 V1028"/>
+    <path id="p-llm-service" d="M1130 510 H1190 V492 H1220"/>
+    <path id="p-parallel-image" d="M1140 1200 H1180 V970 H1220"/>
+    <path id="p-parallel-cos" d="M1140 1200 H1180 V1310 H1220"/>
+    <path id="p-stripe-parallel" d="M1380 700 V730 H1160 V1100 H1030 V1160"/>
+    <path id="p-agentlog-bus" d="M1550 1160 V900 H1380 V858"/>
+    <path id="p-sse-feedback" d="M630 376 H596 V300 H540 V376"/>
+
+    <style>
+      .bg { fill: #0f172a; }
+      .region { fill: none; stroke: #334155; stroke-width: 1.2; stroke-dasharray: 10 6; }
+      .title { fill: #f8fafc; font: 700 26px 'Segoe UI', Arial, sans-serif; }
+      .subtitle { fill: #94a3b8; font: 400 12px 'Segoe UI', Arial, sans-serif; }
+      .region-label { fill: #cbd5e1; font: 600 12px 'Segoe UI', Arial, sans-serif; letter-spacing: 1px; }
+      .tag { fill: #e2e8f0; font: 600 10px 'Segoe UI', Arial, sans-serif; letter-spacing: 1.2px; }
+      .name { fill: #f8fafc; font: 600 16px 'Segoe UI', Arial, sans-serif; }
+      .meta { fill: #94a3b8; font: 400 11px 'Segoe UI', Arial, sans-serif; }
+      .label { fill: #cbd5e1; font: 500 10px 'Segoe UI', Arial, sans-serif; }
+      .legend { fill: #cbd5e1; font: 500 11px 'Segoe UI', Arial, sans-serif; }
+      .entry-fill { fill: #0b1f28; stroke: #22d3ee; stroke-width: 1.6; }
+      .agent-fill { fill: #211334; stroke: #a78bfa; stroke-width: 1.6; }
+      .service-fill { fill: #0f251d; stroke: #34d399; stroke-width: 1.6; }
+      .support-fill { fill: #172233; stroke: #94a3b8; stroke-width: 1.6; }
+      .external-fill { fill: #2a1d0e; stroke: #fbbf24; stroke-width: 1.6; }
+      .flow-violet { fill: none; stroke: #a78bfa; stroke-width: 3; stroke-dasharray: 8 10; marker-end: url(#arrow-violet); }
+      .flow-green { fill: none; stroke: #34d399; stroke-width: 2.8; stroke-dasharray: 8 10; marker-end: url(#arrow-green); }
+      .flow-green-soft { fill: none; stroke: #34d399; stroke-width: 1.6; stroke-dasharray: 6 10; opacity: 0.56; }
+      .flow-cyan { fill: none; stroke: #22d3ee; stroke-width: 2.8; stroke-dasharray: 8 10; marker-end: url(#arrow-cyan); }
+      .flow-amber { fill: none; stroke: #fbbf24; stroke-width: 2; stroke-dasharray: 8 10; marker-end: url(#arrow-amber); opacity: 0.84; }
+      .flow-amber-soft { fill: none; stroke: #fbbf24; stroke-width: 1.5; stroke-dasharray: 6 10; opacity: 0.58; }
+      .flow-support { fill: none; stroke: #94a3b8; stroke-width: 1.5; stroke-dasharray: 6 8; marker-end: url(#arrow-slate); opacity: 0.62; }
+      .flow-support-faint { fill: none; stroke: #94a3b8; stroke-width: 1.3; stroke-dasharray: 5 8; marker-end: url(#arrow-slate); opacity: 0.42; }
+      .signal { filter: url(#glow); }
+      .signal circle { opacity: 0; }
+      .diamond { fill: #172233; stroke: #60a5fa; stroke-width: 1.6; }
+      @media (prefers-reduced-motion: reduce) {
+        .signal { display: none; }
+        .flow-violet, .flow-green, .flow-green-soft, .flow-cyan, .flow-amber, .flow-amber-soft, .flow-support, .flow-support-faint { stroke-dasharray: none; }
+      }
+    </style>
+  </defs>
+
+  <rect width="1700" height="1450" class="bg"/>
+  <rect width="1700" height="1450" fill="url(#grid)"/>
+
+  <text x="40" y="56" class="title">ai-passage-creator | Animated Data Flow</text>
+  <text x="40" y="80" class="subtitle">StateGraph content pipeline with human checkpoints, streaming feedback, VIP-gated image generation, and persistent article assembly.</text>
+
+  <rect x="40" y="120" width="510" height="338" rx="18" class="region"/>
+  <text x="58" y="144" class="region-label">USER ENTRY</text>
+  <rect x="140" y="202" width="220" height="84" rx="12" class="entry-fill"/>
+  <text x="250" y="232" class="tag" text-anchor="middle">CONTENT BRIEF</text>
+  <text x="250" y="257" class="name" text-anchor="middle">Topic Input</text>
+  <text x="250" y="277" class="meta" text-anchor="middle">prompt / angle / channel target</text>
+
+  <rect x="630" y="198" width="360" height="96" rx="12" class="entry-fill"/>
+  <text x="810" y="228" class="tag" text-anchor="middle">ENTRY API</text>
+  <text x="810" y="254" class="name" text-anchor="middle">REST + SSE Controller</text>
+  <text x="810" y="276" class="meta" text-anchor="middle">taskId create / reconnect / stream delivery</text>
+
+  <rect x="630" y="340" width="360" height="72" rx="12" class="support-fill"/>
+  <text x="810" y="369" class="tag" text-anchor="middle">ORCHESTRATION CORE</text>
+  <text x="810" y="393" class="name" text-anchor="middle">ArticleAgentOrchestrator + MemorySaver</text>
+
+  <rect x="630" y="470" width="360" height="80" rx="12" class="agent-fill"/>
+  <text x="810" y="498" class="tag" text-anchor="middle">PHASE 1</text>
+  <text x="810" y="524" class="name" text-anchor="middle">TitleGenerator</text>
+  <text x="810" y="543" class="meta" text-anchor="middle">3-5 title options</text>
+
+  <polygon points="810,590 858,638 810,686 762,638" class="diamond"/>
+  <text x="810" y="633" class="tag" text-anchor="middle">H1</text>
+  <text x="810" y="652" class="meta" text-anchor="middle">user picks title</text>
+
+  <rect x="630" y="728" width="360" height="80" rx="12" class="agent-fill"/>
+  <text x="810" y="756" class="tag" text-anchor="middle">PHASE 2</text>
+  <text x="810" y="782" class="name" text-anchor="middle">OutlineGenerator</text>
+  <text x="810" y="801" class="meta" text-anchor="middle">SSE outline stream + editable structure</text>
+
+  <polygon points="810,850 858,898 810,946 762,898" class="diamond"/>
+  <text x="810" y="893" class="tag" text-anchor="middle">H2</text>
+  <text x="810" y="912" class="meta" text-anchor="middle">human revise outline</text>
+
+  <rect x="630" y="988" width="360" height="80" rx="12" class="agent-fill"/>
+  <text x="810" y="1016" class="tag" text-anchor="middle">PHASE 3</text>
+  <text x="810" y="1042" class="name" text-anchor="middle">ContentGenerator</text>
+  <text x="810" y="1061" class="meta" text-anchor="middle">markdown body + image placeholders</text>
+
+  <rect x="300" y="1160" width="320" height="80" rx="12" class="agent-fill"/>
+  <text x="460" y="1188" class="tag" text-anchor="middle">PHASE 4</text>
+  <text x="460" y="1214" class="name" text-anchor="middle">ImageAnalyzer</text>
+  <text x="460" y="1233" class="meta" text-anchor="middle">List&lt;ImageRequirement&gt;</text>
+
+  <rect x="920" y="1160" width="220" height="80" rx="12" class="agent-fill"/>
+  <text x="1030" y="1188" class="tag" text-anchor="middle">PHASE 5</text>
+  <text x="1030" y="1214" class="name" text-anchor="middle">ParallelImage</text>
+  <text x="1030" y="1233" class="meta" text-anchor="middle">6 strategy fan-out</text>
+
+  <rect x="1450" y="1160" width="200" height="80" rx="12" class="service-fill"/>
+  <text x="1550" y="1188" class="tag" text-anchor="middle">PHASE 6</text>
+  <text x="1550" y="1214" class="name" text-anchor="middle">ContentMerger</text>
+  <text x="1550" y="1233" class="meta" text-anchor="middle">article + image URLs</text>
+
+  <rect x="1220" y="450" width="320" height="84" rx="12" class="external-fill"/>
+  <text x="1380" y="478" class="tag" text-anchor="middle">LLM SERVICE</text>
+  <text x="1380" y="504" class="name" text-anchor="middle">DashScope / Qwen</text>
+  <text x="1380" y="523" class="meta" text-anchor="middle">title, outline, content reasoning</text>
+
+  <rect x="1220" y="930" width="320" height="80" rx="12" class="service-fill"/>
+  <text x="1380" y="958" class="tag" text-anchor="middle">IMAGE MATRIX</text>
+  <text x="1380" y="984" class="name" text-anchor="middle">Gemini / Pexels / Mermaid / Iconify</text>
+  <text x="1380" y="1003" class="meta" text-anchor="middle">Bing / Picsum fallback</text>
+
+  <rect x="1220" y="1270" width="320" height="80" rx="12" class="service-fill"/>
+  <text x="1380" y="1298" class="tag" text-anchor="middle">ASSET STORE</text>
+  <text x="1380" y="1324" class="name" text-anchor="middle">Tencent COS</text>
+  <text x="1380" y="1343" class="meta" text-anchor="middle">signed image URL / binary cache</text>
+
+  <rect x="1240" y="620" width="280" height="80" rx="12" class="external-fill"/>
+  <text x="1380" y="648" class="tag" text-anchor="middle">VIP GATE</text>
+  <text x="1380" y="674" class="name" text-anchor="middle">Stripe Checkout + Webhook</text>
+  <text x="1380" y="693" class="meta" text-anchor="middle">unlock Nano Banana + SVG path</text>
+
+  <rect x="1240" y="780" width="280" height="78" rx="12" class="support-fill"/>
+  <text x="1380" y="808" class="tag" text-anchor="middle">OBSERVABILITY</text>
+  <text x="1380" y="834" class="name" text-anchor="middle">AgentExecutionAspect + agent_log</text>
+  <text x="1380" y="853" class="meta" text-anchor="middle">timing / phase / success / output trace</text>
+
+  <rect x="240" y="340" width="300" height="72" rx="12" class="support-fill"/>
+  <text x="390" y="368" class="tag" text-anchor="middle">STREAM FEEDBACK</text>
+  <text x="390" y="392" class="name" text-anchor="middle">SseEmitterManager</text>
+
+  <use href="#p-user-api" class="flow-cyan"><animate attributeName="stroke-dashoffset" values="0;-36" dur="1.7s" repeatCount="indefinite"/></use>
+  <use href="#p-api-orchestrator" class="flow-violet"><animate attributeName="stroke-dashoffset" values="0;-36" dur="1.7s" repeatCount="indefinite"/></use>
+  <use href="#p-orchestrator-title" class="flow-violet"><animate attributeName="stroke-dashoffset" values="0;-36" dur="1.7s" repeatCount="indefinite"/></use>
+  <use href="#p-title-h1" class="flow-violet"><animate attributeName="stroke-dashoffset" values="0;-36" dur="1.7s" repeatCount="indefinite"/></use>
+  <use href="#p-h1-outline" class="flow-violet"><animate attributeName="stroke-dashoffset" values="0;-36" dur="1.7s" repeatCount="indefinite"/></use>
+  <use href="#p-outline-h2" class="flow-violet"><animate attributeName="stroke-dashoffset" values="0;-36" dur="1.7s" repeatCount="indefinite"/></use>
+  <use href="#p-h2-content" class="flow-violet"><animate attributeName="stroke-dashoffset" values="0;-36" dur="1.7s" repeatCount="indefinite"/></use>
+  <use href="#p-content-analyze" class="flow-violet"><animate attributeName="stroke-dashoffset" values="0;-42" dur="2.1s" repeatCount="indefinite"/></use>
+  <use href="#p-analyze-parallel" class="flow-green"><animate attributeName="stroke-dashoffset" values="0;-42" dur="2.1s" repeatCount="indefinite"/></use>
+  <use href="#p-parallel-merge" class="flow-green"><animate attributeName="stroke-dashoffset" values="0;-42" dur="2.1s" repeatCount="indefinite"/></use>
+
+  <use href="#p-title-llm" class="flow-amber-soft"/>
+  <use href="#p-outline-llm" class="flow-amber-soft"/>
+  <use href="#p-content-llm" class="flow-amber-soft"/>
+  <use href="#p-llm-spine" class="flow-amber-soft"><animate attributeName="stroke-dashoffset" values="0;-18" dur="3.2s" repeatCount="indefinite"/></use>
+  <use href="#p-llm-service" class="flow-amber"><animate attributeName="stroke-dashoffset" values="0;-32" dur="2.1s" repeatCount="indefinite"/></use>
+  <use href="#p-parallel-image" class="flow-green-soft"><animate attributeName="stroke-dashoffset" values="0;-26" dur="2.6s" repeatCount="indefinite"/></use>
+  <use href="#p-parallel-cos" class="flow-green-soft"><animate attributeName="stroke-dashoffset" values="0;-26" dur="2.6s" repeatCount="indefinite"/></use>
+  <use href="#p-stripe-parallel" class="flow-amber-soft"><animate attributeName="stroke-dashoffset" values="0;-20" dur="2.8s" repeatCount="indefinite"/></use>
+  <use href="#p-agentlog-bus" class="flow-support-faint"><animate attributeName="stroke-dashoffset" values="0;-16" dur="3.4s" repeatCount="indefinite"/></use>
+  <use href="#p-sse-feedback" class="flow-support"><animate attributeName="stroke-dashoffset" values="0;-24" dur="2.8s" repeatCount="indefinite"/></use>
+
+  <g class="signal" fill="#22d3ee">
+    <circle r="4"><animateMotion dur="2.0s" repeatCount="indefinite"><mpath href="#p-user-api"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="2.0s" repeatCount="indefinite"/></circle>
+  </g>
+  <g class="signal" fill="#a78bfa">
+    <circle r="4"><animateMotion dur="2.0s" repeatCount="indefinite"><mpath href="#p-api-orchestrator"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="2.0s" repeatCount="indefinite"/></circle>
+    <circle r="4"><animateMotion dur="2.0s" begin=".28s" repeatCount="indefinite"><mpath href="#p-orchestrator-title"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="2.0s" begin=".28s" repeatCount="indefinite"/></circle>
+    <circle r="4"><animateMotion dur="1.8s" begin=".56s" repeatCount="indefinite"><mpath href="#p-title-h1"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="1.8s" begin=".56s" repeatCount="indefinite"/></circle>
+    <circle r="4"><animateMotion dur="1.8s" begin=".84s" repeatCount="indefinite"><mpath href="#p-h1-outline"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="1.8s" begin=".84s" repeatCount="indefinite"/></circle>
+    <circle r="4"><animateMotion dur="1.8s" begin="1.12s" repeatCount="indefinite"><mpath href="#p-outline-h2"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="1.8s" begin="1.12s" repeatCount="indefinite"/></circle>
+    <circle r="4"><animateMotion dur="1.8s" begin="1.40s" repeatCount="indefinite"><mpath href="#p-h2-content"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="1.8s" begin="1.40s" repeatCount="indefinite"/></circle>
+    <circle r="4"><animateMotion dur="2.2s" begin="1.68s" repeatCount="indefinite"><mpath href="#p-content-analyze"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="2.2s" begin="1.68s" repeatCount="indefinite"/></circle>
+  </g>
+  <g class="signal" fill="#34d399">
+    <circle r="4"><animateMotion dur="1.9s" begin=".34s" repeatCount="indefinite"><mpath href="#p-analyze-parallel"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="1.9s" begin=".34s" repeatCount="indefinite"/></circle>
+    <circle r="4"><animateMotion dur="1.9s" begin=".66s" repeatCount="indefinite"><mpath href="#p-parallel-merge"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="1.9s" begin=".66s" repeatCount="indefinite"/></circle>
+  </g>
+  <g class="signal" fill="#fbbf24">
+    <circle r="3.8"><animateMotion dur="2.6s" begin=".08s" repeatCount="indefinite"><mpath href="#p-llm-spine"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="2.6s" begin=".08s" repeatCount="indefinite"/></circle>
+    <circle r="4"><animateMotion dur="2.1s" begin=".28s" repeatCount="indefinite"><mpath href="#p-llm-service"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="2.1s" begin=".28s" repeatCount="indefinite"/></circle>
+    <circle r="4"><animateMotion dur="2.1s" begin="1.15s" repeatCount="indefinite"><mpath href="#p-stripe-parallel"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="2.1s" begin="1.15s" repeatCount="indefinite"/></circle>
+  </g>
+  <g class="signal" fill="#94a3b8">
+    <circle r="3.5"><animateMotion dur="2.7s" begin=".36s" repeatCount="indefinite"><mpath href="#p-agentlog-bus"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="2.7s" begin=".36s" repeatCount="indefinite"/></circle>
+    <circle r="3.5"><animateMotion dur="2.7s" begin=".88s" repeatCount="indefinite"><mpath href="#p-sse-feedback"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="2.7s" begin=".88s" repeatCount="indefinite"/></circle>
+  </g>
+
+  <text x="430" y="238" class="label">submit article task</text>
+  <text x="824" y="328" class="label">build graph state</text>
+  <text x="826" y="452" class="label">generate candidate titles</text>
+  <text x="1080" y="486" class="label">shared LLM reasoning spine</text>
+  <text x="826" y="714" class="label">outline accepted</text>
+  <text x="612" y="1104" class="label">analyze image requirements</text>
+  <text x="800" y="1154" class="label">fan out image strategies</text>
+  <text x="1278" y="610" class="label">VIP image path gate</text>
+  <text x="1378" y="890" class="label">AOP trace bus</text>
+  <text x="556" y="286" class="label">SSE live feedback</text>
+
+  <rect x="40" y="1394" width="1620" height="28" fill="#111827" stroke="#334155" stroke-width="1"/>
+  <text x="58" y="1413" class="legend">Animated violet lanes show the core StateGraph article flow. Green lanes show image asset production. Amber lanes show external model and billing dependencies. Slate lanes show feedback and observability.</text>
+</svg>

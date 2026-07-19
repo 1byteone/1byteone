@@ -1,0 +1,251 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">ruoyi-ai animated data flow architecture</title>
+  <desc id="desc">Animated left to right data flow for ruoyi-ai, covering user entry, admin gateway, business modules, supervisor orchestration, RAG steps, model providers, and persistent state services.</desc>
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#1e293b" stroke-width="0.8"/>
+    </pattern>
+    <filter id="glow" x="-120%" y="-120%" width="340%" height="340%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <marker id="arrow-cyan" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#22d3ee"/>
+    </marker>
+    <marker id="arrow-violet" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#a78bfa"/>
+    </marker>
+    <marker id="arrow-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#34d399"/>
+    </marker>
+    <marker id="arrow-slate" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#94a3b8"/>
+    </marker>
+    <marker id="arrow-slate-sm" markerWidth="8" markerHeight="6" refX="7.2" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#94a3b8"/>
+    </marker>
+    <marker id="arrow-amber" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#fbbf24"/>
+    </marker>
+
+    <path id="p-user-admin" d="M230 220 H310"/>
+    <path id="p-admin-chat" d="M470 220 H560"/>
+    <path id="p-admin-module-bus" d="M504 220 V580"/>
+    <path id="p-admin-aiflow" d="M504 340 H560"/>
+    <path id="p-admin-workflow" d="M504 460 H560"/>
+    <path id="p-admin-system" d="M504 580 H560"/>
+    <path id="p-chat-supervisor" d="M780 220 H920"/>
+    <path id="p-supervisor-drop" d="M1025 262 V282"/>
+    <path id="p-supervisor-bus" d="M935 282 H1075 V428 H935"/>
+    <path id="p-supervisor-skills" d="M935 282 V300"/>
+    <path id="p-supervisor-web" d="M1075 282 V300"/>
+    <path id="p-supervisor-sql" d="M935 428 V396"/>
+    <path id="p-supervisor-chart" d="M1075 428 V396"/>
+    <path id="p-chat-embed" d="M780 220 L840 220 L840 612 L880 612"/>
+    <path id="p-embed-retrieve" d="M958 612 H994"/>
+    <path id="p-retrieve-rerank" d="M1072 612 H1108"/>
+    <path id="p-rerank-vector" d="M1186 612 L1230 612 L1230 327 L1270 327"/>
+    <path id="p-rerank-graph" d="M1186 612 L1240 612 L1240 431 L1270 431"/>
+    <path id="p-supervisor-providers" d="M1130 220 H1270"/>
+    <path id="p-chat-state" d="M780 220 H810 V520 H850"/>
+    <path id="p-aiflow-state" d="M780 340 H820 V520 H850"/>
+    <path id="p-workflow-state" d="M780 460 H830 V520 H850"/>
+    <path id="p-system-state" d="M780 580 H840 V540 H850"/>
+    <path id="p-state-store" d="M850 540 H1270"/>
+    <path id="p-common-support" d="M470 329 H504 V340 H560"/>
+    <path id="p-ops-support" d="M1270 654 H1120 L1120 700 L780 700"/>
+
+    <style>
+      .bg { fill: #0f172a; }
+      .region { fill: none; stroke: #334155; stroke-width: 1.2; stroke-dasharray: 10 6; }
+      .title { fill: #f8fafc; font: 700 26px 'Segoe UI', Arial, sans-serif; }
+      .subtitle { fill: #94a3b8; font: 400 12px 'Segoe UI', Arial, sans-serif; }
+      .region-label { fill: #cbd5e1; font: 600 12px 'Segoe UI', Arial, sans-serif; letter-spacing: 1px; }
+      .tag { fill: #e2e8f0; font: 600 10px 'Segoe UI', Arial, sans-serif; letter-spacing: 1.2px; }
+      .name { fill: #f8fafc; font: 600 16px 'Segoe UI', Arial, sans-serif; }
+      .meta { fill: #94a3b8; font: 400 11px 'Segoe UI', Arial, sans-serif; }
+      .label { fill: #cbd5e1; font: 500 10px 'Segoe UI', Arial, sans-serif; }
+      .legend { fill: #cbd5e1; font: 500 11px 'Segoe UI', Arial, sans-serif; }
+      .entry-fill { fill: #0b1f28; stroke: #22d3ee; stroke-width: 1.6; }
+      .module-fill { fill: #0f251d; stroke: #34d399; stroke-width: 1.6; }
+      .agent-fill { fill: #211334; stroke: #a78bfa; stroke-width: 1.6; }
+      .support-fill { fill: #172233; stroke: #94a3b8; stroke-width: 1.6; }
+      .external-fill { fill: #2a1d0e; stroke: #fbbf24; stroke-width: 1.6; }
+      .flow-cyan { fill: none; stroke: #22d3ee; stroke-width: 2.8; stroke-dasharray: 8 10; marker-end: url(#arrow-cyan); }
+      .flow-violet { fill: none; stroke: #a78bfa; stroke-width: 3; stroke-dasharray: 8 10; marker-end: url(#arrow-violet); }
+      .flow-violet-soft { fill: none; stroke: #a78bfa; stroke-width: 1.6; stroke-dasharray: 6 10; opacity: 0.58; }
+      .flow-green { fill: none; stroke: #34d399; stroke-width: 2.7; stroke-dasharray: 8 10; marker-end: url(#arrow-green); }
+      .flow-green-soft { fill: none; stroke: #34d399; stroke-width: 1.6; stroke-dasharray: 6 10; opacity: 0.58; }
+      .flow-slate { fill: none; stroke: #94a3b8; stroke-width: 1.8; stroke-dasharray: 7 9; marker-end: url(#arrow-slate); opacity: 0.76; }
+      .flow-slate-short { fill: none; stroke: #94a3b8; stroke-width: 1.7; stroke-dasharray: 7 9; marker-end: url(#arrow-slate-sm); opacity: 0.76; }
+      .flow-amber { fill: none; stroke: #fbbf24; stroke-width: 2; stroke-dasharray: 8 10; marker-end: url(#arrow-amber); opacity: 0.84; }
+      .flow-support { fill: none; stroke: #94a3b8; stroke-width: 1.5; stroke-dasharray: 6 8; marker-end: url(#arrow-slate); opacity: 0.58; }
+      .flow-support-faint { fill: none; stroke: #94a3b8; stroke-width: 1.3; stroke-dasharray: 5 8; marker-end: url(#arrow-slate); opacity: 0.4; }
+      .signal { filter: url(#glow); }
+      .signal circle { opacity: 0; }
+      @media (prefers-reduced-motion: reduce) {
+        .signal { display: none; }
+        .flow-cyan, .flow-violet, .flow-violet-soft, .flow-green, .flow-green-soft, .flow-slate, .flow-slate-short, .flow-amber, .flow-support, .flow-support-faint { stroke-dasharray: none; }
+      }
+    </style>
+  </defs>
+
+  <rect width="1600" height="1000" class="bg"/>
+  <rect width="1600" height="1000" fill="url(#grid)"/>
+
+  <text x="40" y="56" class="title">ruoyi-ai | Animated Data Flow</text>
+  <text x="40" y="80" class="subtitle">Enterprise AI platform flow from user channels to gateway, modules, supervisor agents, RAG retrieval, model providers, and long-lived operational state.</text>
+
+  <rect x="40" y="130" width="220" height="160" rx="18" class="region"/>
+  <text x="58" y="154" class="region-label">CHANNELS</text>
+  <rect x="70" y="178" width="160" height="84" rx="12" class="entry-fill"/>
+  <text x="150" y="207" class="tag" text-anchor="middle">USER ENTRY</text>
+  <text x="150" y="233" class="name" text-anchor="middle">Vue 3 + Vben</text>
+  <text x="150" y="252" class="meta" text-anchor="middle">user console / admin console</text>
+
+  <rect x="280" y="130" width="208" height="280" rx="18" class="region"/>
+  <text x="298" y="154" class="region-label">DELIVERY</text>
+  <rect x="310" y="180" width="160" height="80" rx="12" class="entry-fill"/>
+  <text x="390" y="209" class="tag" text-anchor="middle">ENTRY SERVICE</text>
+  <text x="390" y="235" class="name" text-anchor="middle">ruoyi-admin</text>
+  <text x="390" y="253" class="meta" text-anchor="middle">REST / SSE / WebSocket</text>
+  <rect x="310" y="294" width="160" height="70" rx="12" class="support-fill"/>
+  <text x="390" y="323" class="tag" text-anchor="middle">COMMON STARTERS</text>
+  <text x="390" y="347" class="name" text-anchor="middle">ruoyi-common</text>
+
+  <rect x="520" y="110" width="300" height="680" rx="18" class="region"/>
+  <text x="538" y="134" class="region-label">BUSINESS MODULES</text>
+  <rect x="560" y="178" width="220" height="84" rx="12" class="module-fill"/>
+  <text x="670" y="207" class="tag" text-anchor="middle">AI CORE</text>
+  <text x="670" y="233" class="name" text-anchor="middle">ruoyi-chat</text>
+  <text x="670" y="252" class="meta" text-anchor="middle">chat / agent / rag / vector / mcp</text>
+  <rect x="560" y="298" width="220" height="84" rx="12" class="module-fill"/>
+  <text x="670" y="327" class="tag" text-anchor="middle">FLOW ENGINE</text>
+  <text x="670" y="353" class="name" text-anchor="middle">ruoyi-aiflow</text>
+  <text x="670" y="372" class="meta" text-anchor="middle">langgraph4j orchestration</text>
+  <rect x="560" y="418" width="220" height="84" rx="12" class="module-fill"/>
+  <text x="670" y="447" class="tag" text-anchor="middle">APPROVAL</text>
+  <text x="670" y="473" class="name" text-anchor="middle">ruoyi-workflow</text>
+  <text x="670" y="492" class="meta" text-anchor="middle">warm-flow bpm processing</text>
+  <rect x="560" y="538" width="220" height="84" rx="12" class="module-fill"/>
+  <text x="670" y="567" class="tag" text-anchor="middle">PLATFORM</text>
+  <text x="670" y="593" class="name" text-anchor="middle">ruoyi-system</text>
+  <text x="670" y="612" class="meta" text-anchor="middle">rbac / tenant / oss / dictionary</text>
+  <rect x="560" y="658" width="220" height="84" rx="12" class="support-fill"/>
+  <text x="670" y="687" class="tag" text-anchor="middle">DELIVERY ACCELERATOR</text>
+  <text x="670" y="713" class="name" text-anchor="middle">ruoyi-generator</text>
+  <text x="670" y="732" class="meta" text-anchor="middle">schema to crud scaffolding</text>
+
+  <rect x="860" y="110" width="330" height="390" rx="18" class="region"/>
+  <text x="878" y="134" class="region-label">AGENTIC ORCHESTRATION</text>
+  <rect x="920" y="178" width="210" height="84" rx="12" class="agent-fill"/>
+  <text x="1025" y="207" class="tag" text-anchor="middle">CONTROL PLANE</text>
+  <text x="1025" y="233" class="name" text-anchor="middle">Supervisor Agent</text>
+  <text x="1025" y="252" class="meta" text-anchor="middle">plan / route / delegate / synthesize</text>
+  <rect x="880" y="300" width="110" height="64" rx="10" class="agent-fill"/>
+  <text x="935" y="336" class="name" text-anchor="middle">Skills</text>
+  <rect x="1020" y="300" width="110" height="64" rx="10" class="agent-fill"/>
+  <text x="1075" y="336" class="name" text-anchor="middle">WebSearch</text>
+  <rect x="880" y="396" width="110" height="64" rx="10" class="agent-fill"/>
+  <text x="935" y="432" class="name" text-anchor="middle">SQL</text>
+  <rect x="1020" y="396" width="110" height="64" rx="10" class="agent-fill"/>
+  <text x="1075" y="432" class="name" text-anchor="middle">Chart</text>
+
+  <rect x="860" y="520" width="350" height="200" rx="18" class="region"/>
+  <text x="878" y="544" class="region-label">RAG PIPELINE</text>
+  <rect x="880" y="584" width="78" height="56" rx="10" class="support-fill"/>
+  <text x="919" y="617" class="name" text-anchor="middle">Embed</text>
+  <rect x="994" y="584" width="78" height="56" rx="10" class="support-fill"/>
+  <text x="1033" y="617" class="name" text-anchor="middle">Retrieve</text>
+  <rect x="1108" y="584" width="78" height="56" rx="10" class="support-fill"/>
+  <text x="1147" y="617" class="name" text-anchor="middle">Rerank</text>
+
+  <rect x="1230" y="110" width="330" height="680" rx="18" class="region"/>
+  <text x="1248" y="134" class="region-label">MODEL / DATA / OPS</text>
+  <rect x="1270" y="184" width="250" height="72" rx="12" class="external-fill"/>
+  <text x="1395" y="212" class="tag" text-anchor="middle">MODEL ROUTER</text>
+  <text x="1395" y="238" class="name" text-anchor="middle">OpenAI / DeepSeek / Qwen / Zhipu / Ollama</text>
+  <rect x="1270" y="292" width="250" height="70" rx="12" class="support-fill"/>
+  <text x="1395" y="320" class="tag" text-anchor="middle">VECTOR STORE</text>
+  <text x="1395" y="346" class="name" text-anchor="middle">Milvus / Weaviate / Qdrant</text>
+  <rect x="1270" y="396" width="250" height="70" rx="12" class="support-fill"/>
+  <text x="1395" y="424" class="tag" text-anchor="middle">GRAPH RAG</text>
+  <text x="1395" y="450" class="name" text-anchor="middle">Neo4j Knowledge Graph</text>
+  <rect x="1270" y="500" width="250" height="80" rx="12" class="module-fill"/>
+  <text x="1395" y="528" class="tag" text-anchor="middle">STATE STORE</text>
+  <text x="1395" y="554" class="name" text-anchor="middle">MySQL + Redis</text>
+  <text x="1395" y="573" class="meta" text-anchor="middle">chat state / workflow / auth / tenant</text>
+  <rect x="1270" y="618" width="250" height="72" rx="12" class="support-fill"/>
+  <text x="1395" y="646" class="tag" text-anchor="middle">OPERATIONS</text>
+  <text x="1395" y="672" class="name" text-anchor="middle">Spring Boot Admin + SnailJob</text>
+
+  <use href="#p-user-admin" class="flow-cyan"><animate attributeName="stroke-dashoffset" values="0;-36" dur="1.8s" repeatCount="indefinite"/></use>
+  <use href="#p-admin-chat" class="flow-cyan"><animate attributeName="stroke-dashoffset" values="0;-36" dur="1.8s" repeatCount="indefinite"/></use>
+  <use href="#p-admin-module-bus" class="flow-violet-soft"><animate attributeName="stroke-dashoffset" values="0;-22" dur="2.6s" repeatCount="indefinite"/></use>
+  <use href="#p-admin-aiflow" class="flow-violet-soft"/>
+  <use href="#p-admin-workflow" class="flow-violet-soft"/>
+  <use href="#p-admin-system" class="flow-violet-soft"/>
+  <use href="#p-chat-supervisor" class="flow-violet"><animate attributeName="stroke-dashoffset" values="0;-36" dur="1.8s" repeatCount="indefinite"/></use>
+  <use href="#p-supervisor-drop" class="flow-violet-soft"><animate attributeName="stroke-dashoffset" values="0;-18" dur="2.2s" repeatCount="indefinite"/></use>
+  <use href="#p-supervisor-bus" class="flow-violet-soft"><animate attributeName="stroke-dashoffset" values="0;-18" dur="3.0s" repeatCount="indefinite"/></use>
+  <use href="#p-supervisor-skills" class="flow-violet-soft"/>
+  <use href="#p-supervisor-web" class="flow-violet-soft"/>
+  <use href="#p-supervisor-sql" class="flow-violet-soft"/>
+  <use href="#p-supervisor-chart" class="flow-violet-soft"/>
+  <use href="#p-chat-embed" class="flow-slate"><animate attributeName="stroke-dashoffset" values="0;-32" dur="2.4s" repeatCount="indefinite"/></use>
+  <use href="#p-embed-retrieve" class="flow-slate-short"><animate attributeName="stroke-dashoffset" values="0;-28" dur="2.0s" repeatCount="indefinite"/></use>
+  <use href="#p-retrieve-rerank" class="flow-slate-short"><animate attributeName="stroke-dashoffset" values="0;-28" dur="2.0s" repeatCount="indefinite"/></use>
+  <use href="#p-rerank-vector" class="flow-slate"><animate attributeName="stroke-dashoffset" values="0;-36" dur="2.2s" repeatCount="indefinite"/></use>
+  <use href="#p-rerank-graph" class="flow-slate"><animate attributeName="stroke-dashoffset" values="0;-36" dur="2.2s" repeatCount="indefinite"/></use>
+  <use href="#p-supervisor-providers" class="flow-amber"><animate attributeName="stroke-dashoffset" values="0;-36" dur="2.0s" repeatCount="indefinite"/></use>
+  <use href="#p-chat-state" class="flow-green-soft"/>
+  <use href="#p-aiflow-state" class="flow-green-soft"/>
+  <use href="#p-workflow-state" class="flow-green-soft"/>
+  <use href="#p-system-state" class="flow-green-soft"/>
+  <use href="#p-state-store" class="flow-green"><animate attributeName="stroke-dashoffset" values="0;-40" dur="2.2s" repeatCount="indefinite"/></use>
+  <use href="#p-common-support" class="flow-support-faint"><animate attributeName="stroke-dashoffset" values="0;-14" dur="3.0s" repeatCount="indefinite"/></use>
+  <use href="#p-ops-support" class="flow-support-faint"><animate attributeName="stroke-dashoffset" values="0;-14" dur="3.0s" repeatCount="indefinite"/></use>
+
+  <g class="signal" fill="#22d3ee">
+    <circle r="4"><animateMotion dur="2.0s" repeatCount="indefinite"><mpath href="#p-user-admin"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="2.0s" repeatCount="indefinite"/></circle>
+    <circle r="4"><animateMotion dur="2.0s" begin=".34s" repeatCount="indefinite"><mpath href="#p-admin-chat"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="2.0s" begin=".34s" repeatCount="indefinite"/></circle>
+  </g>
+  <g class="signal" fill="#a78bfa">
+    <circle r="4"><animateMotion dur="2.0s" begin=".18s" repeatCount="indefinite"><mpath href="#p-chat-supervisor"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="2.0s" begin=".18s" repeatCount="indefinite"/></circle>
+    <circle r="4"><animateMotion dur="2.2s" begin=".54s" repeatCount="indefinite"><mpath href="#p-admin-module-bus"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="2.2s" begin=".54s" repeatCount="indefinite"/></circle>
+    <circle r="4"><animateMotion dur="2.2s" begin=".96s" repeatCount="indefinite"><mpath href="#p-supervisor-bus"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="2.2s" begin=".96s" repeatCount="indefinite"/></circle>
+  </g>
+  <g class="signal" fill="#94a3b8">
+    <circle r="3.8"><animateMotion dur="2.4s" begin=".44s" repeatCount="indefinite"><mpath href="#p-chat-embed"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="2.4s" begin=".44s" repeatCount="indefinite"/></circle>
+    <circle r="3.8"><animateMotion dur="1.8s" begin=".90s" repeatCount="indefinite"><mpath href="#p-embed-retrieve"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="1.8s" begin=".90s" repeatCount="indefinite"/></circle>
+    <circle r="3.8"><animateMotion dur="1.8s" begin="1.20s" repeatCount="indefinite"><mpath href="#p-retrieve-rerank"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="1.8s" begin="1.20s" repeatCount="indefinite"/></circle>
+    <circle r="3.8"><animateMotion dur="2.2s" begin="1.48s" repeatCount="indefinite"><mpath href="#p-rerank-vector"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="2.2s" begin="1.48s" repeatCount="indefinite"/></circle>
+    <circle r="3.8"><animateMotion dur="2.2s" begin="1.78s" repeatCount="indefinite"><mpath href="#p-rerank-graph"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="2.2s" begin="1.78s" repeatCount="indefinite"/></circle>
+  </g>
+  <g class="signal" fill="#34d399">
+    <circle r="4"><animateMotion dur="2.2s" begin=".44s" repeatCount="indefinite"><mpath href="#p-state-store"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="2.2s" begin=".44s" repeatCount="indefinite"/></circle>
+  </g>
+  <g class="signal" fill="#fbbf24">
+    <circle r="4"><animateMotion dur="2.0s" begin=".40s" repeatCount="indefinite"><mpath href="#p-supervisor-providers"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="2.0s" begin=".40s" repeatCount="indefinite"/></circle>
+  </g>
+
+  <text x="250" y="208" class="label">ui request</text>
+  <text x="488" y="208" class="label">gateway dispatch</text>
+  <text x="790" y="208" class="label">chat request</text>
+  <text x="1168" y="208" class="label">model invocation</text>
+  <text x="458" y="300" class="label">module dispatch bus</text>
+  <text x="968" y="292" class="label">capability bus</text>
+  <text x="918" y="600" class="label">document ingest</text>
+  <text x="1033" y="570" class="label">retrieval</text>
+  <text x="1210" y="318" class="label">vector evidence</text>
+  <text x="1218" y="422" class="label">graph evidence</text>
+  <text x="1060" y="526" class="label">shared state bus</text>
+  <text x="458" y="346" class="label">starter wiring</text>
+  <text x="1062" y="724" class="label">ops monitor + scheduler</text>
+
+  <rect x="40" y="956" width="1520" height="28" fill="#111827" stroke="#334155" stroke-width="1"/>
+  <text x="58" y="975" class="legend">Animated cyan shows user entry, violet shows orchestration, slate shows RAG retrieval flow, amber shows provider calls, and green shows persisted application state. All path endpoints terminate on explicit box-edge anchors.</text>
+</svg>

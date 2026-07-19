@@ -81,6 +81,10 @@
 
 <br/>
 
+<img src="https://raw.githubusercontent.com/1byteone/1byteone/master/profile-3d-contrib/profile-activity-flow.svg" alt="Engineering activity flow animation" />
+
+<br/>
+
 <img src="https://raw.githubusercontent.com/1byteone/1byteone/master/profile-3d-contrib/profile-night-rainbow.svg" alt="3D Contribution Chart" />
 
 </div>
@@ -206,12 +210,12 @@ flowchart LR
     linkStyle default stroke:#8b949e,stroke-width:1.5px
 ```
 
-_补充：专业版架构图，可点击查看 HTML 导出版。_
+_补充：统一风格 SVG 数据流架构图，可点击查看原图。_
 
 <div align="center">
 
-<a href="./diagrams/ruoyi-ai-architecture.html">
-  <img src="./assets/project-architectures/ruoyi-ai-architecture.png" alt="ruoyi-ai 企业级 AI 应用开发框架系统架构图" width="100%" />
+<a href="./diagrams/ruoyi-ai-architecture.svg">
+  <img src="./diagrams/ruoyi-ai-architecture.svg" alt="ruoyi-ai 企业级 AI 应用开发框架系统架构图 SVG" width="100%" />
 </a>
 
 </div>
@@ -321,12 +325,12 @@ flowchart LR
     linkStyle default stroke:#8b949e,stroke-width:1.5px
 ```
 
-_补充：专业版架构图，可点击查看 HTML 导出版。_
+_补充：统一风格 SVG 数据流架构图，可点击查看原图。_
 
 <div align="center">
 
-<a href="./diagrams/ai-passage-creator-architecture.html">
-  <img src="./assets/project-architectures/ai-passage-creator-architecture.png" alt="ai-passage-creator 多智能体内容创作系统架构图" width="100%" />
+<a href="./diagrams/ai-passage-creator-architecture.svg">
+  <img src="./diagrams/ai-passage-creator-architecture.svg" alt="ai-passage-creator 多智能体内容创作系统架构图 SVG" width="100%" />
 </a>
 
 </div>
@@ -441,12 +445,12 @@ flowchart LR
     linkStyle default stroke:#8b949e,stroke-width:1.5px
 ```
 
-_补充：专业版架构图，可点击查看 HTML 导出版。_
+_补充：统一风格 SVG 数据流架构图，可点击查看原图。_
 
 <div align="center">
 
-<a href="./diagrams/mewpaw-code-architecture.html">
-  <img src="./assets/project-architectures/mewpaw-code-architecture.png" alt="mewpaw-code Java 21 CLI Coding Agent 系统架构图" width="100%" />
+<a href="./diagrams/mewpaw-code-architecture.svg">
+  <img src="./diagrams/mewpaw-code-architecture.svg" alt="mewpaw-code Java 21 CLI Coding Agent 系统架构图 SVG" width="100%" />
 </a>
 
 </div>
@@ -570,12 +574,12 @@ flowchart LR
     linkStyle default stroke:#8b949e,stroke-width:1.5px
 ```
 
-_补充：专业版架构图，可点击查看 HTML 导出版。_
+_补充：统一风格 SVG 数据流架构图，可点击查看原图。_
 
 <div align="center">
 
-<a href="./diagrams/zznursing-architecture.html">
-  <img src="./assets/project-architectures/zznursing-architecture.png" alt="zznursing 智慧养老护理平台系统架构图" width="100%" />
+<a href="./diagrams/zznursing-architecture.svg">
+  <img src="./diagrams/zznursing-architecture.svg" alt="zznursing 智慧养老护理平台系统架构图 SVG" width="100%" />
 </a>
 
 </div>

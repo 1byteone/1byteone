@@ -1,0 +1,230 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1640 1040" role="img" aria-labelledby="title desc">
+  <title id="title">zznursing animated care data flow architecture</title>
+  <desc id="desc">Animated eldercare platform data flow showing admin and family channels, admission lifecycle, AI health assessment, IoT monitoring, cloud integrations, and persistence services.</desc>
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#1e293b" stroke-width="0.8"/>
+    </pattern>
+    <filter id="glow" x="-120%" y="-120%" width="340%" height="340%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <marker id="arrow-cyan" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#22d3ee"/>
+    </marker>
+    <marker id="arrow-violet" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#a78bfa"/>
+    </marker>
+    <marker id="arrow-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#34d399"/>
+    </marker>
+    <marker id="arrow-amber" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#fbbf24"/>
+    </marker>
+    <marker id="arrow-slate" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#94a3b8"/>
+    </marker>
+
+    <path id="p-admin-elder" d="M230 212 H340"/>
+    <path id="p-mini-member" d="M230 362 H280 V760 H880 V362 H950"/>
+    <path id="p-mini-health" d="M230 362 H280 V382 H340"/>
+    <path id="p-member-wechat" d="M1150 362 H1200 V286 H1525 V326"/>
+    <path id="p-elder-checkin" d="M520 212 H600"/>
+    <path id="p-checkin-health" d="M690 254 V300 H430 V340"/>
+    <path id="p-health-nursing" d="M520 382 H600"/>
+    <path id="p-health-pipeline" d="M520 382 H620 V446 H950"/>
+    <path id="p-health-oss" d="M1150 446 H1220 V205 H1300"/>
+    <path id="p-oss-qianfan" d="M1410 205 H1470"/>
+    <path id="p-health-state" d="M1150 446 H1200"/>
+    <path id="p-iot-state" d="M1150 556 H1200"/>
+    <path id="p-persistence-spine" d="M1200 446 V601"/>
+    <path id="p-state-mysql" d="M1200 471 H1300"/>
+    <path id="p-state-redis" d="M1200 601 H1300"/>
+    <path id="p-device-iot" d="M520 582 H620 V556 H950"/>
+    <path id="p-device-nursing" d="M430 540 V474 H690 V424"/>
+    <path id="p-iot-cloud" d="M1150 556 H1240 V361 H1300"/>
+    <path id="p-iotda-wechat" d="M1410 361 H1470"/>
+    <path id="p-facility-device" d="M560 582 H520"/>
+    <path id="p-security-support" d="M950 211 H820 V212 H780"/>
+    <path id="p-quartz-support" d="M950 726 H830 V582 H780"/>
+
+    <style>
+      .bg { fill: #0f172a; }
+      .region { fill: none; stroke: #334155; stroke-width: 1.2; stroke-dasharray: 10 6; }
+      .title { fill: #f8fafc; font: 700 26px 'Segoe UI', Arial, sans-serif; }
+      .subtitle { fill: #94a3b8; font: 400 12px 'Segoe UI', Arial, sans-serif; }
+      .region-label { fill: #cbd5e1; font: 600 12px 'Segoe UI', Arial, sans-serif; letter-spacing: 1px; }
+      .tag { fill: #e2e8f0; font: 600 10px 'Segoe UI', Arial, sans-serif; letter-spacing: 1.2px; }
+      .name { fill: #f8fafc; font: 600 16px 'Segoe UI', Arial, sans-serif; }
+      .meta { fill: #94a3b8; font: 400 11px 'Segoe UI', Arial, sans-serif; }
+      .label { fill: #cbd5e1; font: 500 10px 'Segoe UI', Arial, sans-serif; }
+      .legend { fill: #cbd5e1; font: 500 11px 'Segoe UI', Arial, sans-serif; }
+      .entry-fill { fill: #0b1f28; stroke: #22d3ee; stroke-width: 1.6; }
+      .domain-fill { fill: #211334; stroke: #a78bfa; stroke-width: 1.6; }
+      .service-fill { fill: #0f251d; stroke: #34d399; stroke-width: 1.6; }
+      .support-fill { fill: #172233; stroke: #94a3b8; stroke-width: 1.6; }
+      .external-fill { fill: #2a1d0e; stroke: #fbbf24; stroke-width: 1.6; }
+      .flow-cyan { fill: none; stroke: #22d3ee; stroke-width: 2.8; stroke-dasharray: 8 10; marker-end: url(#arrow-cyan); }
+      .flow-cyan-soft { fill: none; stroke: #22d3ee; stroke-width: 1.8; stroke-dasharray: 6 10; marker-end: url(#arrow-cyan); opacity: 0.62; }
+      .flow-violet { fill: none; stroke: #a78bfa; stroke-width: 2.8; stroke-dasharray: 8 10; marker-end: url(#arrow-violet); }
+      .flow-green { fill: none; stroke: #34d399; stroke-width: 2.7; stroke-dasharray: 8 10; marker-end: url(#arrow-green); }
+      .flow-green-soft { fill: none; stroke: #34d399; stroke-width: 1.6; stroke-dasharray: 6 10; opacity: 0.58; }
+      .flow-amber { fill: none; stroke: #fbbf24; stroke-width: 2; stroke-dasharray: 8 10; marker-end: url(#arrow-amber); opacity: 0.84; }
+      .flow-amber-soft { fill: none; stroke: #fbbf24; stroke-width: 1.5; stroke-dasharray: 6 10; marker-end: url(#arrow-amber); opacity: 0.58; }
+      .flow-support { fill: none; stroke: #94a3b8; stroke-width: 1.5; stroke-dasharray: 6 8; marker-end: url(#arrow-slate); opacity: 0.58; }
+      .signal { filter: url(#glow); }
+      .signal circle { opacity: 0; }
+      @media (prefers-reduced-motion: reduce) {
+        .signal { display: none; }
+        .flow-cyan, .flow-cyan-soft, .flow-violet, .flow-green, .flow-green-soft, .flow-amber, .flow-amber-soft, .flow-support { stroke-dasharray: none; }
+      }
+    </style>
+  </defs>
+
+  <rect width="1640" height="1040" class="bg"/>
+  <rect width="1640" height="1040" fill="url(#grid)"/>
+
+  <text x="40" y="56" class="title">zznursing | Animated Care Data Flow</text>
+  <text x="40" y="80" class="subtitle">Smart eldercare platform flow from dual user channels through admission, assessment, nursing, IoT alerts, and cloud-backed storage.</text>
+
+  <rect x="40" y="120" width="220" height="340" rx="18" class="region"/>
+  <text x="58" y="144" class="region-label">ACCESS CHANNELS</text>
+  <rect x="70" y="170" width="160" height="84" rx="12" class="entry-fill"/>
+  <text x="150" y="199" class="tag" text-anchor="middle">OPERATIONS</text>
+  <text x="150" y="225" class="name" text-anchor="middle">Vue 3 Admin</text>
+  <text x="150" y="244" class="meta" text-anchor="middle">institution staff</text>
+  <rect x="70" y="320" width="160" height="84" rx="12" class="entry-fill"/>
+  <text x="150" y="349" class="tag" text-anchor="middle">FAMILY APP</text>
+  <text x="150" y="375" class="name" text-anchor="middle">WeChat Mini Program</text>
+  <text x="150" y="394" class="meta" text-anchor="middle">booking / status / report view</text>
+
+  <rect x="300" y="110" width="560" height="720" rx="18" class="region"/>
+  <text x="318" y="134" class="region-label">CARE DOMAIN</text>
+  <rect x="340" y="170" width="180" height="84" rx="12" class="domain-fill"/>
+  <text x="430" y="199" class="tag" text-anchor="middle">ELDER MASTER</text>
+  <text x="430" y="225" class="name" text-anchor="middle">Elder Profile</text>
+  <text x="430" y="244" class="meta" text-anchor="middle">identity / bed / contact / guardian</text>
+  <rect x="600" y="170" width="180" height="84" rx="12" class="domain-fill"/>
+  <text x="690" y="199" class="tag" text-anchor="middle">ADMISSION</text>
+  <text x="690" y="225" class="name" text-anchor="middle">CheckIn + Contract</text>
+  <text x="690" y="244" class="meta" text-anchor="middle">room / dates / approval / fees</text>
+  <rect x="340" y="340" width="180" height="84" rx="12" class="domain-fill"/>
+  <text x="430" y="369" class="tag" text-anchor="middle">AI ASSESSMENT</text>
+  <text x="430" y="395" class="name" text-anchor="middle">HealthAssessment</text>
+  <text x="430" y="414" class="meta" text-anchor="middle">pdf parse → score → care level</text>
+  <rect x="600" y="340" width="180" height="84" rx="12" class="domain-fill"/>
+  <text x="690" y="369" class="tag" text-anchor="middle">CARE EXECUTION</text>
+  <text x="690" y="395" class="name" text-anchor="middle">Nursing Level / Plan</text>
+  <text x="690" y="414" class="meta" text-anchor="middle">assigned level → scheduled actions</text>
+  <rect x="340" y="540" width="180" height="84" rx="12" class="domain-fill"/>
+  <text x="430" y="569" class="tag" text-anchor="middle">IOT MONITORING</text>
+  <text x="430" y="595" class="name" text-anchor="middle">Device + AlertRule</text>
+  <text x="430" y="614" class="meta" text-anchor="middle">telemetry / threshold / alert event</text>
+  <rect x="600" y="540" width="180" height="84" rx="12" class="support-fill"/>
+  <text x="690" y="569" class="tag" text-anchor="middle">FACILITY MODEL</text>
+  <text x="690" y="595" class="name" text-anchor="middle">Floor / Room / Bed</text>
+  <text x="690" y="614" class="meta" text-anchor="middle">physical location binding</text>
+
+  <rect x="900" y="110" width="280" height="720" rx="18" class="region"/>
+  <text x="918" y="134" class="region-label">PLATFORM ADAPTERS</text>
+  <rect x="950" y="176" width="200" height="70" rx="12" class="support-fill"/>
+  <text x="1050" y="204" class="tag" text-anchor="middle">AUTH</text>
+  <text x="1050" y="230" class="name" text-anchor="middle">SecurityConfig + JWT Filter</text>
+  <rect x="950" y="326" width="200" height="72" rx="12" class="support-fill"/>
+  <text x="1050" y="354" class="tag" text-anchor="middle">MEMBER AUTH</text>
+  <text x="1050" y="380" class="name" text-anchor="middle">MemberInterceptor</text>
+  <text x="1050" y="392" class="meta" text-anchor="middle">openId → jwt → thread local</text>
+  <rect x="950" y="410" width="200" height="72" rx="12" class="service-fill"/>
+  <text x="1050" y="438" class="tag" text-anchor="middle">HEALTH PIPELINE</text>
+  <text x="1050" y="464" class="name" text-anchor="middle">PDFUtil + AIModelInvoker</text>
+  <rect x="950" y="520" width="200" height="72" rx="12" class="service-fill"/>
+  <text x="1050" y="548" class="tag" text-anchor="middle">DEVICE PIPELINE</text>
+  <text x="1050" y="574" class="name" text-anchor="middle">IotClientConfig + Qpid JMS</text>
+  <rect x="950" y="690" width="200" height="72" rx="12" class="support-fill"/>
+  <text x="1050" y="718" class="tag" text-anchor="middle">SCHEDULER</text>
+  <text x="1050" y="744" class="name" text-anchor="middle">Quartz reminder / offline check</text>
+
+  <rect x="1260" y="110" width="340" height="720" rx="18" class="region"/>
+  <text x="1278" y="134" class="region-label">EXTERNAL + PERSISTENCE</text>
+  <rect x="1300" y="170" width="110" height="70" rx="12" class="external-fill"/>
+  <text x="1355" y="212" class="name" text-anchor="middle">Aliyun OSS</text>
+  <rect x="1470" y="170" width="110" height="70" rx="12" class="external-fill"/>
+  <text x="1525" y="212" class="name" text-anchor="middle">Qianfan</text>
+  <rect x="1300" y="326" width="110" height="70" rx="12" class="external-fill"/>
+  <text x="1355" y="368" class="name" text-anchor="middle">IoTDA</text>
+  <rect x="1470" y="326" width="110" height="70" rx="12" class="external-fill"/>
+  <text x="1525" y="368" class="name" text-anchor="middle">WeChat</text>
+  <rect x="1300" y="430" width="250" height="82" rx="12" class="service-fill"/>
+  <text x="1425" y="458" class="tag" text-anchor="middle">RELATIONAL STORE</text>
+  <text x="1425" y="484" class="name" text-anchor="middle">MySQL + MyBatis-Plus</text>
+  <text x="1425" y="503" class="meta" text-anchor="middle">elder / contract / nursing / device_data</text>
+  <rect x="1300" y="560" width="250" height="82" rx="12" class="support-fill"/>
+  <text x="1425" y="588" class="tag" text-anchor="middle">FAST STATE</text>
+  <text x="1425" y="614" class="name" text-anchor="middle">Redis</text>
+  <text x="1425" y="633" class="meta" text-anchor="middle">pdf cache / device shadow / session</text>
+
+  <use href="#p-admin-elder" class="flow-cyan"><animate attributeName="stroke-dashoffset" values="0;-36" dur="1.8s" repeatCount="indefinite"/></use>
+  <use href="#p-mini-member" class="flow-cyan-soft"><animate attributeName="stroke-dashoffset" values="0;-24" dur="3.0s" repeatCount="indefinite"/></use>
+  <use href="#p-mini-health" class="flow-cyan"><animate attributeName="stroke-dashoffset" values="0;-36" dur="2.0s" repeatCount="indefinite"/></use>
+  <use href="#p-member-wechat" class="flow-amber-soft"><animate attributeName="stroke-dashoffset" values="0;-22" dur="2.8s" repeatCount="indefinite"/></use>
+  <use href="#p-elder-checkin" class="flow-violet"><animate attributeName="stroke-dashoffset" values="0;-36" dur="1.8s" repeatCount="indefinite"/></use>
+  <use href="#p-checkin-health" class="flow-violet"><animate attributeName="stroke-dashoffset" values="0;-36" dur="2.0s" repeatCount="indefinite"/></use>
+  <use href="#p-health-nursing" class="flow-violet"><animate attributeName="stroke-dashoffset" values="0;-36" dur="1.8s" repeatCount="indefinite"/></use>
+  <use href="#p-health-pipeline" class="flow-green"><animate attributeName="stroke-dashoffset" values="0;-36" dur="2.0s" repeatCount="indefinite"/></use>
+  <use href="#p-health-oss" class="flow-amber"><animate attributeName="stroke-dashoffset" values="0;-36" dur="2.2s" repeatCount="indefinite"/></use>
+  <use href="#p-oss-qianfan" class="flow-amber-soft"><animate attributeName="stroke-dashoffset" values="0;-18" dur="3.0s" repeatCount="indefinite"/></use>
+  <use href="#p-health-state" class="flow-green-soft"/>
+  <use href="#p-iot-state" class="flow-green-soft"/>
+  <use href="#p-persistence-spine" class="flow-green-soft"><animate attributeName="stroke-dashoffset" values="0;-22" dur="2.8s" repeatCount="indefinite"/></use>
+  <use href="#p-state-mysql" class="flow-green"><animate attributeName="stroke-dashoffset" values="0;-32" dur="2.0s" repeatCount="indefinite"/></use>
+  <use href="#p-state-redis" class="flow-green"><animate attributeName="stroke-dashoffset" values="0;-32" dur="2.0s" repeatCount="indefinite"/></use>
+  <use href="#p-device-iot" class="flow-green"><animate attributeName="stroke-dashoffset" values="0;-36" dur="2.0s" repeatCount="indefinite"/></use>
+  <use href="#p-device-nursing" class="flow-violet"><animate attributeName="stroke-dashoffset" values="0;-32" dur="2.0s" repeatCount="indefinite"/></use>
+  <use href="#p-iot-cloud" class="flow-amber-soft"><animate attributeName="stroke-dashoffset" values="0;-22" dur="2.8s" repeatCount="indefinite"/></use>
+  <use href="#p-iotda-wechat" class="flow-amber-soft"><animate attributeName="stroke-dashoffset" values="0;-18" dur="3.0s" repeatCount="indefinite"/></use>
+  <use href="#p-facility-device" class="flow-support"><animate attributeName="stroke-dashoffset" values="0;-20" dur="2.6s" repeatCount="indefinite"/></use>
+  <use href="#p-security-support" class="flow-support"><animate attributeName="stroke-dashoffset" values="0;-20" dur="2.6s" repeatCount="indefinite"/></use>
+  <use href="#p-quartz-support" class="flow-support"><animate attributeName="stroke-dashoffset" values="0;-20" dur="2.6s" repeatCount="indefinite"/></use>
+
+  <g class="signal" fill="#22d3ee">
+    <circle r="4"><animateMotion dur="1.8s" repeatCount="indefinite"><mpath href="#p-admin-elder"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="1.8s" repeatCount="indefinite"/></circle>
+    <circle r="4"><animateMotion dur="2.0s" begin=".34s" repeatCount="indefinite"><mpath href="#p-mini-member"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="2.0s" begin=".34s" repeatCount="indefinite"/></circle>
+    <circle r="4"><animateMotion dur="2.0s" begin=".70s" repeatCount="indefinite"><mpath href="#p-mini-health"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="2.0s" begin=".70s" repeatCount="indefinite"/></circle>
+  </g>
+  <g class="signal" fill="#a78bfa">
+    <circle r="4"><animateMotion dur="1.8s" begin=".20s" repeatCount="indefinite"><mpath href="#p-elder-checkin"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="1.8s" begin=".20s" repeatCount="indefinite"/></circle>
+    <circle r="4"><animateMotion dur="2.0s" begin=".56s" repeatCount="indefinite"><mpath href="#p-checkin-health"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="2.0s" begin=".56s" repeatCount="indefinite"/></circle>
+    <circle r="4"><animateMotion dur="1.8s" begin=".92s" repeatCount="indefinite"><mpath href="#p-health-nursing"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="1.8s" begin=".92s" repeatCount="indefinite"/></circle>
+    <circle r="4"><animateMotion dur="1.8s" begin="1.28s" repeatCount="indefinite"><mpath href="#p-device-nursing"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="1.8s" begin="1.28s" repeatCount="indefinite"/></circle>
+  </g>
+  <g class="signal" fill="#34d399">
+    <circle r="4"><animateMotion dur="2.0s" begin=".26s" repeatCount="indefinite"><mpath href="#p-health-pipeline"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="2.0s" begin=".26s" repeatCount="indefinite"/></circle>
+    <circle r="4"><animateMotion dur="2.0s" begin=".84s" repeatCount="indefinite"><mpath href="#p-state-mysql"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="2.0s" begin=".84s" repeatCount="indefinite"/></circle>
+    <circle r="4"><animateMotion dur="2.0s" begin="1.36s" repeatCount="indefinite"><mpath href="#p-device-iot"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="2.0s" begin="1.36s" repeatCount="indefinite"/></circle>
+    <circle r="4"><animateMotion dur="2.0s" begin="1.72s" repeatCount="indefinite"><mpath href="#p-state-redis"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="2.0s" begin="1.72s" repeatCount="indefinite"/></circle>
+  </g>
+  <g class="signal" fill="#fbbf24">
+    <circle r="4"><animateMotion dur="2.2s" begin=".32s" repeatCount="indefinite"><mpath href="#p-member-wechat"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="2.2s" begin=".32s" repeatCount="indefinite"/></circle>
+    <circle r="4"><animateMotion dur="2.2s" begin=".78s" repeatCount="indefinite"><mpath href="#p-health-oss"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="2.2s" begin=".78s" repeatCount="indefinite"/></circle>
+    <circle r="4"><animateMotion dur="2.2s" begin="1.64s" repeatCount="indefinite"><mpath href="#p-iot-cloud"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="2.2s" begin="1.64s" repeatCount="indefinite"/></circle>
+  </g>
+
+  <text x="272" y="200" class="label">admin care actions</text>
+  <text x="1430" y="270" class="label">weChat login handshake</text>
+  <text x="536" y="200" class="label">admission chain</text>
+  <text x="510" y="316" class="label">assessment trigger</text>
+  <text x="534" y="366" class="label">care level assignment</text>
+  <text x="648" y="482" class="label">health parsing and scoring</text>
+  <text x="1250" y="186" class="label">report file and ai call</text>
+  <text x="538" y="572" class="label">device alert stream</text>
+  <text x="630" y="518" class="label">alert drives care response</text>
+  <text x="1260" y="344" class="label">iot cloud ingress</text>
+  <text x="1224" y="532" class="label">shared persistence bus</text>
+  <text x="928" y="790" class="label">auth, scheduler, and facility wiring</text>
+
+  <rect x="40" y="1002" width="1560" height="22" fill="#111827" stroke="#334155" stroke-width="1"/>
+  <text x="58" y="1018" class="legend">Cyan shows channel entry, violet shows eldercare lifecycle flow, green shows internal processing and persistence, amber shows cloud integrations, and slate shows support wiring.</text>
+</svg>
